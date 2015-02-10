@@ -49,4 +49,11 @@ packet WaveShortMessage {
 	int serial = 0;
 	Coord senderPos;
 	simtime_t timestamp = 0;
+	
+	//Sender state
+	string senderState = "FN";
+	//Sender InfoCH
+	double infoCH = 0.0;
+	//Sender InfoON
+	double infoON = 0.0;
 }

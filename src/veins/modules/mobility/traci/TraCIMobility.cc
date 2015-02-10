@@ -153,6 +153,10 @@ void TraCIMobility::handleSelfMsg(cMessage *msg)
 	}
 }
 
+void TraCIMobility::setVeichleSpeed(int speed){
+    getVehicleCommandInterface()->setSpeed(speed);
+}
+
 void TraCIMobility::preInitialize(std::string external_id, const Coord& position, std::string road_id, double speed, double angle)
 {
 	this->external_id = external_id;

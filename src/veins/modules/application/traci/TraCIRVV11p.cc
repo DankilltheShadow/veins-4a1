@@ -91,6 +91,14 @@ void TraCIRVV11p::sendRVVMessage(std::string type, int toNode=-1) {
 
 void TraCIRVV11p::receiveSignal(cComponent* source, simsignal_t signalID, cObject* obj) {
 	Enter_Method_Silent();
+	if(simTime() == simulation.getWarmupPeriod()){
+	    traciVehicle->setSpeed(0.0);
+	    /*for (auto const& p : neighborsICH)
+	    {
+	        std::cout << p.first << ' ' << p.second << '\n';
+	    }*/
+
+	}
 	if (signalID == mobilityStateChangedSignal) {
 		handlePositionUpdate(obj);
 	}
@@ -116,8 +124,8 @@ void TraCIRVV11p::handlePositionUpdate(cObject* obj) {
 	// stopped for for at least 10s?
 	if (mobility->getSpeed() < 1) {
 		if (simTime() - lastDroveAt >= 10) {
-			findHost()->getDisplayString().updateWith("r=16,red");
-			if (!sentMessage) sendMessage(mobility->getRoadId());
+			//findHost()->getDisplayString().updateWith("r=16,red");
+			//if (!sentMessage) sendMessage(mobility->getRoadId());
 		}
 	}
 	else {
@@ -132,8 +140,10 @@ void TraCIRVV11p::sendWSM(WaveShortMessage* wsm) {
 void TraCIRVV11p::handleSelfMsg(cMessage* msg) {
     switch (msg->getKind()) {
         case SEND_HELLO: {
-            sendRVVMessage("Hello"); //send broadcast hello MSG.
-            scheduleAt(simTime() + par("helloInterval").doubleValue(), sendHelloTimer);
+            if(simTime() <= simulation.getWarmupPeriod()){
+                sendRVVMessage("Hello"); //send broadcast hello MSG.
+                scheduleAt(simTime() + par("helloInterval").doubleValue(), sendHelloTimer);
+            }
             break;
         }
         default: {
@@ -151,8 +161,14 @@ void TraCIRVV11p::handleLowerMsg(cMessage* msg) {
 
     if (std::string(wsm->getName()) == "Hello") {
         updateInfo(wsm);
-    } else {
-        //BaseWaveApplLayer::handleLowerMsg(msg);
+    } else if (std::string(wsm->getName()) == "beacon") {
+        onBeacon(wsm);
+    }
+    else if (std::string(wsm->getName()) == "data") {
+        onData(wsm);
+    }
+    else {
+        DBG << "unknown message (" << wsm->getName() << ")  received\n";
     }
     delete(msg);
 }
@@ -162,10 +178,29 @@ void TraCIRVV11p::updateInfo(WaveShortMessage* wsm) {
     //wsmdata[0]=wsm->getSenderState();
     //wsmdata[1]=wsm->getInfoCH();
     //wsmdata[2]=wsm->getInfoON();
-    /*neighbors[wsm->getSenderAddress()]["I_CH"]=wsm->getInfoCH();
+    /*std::vector<double> dati;
+    double dDistance = this->curPosition.sqrdist(wsm->getSenderPos());
+    dati[0]=wsm->getInfoCH();
+    dati[1]=wsm->getInfoON();
+    dati[2]=dDistance;
+    //dati[3]=wsm->getSenderState();
+    neighbors[wsm->getSenderAddress()]=dati;
+    neighbors[wsm->getSenderAddress()]["I_CH"]=wsm->getInfoCH();
     neighbors[wsm->getSenderAddress()]["I_ON"]=wsm->getInfoON();
 
     double dDistance = this->curPosition.sqrdist(wsm->getSenderPos());
-    neighbors[wsm->getSenderAddress()]["Dist"]=dDistance;
-    WATCH_MAP(neighbors);*/
+    neighbors[wsm->getSenderAddress()]["Dist"]=dDistance;*/
+    //std::string output = std::string(neighbors[wsm->getSenderAddress()]["I_CH"] + "  " + neighbors[wsm->getSenderAddress()]["I_ON"] + "  " + neighbors[wsm->getSenderAddress()]["Dist"]);
+    //WATCH_MAP(neighbors);
+    //WATCH_VECTOR(dati);
+    int id = wsm->getSenderAddress();
+    //double dDistance = this->curPosition.sqrdist(wsm->getSenderPos());
+    neighborsICH[id]=wsm->getInfoCH();
+    neighborsION[id]=wsm->getInfoON();
+    neighborsdDist[id]=wsm->getSenderPos();
+    neighborsState[id]=wsm->getSenderState();
+    WATCH_MAP(neighborsICH);
+    WATCH_MAP(neighborsION);
+    WATCH_MAP(neighborsdDist);
+    WATCH_MAP(neighborsState);
 }

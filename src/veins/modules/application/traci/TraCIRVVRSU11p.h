@@ -36,11 +36,18 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
 		AnnotationManager* annotations;
 		BaseMobility* mobi;
 		bool sentMessage;
+		//create the maps of neighbors
+        std::map<int, double> neighborsICH;
+        std::map<int, double> neighborsION;
+        std::map<int, Coord> neighborsdDist;
+        std::map<int, std::string> neighborsState;
 	protected:
 		virtual void onBeacon(WaveShortMessage* wsm);
 		virtual void onData(WaveShortMessage* wsm);
 		void sendMessage(std::string blockedRoadId);
 		virtual void sendWSM(WaveShortMessage* wsm);
+		virtual void handleLowerMsg(cMessage* msg);
+        void updateInfo(WaveShortMessage* data);
 };
 
 #endif

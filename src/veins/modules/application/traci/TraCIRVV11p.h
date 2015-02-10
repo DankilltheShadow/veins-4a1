@@ -57,7 +57,10 @@ class TraCIRVV11p : public BaseWaveApplLayer {
 		static const simsignalwrap_t parkingStateChangedSignal;
 		cMessage* sendHelloTimer;
 		//create the maps of neighbors
-		std::map<int, std::map<std::string ,int> > neighbors;
+		std::map<int, double> neighborsICH;
+		std::map<int, double> neighborsION;
+		std::map<int, Coord> neighborsdDist;
+		std::map<int, std::string> neighborsState;
 	protected:
 		virtual void onBeacon(WaveShortMessage* wsm);
 		virtual void onData(WaveShortMessage* wsm);

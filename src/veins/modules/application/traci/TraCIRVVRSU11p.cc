@@ -54,6 +54,38 @@ void TraCIRVVRSU11p::sendMessage(std::string blockedRoadId) {
 	wsm->setWsmData(blockedRoadId.c_str());
 	sendWSM(wsm);
 }
+
 void TraCIRVVRSU11p::sendWSM(WaveShortMessage* wsm) {
 	sendDelayedDown(wsm,individualOffset);
+}
+
+void TraCIRVVRSU11p::handleLowerMsg(cMessage* msg) {
+
+    WaveShortMessage* wsm = dynamic_cast<WaveShortMessage*>(msg);
+    ASSERT(wsm);
+
+    if (std::string(wsm->getName()) == "Hello") {
+        updateInfo(wsm);
+    } else if (std::string(wsm->getName()) == "beacon") {
+        onBeacon(wsm);
+    }
+    else if (std::string(wsm->getName()) == "data") {
+        onData(wsm);
+    }
+    else {
+        DBG << "unknown message (" << wsm->getName() << ")  received\n";
+    }
+    delete(msg);
+}
+
+void TraCIRVVRSU11p::updateInfo(WaveShortMessage* wsm) {
+    int id = wsm->getSenderAddress();
+    neighborsICH[id]=wsm->getInfoCH();
+    neighborsION[id]=wsm->getInfoON();
+    neighborsdDist[id]=wsm->getSenderPos();
+    neighborsState[id]=wsm->getSenderState();
+    WATCH_MAP(neighborsICH);
+    WATCH_MAP(neighborsION);
+    WATCH_MAP(neighborsdDist);
+    WATCH_MAP(neighborsState);
 }

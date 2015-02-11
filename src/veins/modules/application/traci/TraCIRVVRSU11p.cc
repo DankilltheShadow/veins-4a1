@@ -80,8 +80,6 @@ void TraCIRVVRSU11p::handleLowerMsg(cMessage* msg) {
 
 void TraCIRVVRSU11p::updateInfo(WaveShortMessage* wsm) {
     int id = wsm->getSenderAddress();
-    neighborsICH[id]=wsm->getInfoCH();
-    neighborsION[id]=wsm->getInfoON();
     neighborsdDist[id]=wsm->getSenderPos();
     neighborsState[id]=wsm->getSenderState();
     WATCH_MAP(neighborsICH);

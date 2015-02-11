@@ -52,8 +52,4 @@ packet WaveShortMessage {
 	
 	//Sender state
 	string senderState = "FN";
-	//Sender InfoCH
-	double infoCH = 0.0;
-	//Sender InfoON
-	double infoON = 0.0;
 }

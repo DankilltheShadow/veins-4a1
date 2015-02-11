@@ -183,7 +183,7 @@ void TraCIRVV11p::updateInfo(WaveShortMessage* wsm) {
     //double dDistance = this->curPosition.sqrdist(wsm->getSenderPos());
     if(par("Car_State").stringValue() != wsm->getSenderState()){
         int id = wsm->getSenderAddress();
-        double dDistance = this->curPosition.sqrdist(wsm->getSenderPos());
+        double dDistance = this->curPosition.distance(wsm->getSenderPos());
         neighborsdDist[id]=wsm->getSenderPos();
         neighborsState[id]=wsm->getSenderState();
         neighborsdPos[id]=this->curPosition;

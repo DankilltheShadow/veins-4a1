@@ -436,7 +436,7 @@ simtime_t Decider80211p::processSignalEnd(AirFrame* msg) {
 
 	DeciderResult* result;
 
-	if (frame->getUnderSensitivity()) {
+	if (frame->getUnderSensitivity() && sensitivity!=7.94328e+009) {
 		//this frame was not even detected by the radio card
 		result = new DeciderResult80211(false,0,0,recvPower_dBm);
 	}
@@ -469,8 +469,8 @@ simtime_t Decider80211p::processSignalEnd(AirFrame* msg) {
 		phy->sendUp(frame, result);
 	}
 	else {
-		if (frame->getUnderSensitivity()) {
-			DBG_D11P << "packet was not detected by the card. power was under sensitivity threshold\n";
+		if (frame->getUnderSensitivity() && sensitivity!=7.94328e+009) {
+			DBG_D11P << "packet was not detected by the card. power was under sensitivity threshold"<< sensitivity <<"\n";
 		}
 		else if (whileSending) {
 			DBG_D11P << "packet was received while sending, sending it as control message to upper layer\n";

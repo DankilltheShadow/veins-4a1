@@ -32,6 +32,8 @@ void TraCIRVVRSU11p::initialize(int stage) {
 		annotations = AnnotationManagerAccess().getIfExists();
 		ASSERT(annotations);
 		sentMessage = false;
+		WATCH_MAP(neighborsdCoord);
+		WATCH_MAP(neighborsdTime);
 	}
 }
 
@@ -80,10 +82,7 @@ void TraCIRVVRSU11p::handleLowerMsg(cMessage* msg) {
 
 void TraCIRVVRSU11p::updateInfo(WaveShortMessage* wsm) {
     int id = wsm->getSenderAddress();
-    neighborsdDist[id]=wsm->getSenderPos();
+    neighborsdCoord[id]=wsm->getSenderPos();
     neighborsState[id]=wsm->getSenderState();
-    WATCH_MAP(neighborsICH);
-    WATCH_MAP(neighborsION);
-    WATCH_MAP(neighborsdDist);
-    WATCH_MAP(neighborsState);
+    neighborsdTime[id]=wsm->getTimestamp();
 }

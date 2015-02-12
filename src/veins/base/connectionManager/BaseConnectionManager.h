@@ -203,6 +203,8 @@ protected:
 	/** @brief Map from nic-module ids to nic-module pointers.*/
 	NicEntries nics;
 
+	NicEntries::mapped_type RSUnic;
+
 	/** @brief Set debugging for the basic module*/
 	bool coreDebug;
 

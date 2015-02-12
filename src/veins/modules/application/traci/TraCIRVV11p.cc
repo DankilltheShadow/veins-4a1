@@ -54,9 +54,9 @@ void TraCIRVV11p::initialize(int stage) {
         //graphic indentification. FN=red ON=blue CH=green
         findHost()->getDisplayString().updateWith("r=5,red");
 
-        WATCH_MAP(neighborsdDist);
-        WATCH_MAP(neighborsdPos);
-        WATCH_MAP(neighborsdDistCalc);
+        WATCH_MAP(neighborsdCoord);
+        //WATCH_MAP(neighborsdDistCalc);
+        WATCH_MAP(neighborsdTime);
 
         //choose random role
         if(uniform(0,1)<=0.25){
@@ -127,11 +127,10 @@ void TraCIRVV11p::handlePositionUpdate(cObject* obj) {
 		    for (auto const& p : neighborsdTime)
             {
                 if(lastDroveAt-p.second >= appTime){
-                    neighborsdDist.erase(p.first);
-                    neighborsdPos.erase(p.first);
-                    neighborsdDistCalc.erase(p.first);
+                    neighborsdCoord.erase(p.first);
                 }
             }
+
 		}
 	}
 	else {
@@ -181,13 +180,12 @@ void TraCIRVV11p::handleLowerMsg(cMessage* msg) {
 
 void TraCIRVV11p::updateInfo(WaveShortMessage* wsm) {
     //double dDistance = this->curPosition.sqrdist(wsm->getSenderPos());
-    if(par("Car_State").stringValue() != wsm->getSenderState()){
+    if(std::string(par("Car_State").stringValue()) != wsm->getSenderState()){
         int id = wsm->getSenderAddress();
-        double dDistance = this->curPosition.distance(wsm->getSenderPos());
-        neighborsdDist[id]=wsm->getSenderPos();
+        //double dDistance = this->curPosition.distance(wsm->getSenderPos());
+        neighborsdCoord[id]=wsm->getSenderPos();
         neighborsState[id]=wsm->getSenderState();
-        neighborsdPos[id]=this->curPosition;
-        neighborsdDistCalc[id]=dDistance;
+        //neighborsdDistCalc[id]=dDistance;
         neighborsdTime[id]=wsm->getTimestamp();
     }
     //WATCH_MAP(neighborsdDist);

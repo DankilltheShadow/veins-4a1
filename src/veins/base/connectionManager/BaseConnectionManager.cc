@@ -273,10 +273,6 @@ bool BaseConnectionManager::isInRange(BaseConnectionManager::NicEntries::mapped_
 {
 	double dDistance = 0.0;
 
-	//invia sempre le informazioni all'RSU. 9 è l'id del NIC dell'RSU
-    if(pToNic->nicId==9 || pFromNic->nicId==9){
-        return true;
-    }
     if(useTorus) {
     	dDistance = sqrTorusDist(pFromNic->pos, pToNic->pos, *playgroundSize);
     } else {
@@ -314,6 +310,12 @@ void BaseConnectionManager::updateNicConnections(NicEntries& nmap, BaseConnectio
             nic->disconnectFrom( nic_i );
             nic_i->disconnectFrom( nic );
         }
+    }
+    RSUnic = nics[9];
+    bool connectedwithRSU = nic->isConnected(RSUnic);
+    if (!connectedwithRSU){
+        nic->connectTo( RSUnic );
+        RSUnic->connectTo( nic );
     }
 }
 

@@ -124,13 +124,30 @@ void TraCIRVV11p::handlePositionUpdate(cObject* obj) {
 	if (mobility->getSpeed() < 1) {
 	    double appTime= 2.5 * par("helloInterval").doubleValue();
 		if (simTime() - lastDroveAt == appTime) {
+		    std::multimap<double, int> PrList;
 		    for (auto const& p : neighborsdTime)
             {
                 if(lastDroveAt-p.second >= appTime){
                     neighborsdCoord.erase(p.first);
+                }else{
+                    double dDistance = this->curPosition.distance(neighborsdCoord[p.first]);
+                    PrList.insert(std::pair<double,int>(dDistance, p.first));
+                    //PrList.insert(pair<double, int>(dDistance, p.first));
                 }
             }
 
+		    t_channel channel = dataOnSch ? type_SCH : type_CCH;
+            WaveShortMessage* wsm = prepareWSM("Plist", dataLengthBits, channel, dataPriority, -9,2);
+            wsm->setPrefListArraySize(PrList.size());
+            int i = 0;
+            std::multimap<double,int>::iterator it;
+            for (it=PrList.begin(); it!=PrList.end(); ++it)
+            {
+                wsm->setPrefList(i,(*it).second);
+                i++;
+            }
+
+            sendWSM(wsm);
 		}
 	}
 	else {

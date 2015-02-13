@@ -32,8 +32,8 @@ void TraCIRVVRSU11p::initialize(int stage) {
 		annotations = AnnotationManagerAccess().getIfExists();
 		ASSERT(annotations);
 		sentMessage = false;
-		WATCH_MAP(neighborsdCoord);
-		WATCH_MAP(neighborsdTime);
+		WATCH_MAP(PrefLists);
+		WATCH_MAP(dimPrefLists);
 	}
 }
 
@@ -66,8 +66,8 @@ void TraCIRVVRSU11p::handleLowerMsg(cMessage* msg) {
     WaveShortMessage* wsm = dynamic_cast<WaveShortMessage*>(msg);
     ASSERT(wsm);
 
-    if (std::string(wsm->getName()) == "Hello") {
-        updateInfo(wsm);
+    if (std::string(wsm->getName()) == "Plist") {
+        onPreferenceList(wsm);
     } else if (std::string(wsm->getName()) == "beacon") {
         onBeacon(wsm);
     }
@@ -80,9 +80,12 @@ void TraCIRVVRSU11p::handleLowerMsg(cMessage* msg) {
     delete(msg);
 }
 
-void TraCIRVVRSU11p::updateInfo(WaveShortMessage* wsm) {
+void TraCIRVVRSU11p::onPreferenceList(WaveShortMessage* wsm) {
     int id = wsm->getSenderAddress();
-    neighborsdCoord[id]=wsm->getSenderPos();
-    neighborsState[id]=wsm->getSenderState();
-    neighborsdTime[id]=wsm->getTimestamp();
+    int list[wsm->getPrefListArraySize()];
+    for (size_t i=0; i<wsm->getPrefListArraySize(); ++i){
+        list[i]=wsm->getPrefList(i);
+    }
+    PrefLists[id]=list;
+    dimPrefLists[id]=wsm->getPrefListArraySize();
 }

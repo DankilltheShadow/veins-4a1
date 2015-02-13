@@ -436,7 +436,7 @@ simtime_t Decider80211p::processSignalEnd(AirFrame* msg) {
 
 	DeciderResult* result;
 
-	if (frame->getUnderSensitivity() && sensitivity!=7.94328e+009) {
+	if (frame->getUnderSensitivity() && sensitivity!=1) {
 		//this frame was not even detected by the radio card
 		result = new DeciderResult80211(false,0,0,recvPower_dBm);
 	}
@@ -463,13 +463,13 @@ simtime_t Decider80211p::processSignalEnd(AirFrame* msg) {
 		}
 	}
 
-	if (result->isSignalCorrect()) {
+	if (result->isSignalCorrect() || sensitivity==1) {
 		DBG_D11P << "packet was received correctly, it is now handed to upper layer...\n";
 		// go on with processing this AirFrame, send it to the Mac-Layer
 		phy->sendUp(frame, result);
 	}
 	else {
-		if (frame->getUnderSensitivity() && sensitivity!=7.94328e+009) {
+		if (frame->getUnderSensitivity()) {
 			DBG_D11P << "packet was not detected by the card. power was under sensitivity threshold"<< sensitivity <<"\n";
 		}
 		else if (whileSending) {

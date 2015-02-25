@@ -22,6 +22,8 @@
 
 using Veins::AnnotationManagerAccess;
 
+const simsignalwrap_t TraCIRVVRSU11p::mobilityStateChangedSignal = simsignalwrap_t(MIXIM_SIGNAL_MOBILITY_CHANGE_NAME);
+
 Define_Module(TraCIRVVRSU11p);
 
 void TraCIRVVRSU11p::initialize(int stage) {
@@ -34,6 +36,8 @@ void TraCIRVVRSU11p::initialize(int stage) {
 		sentMessage = false;
 		WATCH_MAP(PrefLists);
 		WATCH_MAP(dimPrefLists);
+		Count_S=0;
+
 	}
 }
 
@@ -88,4 +92,20 @@ void TraCIRVVRSU11p::onPreferenceList(WaveShortMessage* wsm) {
     }
     PrefLists[id]=list;
     dimPrefLists[id]=wsm->getPrefListArraySize();
+}
+
+/*
+ Si fermano i veicoli a circa 243. ultimo Hello a circa 263. A 265 circa il primo Plist. <<<280 fine Plist. 82 Nodi.*/
+void TraCIRVVRSU11p::receiveSignal(cComponent* source, simsignal_t signalID, cObject* obj) {
+    if(simTime()==par("startMatching"))
+    {
+        if(Count_S==0){
+            Count_S=1;
+            launchMatching();
+        }
+    }
+}
+
+void TraCIRVVRSU11p::launchMatching() {
+    findHost()->getDisplayString().updateWith("r=16,green");
 }

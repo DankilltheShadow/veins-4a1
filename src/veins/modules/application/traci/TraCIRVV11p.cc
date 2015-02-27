@@ -146,7 +146,7 @@ void TraCIRVV11p::handlePositionUpdate(cObject* obj) {
                 wsm->setPrefList(i,(*it).second);
                 i++;
             }
-
+            wsm->setSenderState(par("Car_State").stringValue());
             sendWSM(wsm);
 		}
 	}

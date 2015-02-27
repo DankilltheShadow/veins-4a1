@@ -34,9 +34,12 @@ void TraCIRVVRSU11p::initialize(int stage) {
 		annotations = AnnotationManagerAccess().getIfExists();
 		ASSERT(annotations);
 		sentMessage = false;
-		WATCH_MAP(PrefLists);
+		WATCH_MAP(PrefCHLists);
+		WATCH_MAP(PrefONLists);
 		WATCH_MAP(dimPrefLists);
-		Count_S=0;
+		WATCH_MAP(statePrefLists);
+		startMatching = new cMessage("Start!", SEND_MATCH);
+		scheduleAt(simTime() + par("startMatching").doubleValue(), startMatching);
 
 	}
 }
@@ -90,22 +93,62 @@ void TraCIRVVRSU11p::onPreferenceList(WaveShortMessage* wsm) {
     for (size_t i=0; i<wsm->getPrefListArraySize(); ++i){
         list[i]=wsm->getPrefList(i);
     }
-    PrefLists[id]=list;
+    if(std::string(wsm->getSenderState())=="CH"){
+        PrefCHLists[id]=list;
+    }else{
+        PrefONLists[id]=list;
+    }
     dimPrefLists[id]=wsm->getPrefListArraySize();
+    statePrefLists[id]=wsm->getSenderState();
 }
 
 /*
  Si fermano i veicoli a circa 243. ultimo Hello a circa 263. A 265 circa il primo Plist. <<<280 fine Plist. 82 Nodi.*/
-void TraCIRVVRSU11p::receiveSignal(cComponent* source, simsignal_t signalID, cObject* obj) {
-    if(simTime()==par("startMatching"))
-    {
-        if(Count_S==0){
-            Count_S=1;
+void TraCIRVVRSU11p::handleSelfMsg(cMessage* msg) {
+    switch (msg->getKind()) {
+        case SEND_MATCH: {
             launchMatching();
+            break;
+        }
+        default: {
+            if (msg)
+                BaseWaveApplLayer::handleSelfMsg(msg);
+            break;
         }
     }
 }
 
 void TraCIRVVRSU11p::launchMatching() {
-    findHost()->getDisplayString().updateWith("r=16,green");
+    /*std::map<int, int> ONlist;
+    std::map<int, int> CHlist;
+    bool Matching[PrefCHLists.size()][PrefONLists.size()]={false};
+    int i=0;
+    for(auto const& iter : PrefONLists) {
+        ONlist[i] = iter.first;
+        i++;
+    }
+    i=0;
+    for(auto const& iter : PrefCHLists) {
+            CHlist[i] = iter.first;
+            i++;
+        }
+    size_t ONlistSize = sizeof(ONlist) / sizeof(int);
+    while(ONlistSize!=0 or PrefONLists.size()!=0){
+        for(size_t i=0;i<ONlistSize;i++){
+            if(sizeof(PrefONLists[ONlist[i]])/sizeof(int)!=0){
+                for(size_t j=0;j<sizeof(CHlist)/sizeof(int);j++){
+                    if(PrefONLists[ONlist[i]][0]==CHlist[j]){
+                        Matching[j][i]=true;
+                    }
+                }
+            }
+        }
+    }*/
+    std::map <int,int> ONMatching;
+    for(auto const& iter : PrefONLists) {
+        ONMatching[iter.first]=iter.second[0];
+
+    }
+
 }
+

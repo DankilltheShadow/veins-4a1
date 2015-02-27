@@ -32,15 +32,22 @@ using Veins::AnnotationManager;
 class TraCIRVVRSU11p : public BaseWaveApplLayer {
 	public:
 		virtual void initialize(int stage);
-		virtual void receiveSignal(cComponent* source, simsignal_t signalID, cObject* obj);
-		int Count_S;
+
+		enum WaveApplMessageKinds {
+            SERVICE_PROVIDER = LAST_BASE_APPL_MESSAGE_KIND,
+            SEND_BEACON_EVT,
+            SEND_MATCH
+        };
 	protected:
 		AnnotationManager* annotations;
 		BaseMobility* mobi;
 		bool sentMessage;
+		cMessage* startMatching;
 		//create the maps of Preference lists
-		std::map<int, int*> PrefLists;
+		std::map<int, int*> PrefCHLists;
+		std::map<int, int*> PrefONLists;
 		std::map<int, int> dimPrefLists;
+		std::map<int, std::string> statePrefLists;
 		static const simsignalwrap_t mobilityStateChangedSignal;
 	protected:
 		virtual void onBeacon(WaveShortMessage* wsm);
@@ -48,6 +55,7 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
 		void sendMessage(std::string blockedRoadId);
 		virtual void sendWSM(WaveShortMessage* wsm);
 		virtual void handleLowerMsg(cMessage* msg);
+		virtual void handleSelfMsg(cMessage* msg);
         void onPreferenceList(WaveShortMessage* data);
         void launchMatching();
 };

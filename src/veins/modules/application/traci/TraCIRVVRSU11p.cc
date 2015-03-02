@@ -34,8 +34,8 @@ void TraCIRVVRSU11p::initialize(int stage) {
 		annotations = AnnotationManagerAccess().getIfExists();
 		ASSERT(annotations);
 		sentMessage = false;
-		WATCH_MAP(PrefCHLists);
-		WATCH_MAP(PrefONLists);
+		//WATCH_MAP(PrefCHLists);
+		//WATCH_MAP(PrefONLists);
 		WATCH_MAP(dimPrefLists);
 		WATCH_MAP(statePrefLists);
 		startMatching = new cMessage("Start!", SEND_MATCH);
@@ -89,14 +89,18 @@ void TraCIRVVRSU11p::handleLowerMsg(cMessage* msg) {
 
 void TraCIRVVRSU11p::onPreferenceList(WaveShortMessage* wsm) {
     int id = wsm->getSenderAddress();
+    //int list[wsm->getPrefListArraySize()];
     std::vector<int> list;
     for (size_t i=0; i<wsm->getPrefListArraySize(); ++i){
+        //list[i]=wsm->getPrefList(i);
         list.push_back(wsm->getPrefList(i));
     }
     if(std::string(wsm->getSenderState())=="CH"){
-        PrefCHLists[id]=list;
+        //PrefCHLists[id]=list;
+        PrefCHLists.insert(std::pair<int, std::vector<int>> (id, list));
     }else{
-        PrefONLists[id]=list;
+        //PrefONLists[id]=list;
+        PrefONLists.insert(std::pair<int, std::vector<int>> (id, list));
     }
     dimPrefLists[id]=wsm->getPrefListArraySize();
     statePrefLists[id]=wsm->getSenderState();
@@ -144,15 +148,14 @@ void TraCIRVVRSU11p::launchMatching() {
             }
         }
     }*/
-    std::map <int,int> ONMatching;
+   /* std::map <int,int> ONMatching;
     for(auto const& iter : PrefONLists) {
         ONMatching[iter.first]=iter.second[0];
-        /*cancellare l'elemento*/
+
     }
     for(auto const& iter : PrefCHLists) {
         ONMatching[iter.first]=iter.second[0];
-        /*cancellare l'elemento*/
-    }
+    }*/
 
 }
 

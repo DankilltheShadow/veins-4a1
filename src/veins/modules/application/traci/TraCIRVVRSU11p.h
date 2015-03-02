@@ -44,6 +44,8 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
 		bool sentMessage;
 		cMessage* startMatching;
 		//create the maps of Preference lists
+		//std::map<int, int*> PrefCHLists;
+		//std::map<int, int*> PrefONLists;
 		std::map<int, std::vector<int>> PrefCHLists;
 		std::map<int, std::vector<int>> PrefONLists;
 		std::map<int, int> dimPrefLists;

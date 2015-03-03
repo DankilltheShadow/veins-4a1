@@ -19,6 +19,8 @@
 //
 
 #include "veins/modules/application/traci/TraCIRVVRSU11p.h"
+#include <iostream>
+#include <fstream>
 
 using Veins::AnnotationManagerAccess;
 
@@ -134,12 +136,12 @@ void TraCIRVVRSU11p::launchMatching() {
         ONunmatched.push_back(iter.first);
     }
     while(!ONunmatched.empty()){
-        for(int it = 0; it<ONunmatched.size(); it++){
+        for(size_t it = 0; it<ONunmatched.size(); it++){
             int ON = ONunmatched[it];
             const PrefList &preflist = PrefONLists[ON];
             if(!preflist.empty()){
                 const int &pCH = *preflist.begin();
-                Matched.insert(pair<int,int>(pCH, ON));
+                Matched.insert(std::pair<int,int>(pCH, ON));
                 PrefONLists[ON].erase(PrefONLists[ON].begin());
             }else{
                 ONunmatched.erase(ONunmatched.begin()+it);
@@ -147,17 +149,16 @@ void TraCIRVVRSU11p::launchMatching() {
         }
         for(auto const& p : PrefCHLists){
             const int CH = p.first;
-            pair <Matching::iterator, Matching::iterator> ret;
+            std::pair <Matching::iterator, Matching::iterator> ret;
             ret = Matched.equal_range(CH);
             int CountON = Matched.count(CH);
             if(CountON > 2){
                 PrefList preflistCH = p.second;
-                map<int, Matching::iterator> Order;
-                int leastON = preflistCH[preflistCH.size()-1];
+                std::map<int, Matching::iterator> Order;
                 int size = preflistCH.size();
                 for(Matching::iterator it=ret.first; it!=ret.second; it++){
                     bool found=false;
-                    for(int itpCH = 0; itpCH<preflistCH.size(); itpCH++){
+                    for(size_t itpCH = 0; itpCH<preflistCH.size(); itpCH++){
                         if(it->second==preflistCH[itpCH]){
                             Order[itpCH]=it;
                             found=true;
@@ -169,8 +170,8 @@ void TraCIRVVRSU11p::launchMatching() {
                         size++;
                     }
                 }
-                for(size_t itC=0; itC<CountON-2; itC++){
-                    map<int, Matching::iterator>::reverse_iterator last= Order.rbegin();
+                for(int itC=0; itC<CountON-2; itC++){
+                    std::map<int, Matching::iterator>::reverse_iterator last= Order.rbegin();
                     Matched.erase(last->second);
                     bool found=false;
                     for(size_t itpB=0; itpB<ONunmatched.size(); itpB++){
@@ -186,7 +187,7 @@ void TraCIRVVRSU11p::launchMatching() {
                 }
             }
             for(Matching::iterator it=ret.first; it!=ret.second; ++it){
-                for(int itUn = 0; itUn<ONunmatched.size(); itUn++){
+                for(size_t itUn = 0; itUn<ONunmatched.size(); itUn++){
                     if(ONunmatched[itUn]==it->second){
                         ONunmatched.erase(ONunmatched.begin()+itUn);
                     }
@@ -195,6 +196,14 @@ void TraCIRVVRSU11p::launchMatching() {
         }
 
     }
+    std::ofstream myfile;
+    myfile.open ("matching.txt");
+    Matching::iterator iter;
+    for (iter=Matched.begin(); iter!=Matched.end(); ++iter)
+    {
+        myfile<<(*iter).first<<"->"<<(*iter).second<<"\n";
+    }
+    myfile.close();
 
 }
 

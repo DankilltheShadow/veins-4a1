@@ -152,7 +152,7 @@ void TraCIRVVRSU11p::launchMatching() {
             std::pair <Matching::iterator, Matching::iterator> ret;
             ret = Matched.equal_range(CH);
             int CountON = Matched.count(CH);
-            if(CountON > 2){
+            if(CountON > 3){
                 PrefList preflistCH = p.second;
                 std::map<int, Matching::iterator> Order;
                 int size = preflistCH.size();
@@ -170,7 +170,7 @@ void TraCIRVVRSU11p::launchMatching() {
                         size++;
                     }
                 }
-                for(int itC=0; itC<CountON-2; itC++){
+                for(int itC=0; itC<CountON-3; itC++){
                     std::map<int, Matching::iterator>::reverse_iterator last= Order.rbegin();
                     Matched.erase(last->second);
                     bool found=false;

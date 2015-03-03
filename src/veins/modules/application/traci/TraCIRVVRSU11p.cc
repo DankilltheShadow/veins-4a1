@@ -122,40 +122,64 @@ void TraCIRVVRSU11p::handleSelfMsg(cMessage* msg) {
     }
 }
 
+typedef std::vector<int> PrefList;
+typedef std::map<int, PrefList> PrefMap;
+typedef std::multimap<int, int> Matching;
+
 void TraCIRVVRSU11p::launchMatching() {
-    /*std::map<int, int> ONlist;
-    std::map<int, int> CHlist;
-    bool Matching[PrefCHLists.size()][PrefONLists.size()]={false};
-    int i=0;
-    for(auto const& iter : PrefONLists) {
-        ONlist[i] = iter.first;
-        i++;
+
+    PrefList ONunmatched;
+    Matching Matched;
+    for(auto const& iter : PrefONLists){
+        ONunmatched.push_back(iter.first);
     }
-    i=0;
-    for(auto const& iter : PrefCHLists) {
-            CHlist[i] = iter.first;
-            i++;
+    while(!ONunmatched.empty()){
+        for(PrefList::const_iterator it = ONunmatched.begin(); it!= ONunmatched.end(); ++it){
+            const int &ON = *it;
+            const PrefList &preflist = PrefONLists[ON];
+            Matched.insert(std::pair<int,int>(*preflist.begin(), ON));
+            PrefONLists[ON].erase(PrefONLists[ON].begin());
+            //cancellare il primo elemento
         }
-    size_t ONlistSize = sizeof(ONlist) / sizeof(int);
-    while(ONlistSize!=0 or PrefONLists.size()!=0){
-        for(size_t i=0;i<ONlistSize;i++){
-            if(sizeof(PrefONLists[ONlist[i]])/sizeof(int)!=0){
-                for(size_t j=0;j<sizeof(CHlist)/sizeof(int);j++){
-                    if(PrefONLists[ONlist[i]][0]==CHlist[j]){
-                        Matching[j][i]=true;
+        for(auto const& p : PrefCHLists){
+            const int CH = p.first;
+            std::pair <Matching::iterator, Matching::iterator> ret;
+            ret = Matched.equal_range(CH);
+            int CountON = Matched.count(CH);
+            if(CountON < 4){ //4 è scelto per ora da me per lo 0.25 del random CH
+                for(Matching::iterator it=ret.first; it!=ret.second; ++it){
+                    for(PrefList::const_iterator itUn = ONunmatched.begin(); itUn!= ONunmatched.end(); ++itUn){
+                        if(*itUn==it->second){
+                            ONunmatched.erase(itUn);
+                        }
                     }
                 }
+            }else{
+                PrefList preflistCH = p.second;
+                while(CountON>3){
+                    int leastON = *preflistCH.end();
+                    for(Matching::iterator it=ret.first; it!=ret.second; ++it){
+                        if(leastON == it->second){
+                            Matched.erase(it->first);
+                            bool found=false;
+                            for(PrefList::const_iterator itUn = ONunmatched.begin(); itUn!= ONunmatched.end(); ++itUn){
+                                if(*itUn==it->second){
+                                    found = true;
+                                }
+                            }
+                            if(!found){
+                                ONunmatched.push_back(leastON);
+                            }
+                            CountON--;
+                        }
+                    }
+                    preflistCH.pop_back();
+                }
             }
+
         }
-    }*/
-   /* std::map <int,int> ONMatching;
-    for(auto const& iter : PrefONLists) {
-        ONMatching[iter.first]=iter.second[0];
 
     }
-    for(auto const& iter : PrefCHLists) {
-        ONMatching[iter.first]=iter.second[0];
-    }*/
 
 }
 

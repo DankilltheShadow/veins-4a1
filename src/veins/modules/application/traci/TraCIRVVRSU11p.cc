@@ -134,49 +134,64 @@ void TraCIRVVRSU11p::launchMatching() {
         ONunmatched.push_back(iter.first);
     }
     while(!ONunmatched.empty()){
-        for(PrefList::const_iterator it = ONunmatched.begin(); it!= ONunmatched.end(); ++it){
-            const int &ON = *it;
+        for(int it = 0; it<ONunmatched.size(); it++){
+            int ON = ONunmatched[it];
             const PrefList &preflist = PrefONLists[ON];
-            Matched.insert(std::pair<int,int>(*preflist.begin(), ON));
-            PrefONLists[ON].erase(PrefONLists[ON].begin());
-            //cancellare il primo elemento
+            if(!preflist.empty()){
+                const int &pCH = *preflist.begin();
+                Matched.insert(pair<int,int>(pCH, ON));
+                PrefONLists[ON].erase(PrefONLists[ON].begin());
+            }else{
+                ONunmatched.erase(ONunmatched.begin()+it);
+            }
         }
         for(auto const& p : PrefCHLists){
             const int CH = p.first;
-            std::pair <Matching::iterator, Matching::iterator> ret;
+            pair <Matching::iterator, Matching::iterator> ret;
             ret = Matched.equal_range(CH);
             int CountON = Matched.count(CH);
-            if(CountON < 4){ //4 è scelto per ora da me per lo 0.25 del random CH
-                for(Matching::iterator it=ret.first; it!=ret.second; ++it){
-                    for(PrefList::const_iterator itUn = ONunmatched.begin(); itUn!= ONunmatched.end(); ++itUn){
-                        if(*itUn==it->second){
-                            ONunmatched.erase(itUn);
+            if(CountON > 2){
+                PrefList preflistCH = p.second;
+                map<int, Matching::iterator> Order;
+                int leastON = preflistCH[preflistCH.size()-1];
+                int size = preflistCH.size();
+                for(Matching::iterator it=ret.first; it!=ret.second; it++){
+                    bool found=false;
+                    for(int itpCH = 0; itpCH<preflistCH.size(); itpCH++){
+                        if(it->second==preflistCH[itpCH]){
+                            Order[itpCH]=it;
+                            found=true;
+                            break;
                         }
+                    }
+                    if(!found){
+                        Order[size]=it;
+                        size++;
                     }
                 }
-            }else{
-                PrefList preflistCH = p.second;
-                while(CountON>3){
-                    int leastON = *preflistCH.end();
-                    for(Matching::iterator it=ret.first; it!=ret.second; ++it){
-                        if(leastON == it->second){
-                            Matched.erase(it->first);
-                            bool found=false;
-                            for(PrefList::const_iterator itUn = ONunmatched.begin(); itUn!= ONunmatched.end(); ++itUn){
-                                if(*itUn==it->second){
-                                    found = true;
-                                }
-                            }
-                            if(!found){
-                                ONunmatched.push_back(leastON);
-                            }
-                            CountON--;
+                for(size_t itC=0; itC<CountON-2; itC++){
+                    map<int, Matching::iterator>::reverse_iterator last= Order.rbegin();
+                    Matched.erase(last->second);
+                    bool found=false;
+                    for(size_t itpB=0; itpB<ONunmatched.size(); itpB++){
+                        if(ONunmatched[itpB]==last->second->second){
+                            found=true;
+                            break;
                         }
                     }
-                    preflistCH.pop_back();
+                    if(!found){
+                        ONunmatched.push_back(last->second->second);
+                    }
+                    Order.erase(last->first);
                 }
             }
-
+            for(Matching::iterator it=ret.first; it!=ret.second; ++it){
+                for(int itUn = 0; itUn<ONunmatched.size(); itUn++){
+                    if(ONunmatched[itUn]==it->second){
+                        ONunmatched.erase(ONunmatched.begin()+itUn);
+                    }
+                }
+            }
         }
 
     }

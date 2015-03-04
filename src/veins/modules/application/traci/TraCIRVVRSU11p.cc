@@ -26,6 +26,24 @@ using Veins::AnnotationManagerAccess;
 
 Define_Module(TraCIRVVRSU11p);
 
+void TraCIRVVRSU11p::Statistics::initialize()
+{
+    numCH=0;
+    numON=0;
+    numFN=0;
+    meanCluster=0;
+    sigmaCluster=0;
+}
+
+void TraCIRVVRSU11p::Statistics::recordScalars(cSimpleModule& module)
+{
+    module.recordScalar("NumberofCH", numCH);
+    module.recordScalar("NumberofON", numON);
+    module.recordScalar("NumberofFN", numFN);
+    module.recordScalar("meanClusterNodes", meanCluster);
+    module.recordScalar("varClusterNodes", sigmaCluster);
+}
+
 void TraCIRVVRSU11p::initialize(int stage) {
 	BaseWaveApplLayer::initialize(stage);
 	if (stage == 0) {
@@ -35,6 +53,7 @@ void TraCIRVVRSU11p::initialize(int stage) {
 		ASSERT(annotations);
 		sentMessage = false;
 		startMatching = new cMessage("Start!", SEND_MATCH);
+		statistics.initialize();
 		scheduleAt(simTime() + par("startMatching").doubleValue(), startMatching);
 
 	}
@@ -93,8 +112,10 @@ void TraCIRVVRSU11p::onPreferenceList(WaveShortMessage* wsm) {
     if(std::string(wsm->getSenderState())=="CH"){
         PrefCHLists.insert(std::pair<int, std::vector<int>> (id, list));
         CHcapacity.insert(std::pair<int, int> (id, wsm->getCapacity()));
+        statistics.numCH++;
     }else{
         PrefONLists.insert(std::pair<int, std::vector<int>> (id, list));
+        statistics.numFN++;
     }
 }
 
@@ -190,14 +211,30 @@ void TraCIRVVRSU11p::launchMatching() {
         }
 
     }
-    std::ofstream myfile;
+    /*std::ofstream myfile;
     myfile.open ("matching.txt");
     Matching::iterator iter;
     for (iter=Matched.begin(); iter!=Matched.end(); ++iter)
     {
         myfile<<(*iter).first<<"->"<<(*iter).second<<"\n";
     }
-    myfile.close();
+    myfile.close();*/
+    statistics.numON = Matched.size();
+    statistics.numFN -= Matched.size();
+    statistics.meanCluster = statistics.numON / statistics.numCH;
+
+    double var = 0;
+    for(auto const& p : PrefCHLists){
+        const int CH = p.first;
+        var += (Matched.count(CH)-statistics.meanCluster)*(Matched.count(CH)-statistics.meanCluster);
+    }
+    statistics.sigmaCluster = sqrt(var / statistics.numCH);
+
+}
+
+void TraCIRVVRSU11p::finish() {
+
+    statistics.recordScalars(*this);
 
 }
 

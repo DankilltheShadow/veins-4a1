@@ -31,6 +31,20 @@ using Veins::AnnotationManager;
  */
 class TraCIRVVRSU11p : public BaseWaveApplLayer {
 	public:
+        class Statistics {
+            public:
+                double numCH;
+                double numON;
+                double numFN;
+                double meanCluster;
+                double sigmaCluster;
+
+                void initialize();
+                void watch(cSimpleModule& module);
+                void recordScalars(cSimpleModule& module);
+        };
+
+        virtual void finish();
 		virtual void initialize(int stage);
 
 		enum WaveApplMessageKinds {
@@ -39,6 +53,7 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
             SEND_MATCH
         };
 	protected:
+		Statistics statistics;
 		AnnotationManager* annotations;
 		BaseMobility* mobi;
 		bool sentMessage;

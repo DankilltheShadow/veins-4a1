@@ -28,6 +28,7 @@ simple TraCIRVV11p extends BaseWaveApplLayer
     
     bool sendWhileParking  = default(false); //send messages when the car is parked
     volatile double helloInterval = default(1s) @unit(s); //the intervall between 2 hello messages
-    string Car_State=default("FN"); //car state, FN ON CH.
-    
+    string Car_State = default("FN"); //car state, FN ON CH.
+    double Prob_CH = default(0.1); //prob di diventare CH
+    int capacityCluster = default(9); //capacità se CH
 }

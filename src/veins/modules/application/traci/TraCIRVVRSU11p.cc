@@ -24,8 +24,6 @@
 
 using Veins::AnnotationManagerAccess;
 
-const simsignalwrap_t TraCIRVVRSU11p::mobilityStateChangedSignal = simsignalwrap_t(MIXIM_SIGNAL_MOBILITY_CHANGE_NAME);
-
 Define_Module(TraCIRVVRSU11p);
 
 void TraCIRVVRSU11p::initialize(int stage) {
@@ -36,10 +34,6 @@ void TraCIRVVRSU11p::initialize(int stage) {
 		annotations = AnnotationManagerAccess().getIfExists();
 		ASSERT(annotations);
 		sentMessage = false;
-		//WATCH_MAP(PrefCHLists);
-		//WATCH_MAP(PrefONLists);
-		WATCH_MAP(dimPrefLists);
-		WATCH_MAP(statePrefLists);
 		startMatching = new cMessage("Start!", SEND_MATCH);
 		scheduleAt(simTime() + par("startMatching").doubleValue(), startMatching);
 
@@ -91,21 +85,17 @@ void TraCIRVVRSU11p::handleLowerMsg(cMessage* msg) {
 
 void TraCIRVVRSU11p::onPreferenceList(WaveShortMessage* wsm) {
     int id = wsm->getSenderAddress();
-    //int list[wsm->getPrefListArraySize()];
     std::vector<int> list;
+
     for (size_t i=0; i<wsm->getPrefListArraySize(); ++i){
-        //list[i]=wsm->getPrefList(i);
         list.push_back(wsm->getPrefList(i));
     }
     if(std::string(wsm->getSenderState())=="CH"){
-        //PrefCHLists[id]=list;
         PrefCHLists.insert(std::pair<int, std::vector<int>> (id, list));
+        CHcapacity.insert(std::pair<int, int> (id, wsm->getCapacity()));
     }else{
-        //PrefONLists[id]=list;
         PrefONLists.insert(std::pair<int, std::vector<int>> (id, list));
     }
-    dimPrefLists[id]=wsm->getPrefListArraySize();
-    statePrefLists[id]=wsm->getSenderState();
 }
 
 /*
@@ -141,7 +131,11 @@ void TraCIRVVRSU11p::launchMatching() {
             const PrefList &preflist = PrefONLists[ON];
             if(!preflist.empty()){
                 const int &pCH = *preflist.begin();
-                Matched.insert(std::pair<int,int>(pCH, ON));
+                if(PrefCHLists.find(pCH)!=PrefCHLists.end()){
+                    Matched.insert(std::pair<int,int>(pCH, ON));
+                }else{
+                    it--;
+                }
                 PrefONLists[ON].erase(PrefONLists[ON].begin());
             }else{
                 ONunmatched.erase(ONunmatched.begin()+it);
@@ -152,25 +146,25 @@ void TraCIRVVRSU11p::launchMatching() {
             std::pair <Matching::iterator, Matching::iterator> ret;
             ret = Matched.equal_range(CH);
             int CountON = Matched.count(CH);
-            if(CountON > 3){
+            if( CountON > CHcapacity[CH] ){
                 PrefList preflistCH = p.second;
                 std::map<int, Matching::iterator> Order;
                 int size = preflistCH.size();
-                for(Matching::iterator it=ret.first; it!=ret.second; it++){
+                for( Matching::iterator it = ret.first; it != ret.second; it++ ){
                     bool found=false;
-                    for(size_t itpCH = 0; itpCH<preflistCH.size(); itpCH++){
-                        if(it->second==preflistCH[itpCH]){
-                            Order[itpCH]=it;
-                            found=true;
+                    for( size_t itpCH = 0; itpCH < preflistCH.size(); itpCH++ ){
+                        if( it->second == preflistCH[itpCH] ){
+                            Order[itpCH] = it;
+                            found = true;
                             break;
                         }
                     }
                     if(!found){
-                        Order[size]=it;
+                        Order[size] = it;
                         size++;
                     }
                 }
-                for(int itC=0; itC<CountON-3; itC++){
+                for(int itC=0; itC < CountON-CHcapacity[CH]; itC++){
                     std::map<int, Matching::iterator>::reverse_iterator last= Order.rbegin();
                     Matched.erase(last->second);
                     bool found=false;

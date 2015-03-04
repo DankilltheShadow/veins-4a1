@@ -53,4 +53,5 @@ packet WaveShortMessage {
 	//Sender state
 	string senderState = "FN";
 	int PrefList[];
+	int capacity = 0;
 }

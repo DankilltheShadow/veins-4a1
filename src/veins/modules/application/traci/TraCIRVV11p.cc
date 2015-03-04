@@ -54,12 +54,11 @@ void TraCIRVV11p::initialize(int stage) {
         //graphic indentification. FN=red ON=blue CH=green
         findHost()->getDisplayString().updateWith("r=5,red");
 
-        WATCH_MAP(neighborsdCoord);
-        //WATCH_MAP(neighborsdDistCalc);
-        WATCH_MAP(neighborsdTime);
+        capacity = par("capacityCluster");
 
         //choose random role
-        if(uniform(0,1)<=0.25){
+        double probCH = par("Prob_CH").doubleValue();
+        if(uniform(0,1)<=probCH){
             par("Car_State").setStringValue("CH");
             findHost()->getDisplayString().updateWith("r=6,green");
         }
@@ -132,7 +131,6 @@ void TraCIRVV11p::handlePositionUpdate(cObject* obj) {
                 }else{
                     double dDistance = this->curPosition.distance(neighborsdCoord[p.first]);
                     PrList.insert(std::pair<double,int>(dDistance, p.first));
-                    //PrList.insert(pair<double, int>(dDistance, p.first));
                 }
             }
 
@@ -147,6 +145,7 @@ void TraCIRVV11p::handlePositionUpdate(cObject* obj) {
                 i++;
             }
             wsm->setSenderState(par("Car_State").stringValue());
+            wsm->setCapacity(capacity);
             sendWSM(wsm);
 		}
 	}
@@ -196,15 +195,10 @@ void TraCIRVV11p::handleLowerMsg(cMessage* msg) {
 }
 
 void TraCIRVV11p::updateInfo(WaveShortMessage* wsm) {
-    //double dDistance = this->curPosition.sqrdist(wsm->getSenderPos());
     if(std::string(par("Car_State").stringValue()) != wsm->getSenderState()){
         int id = wsm->getSenderAddress();
-        //double dDistance = this->curPosition.distance(wsm->getSenderPos());
         neighborsdCoord[id]=wsm->getSenderPos();
-        neighborsState[id]=wsm->getSenderState();
-        //neighborsdDistCalc[id]=dDistance;
         neighborsdTime[id]=wsm->getTimestamp();
     }
-    //WATCH_MAP(neighborsdDist);
-    //WATCH_MAP(neighborsdPos);
+
 }

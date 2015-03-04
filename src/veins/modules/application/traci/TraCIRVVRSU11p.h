@@ -44,13 +44,9 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
 		bool sentMessage;
 		cMessage* startMatching;
 		//create the maps of Preference lists
-		//std::map<int, int*> PrefCHLists;
-		//std::map<int, int*> PrefONLists;
 		std::map<int, std::vector<int>> PrefCHLists;
 		std::map<int, std::vector<int>> PrefONLists;
-		std::map<int, int> dimPrefLists;
-		std::map<int, std::string> statePrefLists;
-		static const simsignalwrap_t mobilityStateChangedSignal;
+		std::map<int, int> CHcapacity;
 	protected:
 		virtual void onBeacon(WaveShortMessage* wsm);
 		virtual void onData(WaveShortMessage* wsm);

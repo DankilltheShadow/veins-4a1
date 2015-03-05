@@ -38,6 +38,7 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
                 double numFN;
                 double meanCluster;
                 double sigmaCluster;
+                int cycles;
 
                 void initialize();
                 void watch(cSimpleModule& module);

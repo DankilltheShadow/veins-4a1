@@ -33,6 +33,7 @@ void TraCIRVVRSU11p::Statistics::initialize()
     numFN=0;
     meanCluster=0;
     sigmaCluster=0;
+    cycles=0;
 }
 
 void TraCIRVVRSU11p::Statistics::recordScalars(cSimpleModule& module)
@@ -42,6 +43,7 @@ void TraCIRVVRSU11p::Statistics::recordScalars(cSimpleModule& module)
     module.recordScalar("NumberofFN", numFN);
     module.recordScalar("meanClusterNodes", meanCluster);
     module.recordScalar("varClusterNodes", sigmaCluster);
+    module.recordScalar("GSScycles", cycles);
 }
 
 void TraCIRVVRSU11p::initialize(int stage) {
@@ -147,6 +149,7 @@ void TraCIRVVRSU11p::launchMatching() {
         ONunmatched.push_back(iter.first);
     }
     while(!ONunmatched.empty()){
+        statistics.cycles++;
         for(size_t it = 0; it<ONunmatched.size(); it++){
             int ON = ONunmatched[it];
             const PrefList &preflist = PrefONLists[ON];

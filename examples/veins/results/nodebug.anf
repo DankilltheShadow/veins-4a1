@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scave:Analysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:scave="http://www.omnetpp.org/omnetpp/scave">
+  <inputs>
+    <inputs name="/veins/examples/veins/results/nodebug-*.vec"/>
+    <inputs name="/veins/examples/veins/results/nodebug-*.sca"/>
+  </inputs>
+  <datasets>
+    <datasets name="Gss">
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(varClusterNodes)"/>
+        <items xsi:type="scave:BarChart" name="Variance of Clusters size">
+          <groupByFields>replication</groupByFields>
+        </items>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(Numberof*)"/>
+        <items xsi:type="scave:BarChart" name="Number of Vehicles">
+          <groupByFields>replication</groupByFields>
+        </items>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(meanClusterNodes)"/>
+        <items xsi:type="scave:BarChart" name="Mean of Cluster size">
+          <groupByFields>replication</groupByFields>
+        </items>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="run(*) AND name(GSScycles)"/>
+        <items xsi:type="scave:BarChart" name="Number of Great Cycle">
+          <properties name="Bar.Placement" value="InFront"/>
+          <groupByFields>replication</groupByFields>
+        </items>
+      </items>
+    </datasets>
+  </datasets>
+  <chartSheets>
+    <chartSheets name="default" charts="//@datasets/@datasets.0/@items.3/@items.1 //@datasets/@datasets.0/@items.2/@items.1 //@datasets/@datasets.0/@items.1/@items.1 //@datasets/@datasets.0/@items.0/@items.1"/>
+  </chartSheets>
+</scave:Analysis>

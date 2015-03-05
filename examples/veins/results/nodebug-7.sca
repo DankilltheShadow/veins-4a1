@@ -1,23 +1,26 @@
 version 2
-run nodebug-7-20150304-18:34:07-4504
+run nodebug-7-20150305-14:40:27-7916
+attr c 9
 attr configname nodebug
-attr datetime 20150304-18:34:07
+attr datetime 20150305-14:40:27
 attr experiment nodebug
 attr inifile omnetpp.ini
-attr iterationvars ""
-attr iterationvars2 $repetition=7
-attr measurement ""
+attr iterationvars "$p=1/10, $c=9"
+attr iterationvars2 "$p=1/10, $c=9, $repetition=7"
+attr measurement "$p=1/10, $c=9"
 attr network RSUExampleScenario
-attr processid 4504
+attr p 1/10
+attr processid 7916
 attr repetition 7
 attr replication #7
 attr resultdir results
 attr runnumber 7
 attr seedset 7
 
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	19
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	49
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	14
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	2.5789473684211
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.74803528439747
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	7
+scalar . 	c 	9
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	8
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	62
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	12
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	7.75
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.7139136501003
+scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	5

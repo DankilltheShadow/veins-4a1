@@ -1,0 +1,23 @@
+version 2
+run nodebug-0-20150305-12:57:41-4868
+attr configname nodebug
+attr datetime 20150305-12:57:41
+attr experiment nodebug
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network RSUExampleScenario
+attr processid 4868
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	17
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	41
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	24
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	2.4117647058824
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.91129019910763
+scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	9

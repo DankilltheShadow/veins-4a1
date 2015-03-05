@@ -46,6 +46,16 @@ void TraCIRVVRSU11p::Statistics::recordScalars(cSimpleModule& module)
     module.recordScalar("GSScycles", cycles);
 }
 
+void TraCIRVVRSU11p::Statistics::watch(cSimpleModule& )
+{
+    WATCH(numCH);
+    WATCH(numON);
+    WATCH(numFN);
+    WATCH(meanCluster);
+    WATCH(cycles);
+    WATCH(sigmaCluster);
+}
+
 void TraCIRVVRSU11p::initialize(int stage) {
 	BaseWaveApplLayer::initialize(stage);
 	if (stage == 0) {
@@ -56,6 +66,7 @@ void TraCIRVVRSU11p::initialize(int stage) {
 		sentMessage = false;
 		startMatching = new cMessage("Start!", SEND_MATCH);
 		statistics.initialize();
+		statistics.watch(*this);
 		scheduleAt(simTime() + par("startMatching").doubleValue(), startMatching);
 
 	}

@@ -1,0 +1,26 @@
+version 2
+run statistic-1421-20150306-07:31:03-12684
+attr c 5
+attr configname statistic
+attr datetime 20150306-07:31:03
+attr experiment statistic
+attr inifile omnetpp.ini
+attr iterationvars "$p=1/4, $c=5"
+attr iterationvars2 "$p=1/4, $c=5, $repetition=21"
+attr measurement "$p=1/4, $c=5"
+attr network RSUExampleScenario
+attr p 1/4
+attr processid 12684
+attr repetition 21
+attr replication #21
+attr resultdir results
+attr runnumber 1421
+attr seedset 1421
+
+scalar . 	c 	5
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	29
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	70
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	1
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	2.4137931034483
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.5428867118067
+scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	4

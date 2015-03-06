@@ -1,0 +1,26 @@
+version 2
+run statistic-81-20150305-22:19:40-11540
+attr c 9
+attr configname statistic
+attr datetime 20150305-22:19:40
+attr experiment statistic
+attr inifile omnetpp.ini
+attr iterationvars "$p=1/10, $c=9"
+attr iterationvars2 "$p=1/10, $c=9, $repetition=81"
+attr measurement "$p=1/10, $c=9"
+attr network RSUExampleScenario
+attr p 1/10
+attr processid 11540
+attr repetition 81
+attr replication #81
+attr resultdir results
+attr runnumber 81
+attr seedset 81
+
+scalar . 	c 	9
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	8
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	67
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	25
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	8.375
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.1110243021644
+scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	6

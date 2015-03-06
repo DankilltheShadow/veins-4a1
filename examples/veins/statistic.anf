@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scave:Analysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:scave="http://www.omnetpp.org/omnetpp/scave">
+<scave:Analysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:scave="http://www.omnetpp.org/omnetpp/scave">
   <inputs>
     <inputs name="/veins/examples/veins/results/statistic-*.vec"/>
     <inputs name="/veins/examples/veins/results/statistic-*.sca"/>
   </inputs>
-  <datasets/>
-  <chartSheets/>
+  <datasets>
+    <datasets name="GSS">
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(NumberofCH)"/>
+        <items xsi:type="scave:Add" filterPattern="name(NumberofFN)"/>
+        <items xsi:type="scave:Add" filterPattern="name(NumberofON)"/>
+        <items xsi:type="scave:BarChart" name="Number of Vehicles">
+          <groupByFields>measurement</groupByFields>
+        </items>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(c)"/>
+        <items xsi:type="scave:Add" filterPattern="name(meanClusterNodes)"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="normalMean" valueExpr="meanClusterNodes/c" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:BarChart" name="Mean of Cluster Size (not CH)">
+          <filters xsi:type="scave:Deselect" filterPattern="name(c)"/>
+          <filters xsi:type="scave:Deselect" filterPattern="name(meanClusterNodes)"/>
+          <groupByFields>measurement</groupByFields>
+        </items>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(varClusterNodes)"/>
+        <items xsi:type="scave:Add" filterPattern="name(c)"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="normalSD" valueExpr="varClusterNodes/c" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:BarChart" name="Standard deviation">
+          <filters xsi:type="scave:Deselect" filterPattern="name(c)"/>
+          <filters xsi:type="scave:Deselect" filterPattern="name(varClusterNodes)"/>
+          <groupByFields>measurement</groupByFields>
+        </items>
+      </items>
+    </datasets>
+  </datasets>
+  <chartSheets>
+    <chartSheets name="default" charts="//@datasets/@datasets.0/@items.0/@items.3 //@datasets/@datasets.0/@items.1/@items.3 //@datasets/@datasets.0/@items.2/@items.3"/>
+  </chartSheets>
 </scave:Analysis>

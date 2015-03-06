@@ -225,14 +225,7 @@ void TraCIRVVRSU11p::launchMatching() {
         }
 
     }
-    /*std::ofstream myfile;
-    myfile.open ("matching.txt");
-    Matching::iterator iter;
-    for (iter=Matched.begin(); iter!=Matched.end(); ++iter)
-    {
-        myfile<<(*iter).first<<"->"<<(*iter).second<<"\n";
-    }
-    myfile.close();*/
+
     statistics.numON = Matched.size();
     statistics.numFN -= Matched.size();
     statistics.meanCluster = statistics.numON / statistics.numCH;

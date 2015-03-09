@@ -26,6 +26,10 @@ using Veins::AnnotationManagerAccess;
 
 Define_Module(TraCIRVVRSU11p);
 
+typedef std::vector<int> PrefList;
+typedef std::map<int, PrefList> PrefMap;
+typedef std::multimap<int, int> Matching;
+
 void TraCIRVVRSU11p::Statistics::initialize()
 {
     numCH=0;
@@ -33,7 +37,12 @@ void TraCIRVVRSU11p::Statistics::initialize()
     numFN=0;
     meanCluster=0;
     sigmaCluster=0;
-    cycles=0;
+    CHutility=0;
+    meanCHutility=0;
+    sigmaCHutility=0;
+    diffCHutility=0;
+    meandiffCHutility=0;
+    sigmadiffCHutility=0;
 }
 
 void TraCIRVVRSU11p::Statistics::recordScalars(cSimpleModule& module)
@@ -43,17 +52,12 @@ void TraCIRVVRSU11p::Statistics::recordScalars(cSimpleModule& module)
     module.recordScalar("NumberofFN", numFN);
     module.recordScalar("meanClusterNodes", meanCluster);
     module.recordScalar("varClusterNodes", sigmaCluster);
-    module.recordScalar("GSScycles", cycles);
-}
-
-void TraCIRVVRSU11p::Statistics::watch(cSimpleModule& )
-{
-    WATCH(numCH);
-    WATCH(numON);
-    WATCH(numFN);
-    WATCH(meanCluster);
-    WATCH(cycles);
-    WATCH(sigmaCluster);
+    module.recordScalar("sumCHutility", CHutility);
+    module.recordScalar("meanCHutility", meanCHutility);
+    module.recordScalar("varCHutility", sigmaCHutility);
+    module.recordScalar("sumDiffCHutility", diffCHutility);
+    module.recordScalar("meanDiffCHutility", meandiffCHutility);
+    module.recordScalar("varDiffCHutility", sigmadiffCHutility);
 }
 
 void TraCIRVVRSU11p::initialize(int stage) {
@@ -66,7 +70,6 @@ void TraCIRVVRSU11p::initialize(int stage) {
 		sentMessage = false;
 		startMatching = new cMessage("Start!", SEND_MATCH);
 		statistics.initialize();
-		statistics.watch(*this);
 		scheduleAt(simTime() + par("startMatching").doubleValue(), startMatching);
 
 	}
@@ -117,7 +120,7 @@ void TraCIRVVRSU11p::handleLowerMsg(cMessage* msg) {
 
 void TraCIRVVRSU11p::onPreferenceList(WaveShortMessage* wsm) {
     int id = wsm->getSenderAddress();
-    std::vector<int> list;
+    PrefList list;
 
     for (size_t i=0; i<wsm->getPrefListArraySize(); ++i){
         list.push_back(wsm->getPrefList(i));
@@ -130,6 +133,7 @@ void TraCIRVVRSU11p::onPreferenceList(WaveShortMessage* wsm) {
         PrefONLists.insert(std::pair<int, std::vector<int>> (id, list));
         statistics.numFN++;
     }
+    nodesCoord.insert(std::pair<int, Coord> (id, wsm->getSenderPos()));
 }
 
 /*
@@ -148,9 +152,7 @@ void TraCIRVVRSU11p::handleSelfMsg(cMessage* msg) {
     }
 }
 
-typedef std::vector<int> PrefList;
-typedef std::map<int, PrefList> PrefMap;
-typedef std::multimap<int, int> Matching;
+
 
 void TraCIRVVRSU11p::launchMatching() {
 
@@ -160,7 +162,6 @@ void TraCIRVVRSU11p::launchMatching() {
         ONunmatched.push_back(iter.first);
     }
     while(!ONunmatched.empty()){
-        statistics.cycles++;
         for(size_t it = 0; it<ONunmatched.size(); it++){
             int ON = ONunmatched[it];
             const PrefList &preflist = PrefONLists[ON];
@@ -226,6 +227,7 @@ void TraCIRVVRSU11p::launchMatching() {
 
     }
 
+    //raccoglie statistiche
     statistics.numON = Matched.size();
     statistics.numFN -= Matched.size();
     statistics.meanCluster = statistics.numON / statistics.numCH;
@@ -234,14 +236,22 @@ void TraCIRVVRSU11p::launchMatching() {
     for(auto const& p : PrefCHLists){
         const int CH = p.first;
         var += (Matched.count(CH)-statistics.meanCluster)*(Matched.count(CH)-statistics.meanCluster);
+
     }
     statistics.sigmaCluster = sqrt(var / statistics.numCH);
+    //FWMath::dBm2mW(par("thermalNoise").doubleValue());
 
-}
-
-void TraCIRVVRSU11p::finish() {
-
+    ////////////////////////////////////////////////////////////////
+    //Scrive file di matching
+    /*
+    std::ofstream myfile;
+    myfile.open ("matching.txt");
+    Matching::iterator iter;
+    for (iter=Matched.begin(); iter!=Matched.end(); ++iter)
+    {
+        myfile<<(*iter).first<<"->"<<(*iter).second<<"\n";
+    }
+    myfile.close();*/
     statistics.recordScalars(*this);
-
 }
 

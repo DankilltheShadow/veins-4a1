@@ -38,14 +38,17 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
                 double numFN;
                 double meanCluster;
                 double sigmaCluster;
-                double cycles;
+                double CHutility;
+                double meanCHutility;
+                double sigmaCHutility;
+                double diffCHutility;
+                double meandiffCHutility;
+                double sigmadiffCHutility;
 
                 void initialize();
-                void watch(cSimpleModule& module);
                 void recordScalars(cSimpleModule& module);
         };
 
-        virtual void finish();
 		virtual void initialize(int stage);
 
 		enum WaveApplMessageKinds {
@@ -62,6 +65,7 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
 		//create the maps of Preference lists
 		std::map<int, std::vector<int>> PrefCHLists;
 		std::map<int, std::vector<int>> PrefONLists;
+		std::map<int, Coord> nodesCoord;
 		std::map<int, int> CHcapacity;
 	protected:
 		virtual void onBeacon(WaveShortMessage* wsm);

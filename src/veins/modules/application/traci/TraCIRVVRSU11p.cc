@@ -40,6 +40,9 @@ void TraCIRVVRSU11p::Statistics::initialize()
     CHutility=0;
     meanCHutility=0;
     sigmaCHutility=0;
+    expCHutility=0;
+    meanexpCHutility=0;
+    sigmaexpCHutility=0;
     diffCHutility=0;
     meandiffCHutility=0;
     sigmadiffCHutility=0;
@@ -58,6 +61,9 @@ void TraCIRVVRSU11p::Statistics::recordScalars(cSimpleModule& module)
     module.recordScalar("sumDiffCHutility", diffCHutility);
     module.recordScalar("meanDiffCHutility", meandiffCHutility);
     module.recordScalar("varDiffCHutility", sigmadiffCHutility);
+    module.recordScalar("expectedCHutility", expCHutility);
+    module.recordScalar("meanExpectedCHutility", meanexpCHutility);
+    module.recordScalar("varExpectedCHutility", sigmaexpCHutility);
 }
 
 void TraCIRVVRSU11p::initialize(int stage) {
@@ -247,6 +253,7 @@ void TraCIRVVRSU11p::launchMatching() {
         }
         double sumexpU = 0;
         PrefList preflistCH = p.second;
+        int countON = 0;
         for( size_t itpCH = 0; itpCH < preflistCH.size(); itpCH++ ){
             const int ON = preflistCH[itpCH];
             PrefMap::iterator it;
@@ -254,15 +261,21 @@ void TraCIRVVRSU11p::launchMatching() {
             if(it==PrefCHLists.end()){
                 double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
                 sumexpU += calcUtility(sqrDistance);
+                countON++;
             }
         }
-        statistics.CHutility += sumU;
-        statistics.diffCHutility += sumexpU-sumU;
+        statistics.CHutility += sumU/(10*numONCluster);
+        statistics.expCHutility += sumexpU/(10*countON);
+        statistics.diffCHutility += (sumexpU/(10*countON))-sumU;
     }
     statistics.meanCHutility = statistics.CHutility/statistics.numCH;
+    statistics.meanexpCHutility = statistics.expCHutility/statistics.numCH;
     statistics.meandiffCHutility = statistics.diffCHutility/statistics.numCH;
+
+    /////////////////////////////////////////////////
     for(auto const& p : PrefCHLists){
         const int CH = p.first;
+        double numONCluster = Matched.count(CH);
         std::pair <Matching::iterator, Matching::iterator> ret;
         ret = Matched.equal_range(CH);
         double sumU = 0;
@@ -273,6 +286,7 @@ void TraCIRVVRSU11p::launchMatching() {
         }
         double sumexpU = 0;
         PrefList preflistCH = p.second;
+        int countON = 0;
         for( size_t itpCH = 0; itpCH < preflistCH.size(); itpCH++ ){
             const int ON = preflistCH[itpCH];
             PrefMap::iterator it;
@@ -280,12 +294,15 @@ void TraCIRVVRSU11p::launchMatching() {
             if(it==PrefCHLists.end()){
                 double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
                 sumexpU += calcUtility(sqrDistance);
+                countON++;
             }
         }
-        statistics.sigmaCHutility += (sumU-statistics.meanCHutility)*(sumU-statistics.meanCHutility);
-        statistics.sigmadiffCHutility += ((sumexpU-sumU)-statistics.meandiffCHutility)*((sumexpU-sumU)-statistics.meandiffCHutility);
+        statistics.sigmaCHutility += ((sumU/(10*numONCluster))-statistics.meanCHutility)*((sumU/(10*numONCluster))-statistics.meanCHutility);
+        statistics.sigmaexpCHutility += ((sumexpU/(10*countON))-statistics.meanexpCHutility)*((sumexpU/(10*countON))-statistics.meanexpCHutility);
+        statistics.sigmadiffCHutility += (((sumexpU/(10*countON))-sumU)-statistics.meandiffCHutility)*(((sumexpU/(10*countON))-sumU)-statistics.meandiffCHutility);
     }
     statistics.sigmaCHutility = sqrt(statistics.sigmaCHutility/statistics.numCH);
+    statistics.sigmaexpCHutility = sqrt(statistics.sigmaexpCHutility);
     statistics.sigmadiffCHutility = sqrt(statistics.sigmadiffCHutility/statistics.numCH);
     statistics.sigmaCluster = sqrt(var / statistics.numCH);
     //

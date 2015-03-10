@@ -44,6 +44,9 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
                 double diffCHutility;
                 double meandiffCHutility;
                 double sigmadiffCHutility;
+                double expCHutility;
+                double meanexpCHutility;
+                double sigmaexpCHutility;
 
                 void initialize();
                 void recordScalars(cSimpleModule& module);

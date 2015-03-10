@@ -76,6 +76,7 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
 		virtual void handleSelfMsg(cMessage* msg);
         void onPreferenceList(WaveShortMessage* data);
         void launchMatching();
+        double calcUtility(double sqrD);
 };
 
 #endif

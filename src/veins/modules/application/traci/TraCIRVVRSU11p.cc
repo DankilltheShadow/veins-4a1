@@ -235,11 +235,52 @@ void TraCIRVVRSU11p::launchMatching() {
     double var = 0;
     for(auto const& p : PrefCHLists){
         const int CH = p.first;
-        var += (Matched.count(CH)-statistics.meanCluster)*(Matched.count(CH)-statistics.meanCluster);
-
+        double numONCluster = Matched.count(CH);
+        var += (numONCluster-statistics.meanCluster)*(numONCluster-statistics.meanCluster);
+        std::pair <Matching::iterator, Matching::iterator> ret;
+        ret = Matched.equal_range(CH);
+        double sumU = 0;
+        for( Matching::iterator it = ret.first; it != ret.second; it++ ){
+            const int ON = it->second;
+            double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
+            sumU += calcUtility(sqrDistance);
+        }
+        double sumexpU = 0;
+        PrefList preflistCH = p.second;
+        for( size_t itpCH = 0; itpCH < preflistCH.size(); itpCH++ ){
+            const int ON = preflistCH[itpCH];
+            double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
+            sumexpU += calcUtility(sqrDistance);
+        }
+        statistics.CHutility += sumU;
+        statistics.diffCHutility += sumexpU-sumU;
     }
+    statistics.meanCHutility = statistics.CHutility/statistics.numCH;
+    statistics.meandiffCHutility = statistics.diffCHutility/statistics.numCH;
+    for(auto const& p : PrefCHLists){
+        const int CH = p.first;
+        std::pair <Matching::iterator, Matching::iterator> ret;
+        ret = Matched.equal_range(CH);
+        double sumU = 0;
+        for( Matching::iterator it = ret.first; it != ret.second; it++ ){
+            const int ON = it->second;
+            double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
+            sumU += calcUtility(sqrDistance);
+        }
+        double sumexpU = 0;
+        PrefList preflistCH = p.second;
+        for( size_t itpCH = 0; itpCH < preflistCH.size(); itpCH++ ){
+            const int ON = preflistCH[itpCH];
+            double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
+            sumexpU += calcUtility(sqrDistance);
+        }
+        statistics.sigmaCHutility += sumU-statistics.meanCHutility;
+        statistics.sigmadiffCHutility += (sumexpU-sumU)-statistics.meandiffCHutility;
+    }
+    statistics.sigmaCHutility = sqrt(statistics.sigmaCHutility/statistics.numCH);
+    statistics.sigmadiffCHutility = sqrt(statistics.sigmadiffCHutility/statistics.numCH);
     statistics.sigmaCluster = sqrt(var / statistics.numCH);
-    //FWMath::dBm2mW(par("thermalNoise").doubleValue());
+    //
 
     ////////////////////////////////////////////////////////////////
     //Scrive file di matching
@@ -255,3 +296,11 @@ void TraCIRVVRSU11p::launchMatching() {
     statistics.recordScalars(*this);
 }
 
+double TraCIRVVRSU11p::calcUtility(double sqrD){
+    double sigmaQ=FWMath::dBm2mW(-110); //converto i dBm in mW per sigma quadro
+    double pDivSigma = 10/sigmaQ; //mW
+    double w = 20; //MHZ
+    double g = 1/sqrD;
+
+    return(w*log(1+(pDivSigma*g)));
+}

@@ -306,7 +306,7 @@ void TraCIRVVRSU11p::launchMatching() {
 
 double TraCIRVVRSU11p::calcUtility(double sqrD){
     double sigmaQ=FWMath::dBm2mW(-110); //converto i dBm in mW per sigma quadro
-    double pDivSigma = 10/sigmaQ; //mW
+    double pDivSigma = 10/sigmaQ; // 10 mW
     double w = 20; //MHZ
     double g = 1/sqrD;
 

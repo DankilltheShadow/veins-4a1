@@ -249,8 +249,12 @@ void TraCIRVVRSU11p::launchMatching() {
         PrefList preflistCH = p.second;
         for( size_t itpCH = 0; itpCH < preflistCH.size(); itpCH++ ){
             const int ON = preflistCH[itpCH];
-            double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
-            sumexpU += calcUtility(sqrDistance);
+            PrefMap::iterator it;
+            it = PrefCHLists.find(ON);
+            if(it==PrefCHLists.end()){
+                double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
+                sumexpU += calcUtility(sqrDistance);
+            }
         }
         statistics.CHutility += sumU;
         statistics.diffCHutility += sumexpU-sumU;
@@ -271,11 +275,15 @@ void TraCIRVVRSU11p::launchMatching() {
         PrefList preflistCH = p.second;
         for( size_t itpCH = 0; itpCH < preflistCH.size(); itpCH++ ){
             const int ON = preflistCH[itpCH];
-            double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
-            sumexpU += calcUtility(sqrDistance);
+            PrefMap::iterator it;
+            it = PrefCHLists.find(ON);
+            if(it==PrefCHLists.end()){
+                double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
+                sumexpU += calcUtility(sqrDistance);
+            }
         }
-        statistics.sigmaCHutility += sumU-statistics.meanCHutility;
-        statistics.sigmadiffCHutility += (sumexpU-sumU)-statistics.meandiffCHutility;
+        statistics.sigmaCHutility += (sumU-statistics.meanCHutility)*(sumU-statistics.meanCHutility);
+        statistics.sigmadiffCHutility += ((sumexpU-sumU)-statistics.meandiffCHutility)*((sumexpU-sumU)-statistics.meandiffCHutility);
     }
     statistics.sigmaCHutility = sqrt(statistics.sigmaCHutility/statistics.numCH);
     statistics.sigmadiffCHutility = sqrt(statistics.sigmadiffCHutility/statistics.numCH);

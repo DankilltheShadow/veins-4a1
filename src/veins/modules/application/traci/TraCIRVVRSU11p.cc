@@ -179,6 +179,8 @@ void TraCIRVVRSU11p::launchMatching() {
         }
         for(auto const& p : PrefCHLists){
             const int CH = p.first;
+            std::pair <Matching::iterator, Matching::iterator> ret;
+            ret = Matched.equal_range(CH);
             int CountON = Matched.count(CH);
             if( CountON > CHcapacity[CH] ){
                 PrefList preflistCH = p.second;

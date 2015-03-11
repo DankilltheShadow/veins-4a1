@@ -333,8 +333,24 @@ void TraCIRVVRSU11p::orgStatistic() {
 Matching TraCIRVVRSU11p::launchRVVMatching(Matching pMatched) {
     Matching tempMatch = pMatched;
     Matching BP = stable(tempMatch);
+    std::map<int,int> S;
     while (BP.size() > 0){
+        bool addB = false;
+        for( Matching::iterator it = BP.begin(); it != BP.end(); it++ ){
+            if(S.find(it->first)!= S.end() && S.find(it->second)== S.end()){
+                add(it->first);
+                addB = true;
+                break;
+            }
+            if(S.find(it->second)!= S.end() && S.find(it->first)== S.end()){
+                add(it->second);
+                addB = true;
+                break;
+            }
+        }
+        if(!addB){
 
+        }
     }
     return tempMatch;
 }
@@ -390,4 +406,8 @@ Matching TraCIRVVRSU11p::stable(Matching m){
 
     }
     return BP;
+}
+
+void TraCIRVVRSU11p::add(int a){
+
 }

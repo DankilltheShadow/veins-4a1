@@ -88,6 +88,7 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
         void orgStatistic();
         Matching launchRVVMatching(Matching Matched);
         Matching stable(Matching m);
+        void add(int a);
 };
 
 #endif

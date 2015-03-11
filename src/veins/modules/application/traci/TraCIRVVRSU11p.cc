@@ -26,10 +26,6 @@ using Veins::AnnotationManagerAccess;
 
 Define_Module(TraCIRVVRSU11p);
 
-typedef std::vector<int> PrefList;
-typedef std::map<int, PrefList> PrefMap;
-typedef std::multimap<int, int> Matching;
-
 void TraCIRVVRSU11p::Statistics::initialize()
 {
     numCH=0;
@@ -158,19 +154,17 @@ void TraCIRVVRSU11p::handleSelfMsg(cMessage* msg) {
     }
 }
 
-
-
 void TraCIRVVRSU11p::launchMatching() {
 
     PrefList ONunmatched;
-    Matching Matched;
+    PrefMap PrefONListsTEMP = PrefONLists;
     for(auto const& iter : PrefONLists){
         ONunmatched.push_back(iter.first);
     }
     while(!ONunmatched.empty()){
         for(size_t it = 0; it<ONunmatched.size(); it++){
             int ON = ONunmatched[it];
-            const PrefList &preflist = PrefONLists[ON];
+            const PrefList &preflist = PrefONListsTEMP[ON];
             if(!preflist.empty()){
                 const int &pCH = *preflist.begin();
                 if(PrefCHLists.find(pCH)!=PrefCHLists.end()){
@@ -178,7 +172,7 @@ void TraCIRVVRSU11p::launchMatching() {
                 }else{
                     it--;
                 }
-                PrefONLists[ON].erase(PrefONLists[ON].begin());
+                PrefONListsTEMP[ON].erase(PrefONListsTEMP[ON].begin());
             }else{
                 ONunmatched.erase(ONunmatched.begin()+it);
             }
@@ -234,6 +228,21 @@ void TraCIRVVRSU11p::launchMatching() {
     }
 
     //raccoglie statistiche
+    orgStatistic();
+
+}
+
+double TraCIRVVRSU11p::calcUtility(double sqrD){
+    double sigmaQ=FWMath::dBm2mW(-110); //converto i dBm in mW per sigma quadro
+    double pDivSigma = 10/sigmaQ; // 10 mW
+    double w = 20; //MHZ
+    double g = 1/sqrD;
+
+    return(w*log(1+(pDivSigma*g)));
+}
+
+void TraCIRVVRSU11p::orgStatistic() {
+
     statistics.numON = Matched.size();
     statistics.numFN -= Matched.size();
     statistics.meanCluster = statistics.numON / statistics.numCH;
@@ -266,7 +275,7 @@ void TraCIRVVRSU11p::launchMatching() {
         }
         statistics.CHutility += sumU/(10*numONCluster);
         statistics.expCHutility += sumexpU/(10*countON);
-        statistics.diffCHutility += (sumexpU/(10*countON))-sumU;
+        statistics.diffCHutility += (sumexpU/(10*countON))-(sumU/(10*numONCluster));
     }
     statistics.meanCHutility = statistics.CHutility/statistics.numCH;
     statistics.meanexpCHutility = statistics.expCHutility/statistics.numCH;
@@ -299,7 +308,7 @@ void TraCIRVVRSU11p::launchMatching() {
         }
         statistics.sigmaCHutility += ((sumU/(10*numONCluster))-statistics.meanCHutility)*((sumU/(10*numONCluster))-statistics.meanCHutility);
         statistics.sigmaexpCHutility += ((sumexpU/(10*countON))-statistics.meanexpCHutility)*((sumexpU/(10*countON))-statistics.meanexpCHutility);
-        statistics.sigmadiffCHutility += (((sumexpU/(10*countON))-sumU)-statistics.meandiffCHutility)*(((sumexpU/(10*countON))-sumU)-statistics.meandiffCHutility);
+        statistics.sigmadiffCHutility += (((sumexpU/(10*countON))-(sumU/(10*numONCluster)))-statistics.meandiffCHutility)*(((sumexpU/(10*countON))-(sumU/(10*numONCluster)))-statistics.meandiffCHutility);
     }
     statistics.sigmaCHutility = sqrt(statistics.sigmaCHutility/statistics.numCH);
     statistics.sigmaexpCHutility = sqrt(statistics.sigmaexpCHutility);
@@ -321,11 +330,64 @@ void TraCIRVVRSU11p::launchMatching() {
     statistics.recordScalars(*this);
 }
 
-double TraCIRVVRSU11p::calcUtility(double sqrD){
-    double sigmaQ=FWMath::dBm2mW(-110); //converto i dBm in mW per sigma quadro
-    double pDivSigma = 10/sigmaQ; // 10 mW
-    double w = 20; //MHZ
-    double g = 1/sqrD;
+Matching TraCIRVVRSU11p::launchRVVMatching(Matching pMatched) {
+    Matching tempMatch = pMatched;
+    Matching BP = stable(tempMatch);
+    while (BP.size() > 0){
 
-    return(w*log(1+(pDivSigma*g)));
+    }
+    return tempMatch;
+}
+
+Matching TraCIRVVRSU11p::stable(Matching m){
+    Matching BP;
+    for(auto const& p : PrefCHLists){
+        const int CH = p.first;
+        const PrefList CHpref = p.second;
+        std::pair <Matching::iterator, Matching::iterator> ret;
+        ret = m.equal_range(CH);
+        PrefList ONmatched;
+        for( Matching::iterator it = ret.first; it != ret.second; it++ ){
+            ONmatched.push_back(it->second);
+        }
+        size_t j = 0;
+        for( int i = 0; i < CHcapacity[CH]; i++ ){
+            if(j < CHpref.size()){
+                const int ON = CHpref[j];
+                bool found = false;
+                for( size_t k = 0; k < ONmatched.size(); k++ ){
+                    if( ON == ONmatched[k] ){
+                        found=true;
+                        break;
+                    }
+                }
+                if(found==false){
+                    bool insertBP = true;
+                    for( Matching::iterator it = m.begin(); it != m.end(); it++ ){
+                        if(it->second == ON){
+                            const int onCH = it->first;
+                            PrefList ONpref = PrefONLists.find(ON)->second;
+                            for(size_t iter = 0; iter < ONpref.size(); iter++){
+                                if(ONpref[iter]==CH){
+                                    break;
+                                }
+                                if(ONpref[iter]==onCH){
+                                    insertBP = false;
+                                    i--;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    if(insertBP){
+                        BP.insert(std::pair<int, int>(CH,ON));
+                    }
+                }
+                j++;
+            }
+        }
+
+    }
+    return BP;
 }

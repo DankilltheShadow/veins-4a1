@@ -26,6 +26,10 @@
 
 using Veins::AnnotationManager;
 
+typedef std::vector<int> PrefList;
+typedef std::map<int, PrefList> PrefMap;
+typedef std::multimap<int, int> Matching;
+
 /**
  * Small RSU Demo using 11p
  */
@@ -66,8 +70,9 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
 		bool sentMessage;
 		cMessage* startMatching;
 		//create the maps of Preference lists
-		std::map<int, std::vector<int>> PrefCHLists;
-		std::map<int, std::vector<int>> PrefONLists;
+		PrefMap PrefCHLists;
+		PrefMap PrefONLists;
+		Matching Matched;
 		std::map<int, Coord> nodesCoord;
 		std::map<int, int> CHcapacity;
 	protected:
@@ -80,6 +85,9 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
         void onPreferenceList(WaveShortMessage* data);
         void launchMatching();
         double calcUtility(double sqrD);
+        void orgStatistic();
+        Matching launchRVVMatching(Matching Matched);
+        Matching stable(Matching m);
 };
 
 #endif

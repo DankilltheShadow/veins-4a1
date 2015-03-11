@@ -1,26 +1,34 @@
 version 2
-run statistic-680-20150306-02:21:31-12220
-attr c 9
+run statistic-680-20150310-18:04:41-6656
+attr c 25
 attr configname statistic
-attr datetime 20150306-02:21:31
+attr datetime 20150310-18:04:41
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/8, $c=9"
-attr iterationvars2 "$p=1/8, $c=9, $repetition=80"
-attr measurement "$p=1/8, $c=9"
+attr iterationvars "$p=1/20, $c=25"
+attr iterationvars2 "$p=1/20, $c=25, $repetition=80"
+attr measurement "$p=1/20, $c=25"
 attr network RSUExampleScenario
-attr p 1/8
-attr processid 12220
+attr p 1/20
+attr processid 6656
 attr repetition 80
 attr replication #80
 attr resultdir results
 attr runnumber 680
 attr seedset 680
 
-scalar . 	c 	9
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	8
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	64
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	28
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	8
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.2912878474779
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	7
+scalar . 	c 	25
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	2
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	45
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	53
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	22.5
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.5
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	70.06753936469
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	35.033769682345
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	0.64191443049224
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-15664.477326808
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-7832.238663404
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	732.77752494934
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	68.623308722738
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.311654361369
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.929029374007

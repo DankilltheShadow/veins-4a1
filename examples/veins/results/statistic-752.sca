@@ -1,26 +1,34 @@
 version 2
-run statistic-752-20150306-02:51:09-3928
-attr c 10
+run statistic-752-20150310-18:29:11-5672
+attr c 9
 attr configname statistic
-attr datetime 20150306-02:51:09
+attr datetime 20150310-18:29:11
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/8, $c=10"
-attr iterationvars2 "$p=1/8, $c=10, $repetition=52"
-attr measurement "$p=1/8, $c=10"
+attr iterationvars "$p=1/10, $c=9"
+attr iterationvars2 "$p=1/10, $c=9, $repetition=52"
+attr measurement "$p=1/10, $c=9"
 attr network RSUExampleScenario
-attr p 1/8
-attr processid 3928
+attr p 1/10
+attr processid 5672
 attr repetition 52
 attr replication #52
 attr resultdir results
 attr runnumber 752
 attr seedset 752
 
-scalar . 	c 	10
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	16
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	84
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	0
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	5.25
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.7726341266024
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	1
+scalar . 	c 	9
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	14
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	77
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	9
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	5.5
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.5284100029183
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	534.16018053914
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	38.154298609939
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2.0527866654386
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-28836.880810201
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2059.7772007286
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	954.26339828732
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	476.46647104443
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.033319360317
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.3816448215881

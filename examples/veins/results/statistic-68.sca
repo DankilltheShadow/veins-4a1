@@ -1,26 +1,34 @@
 version 2
-run statistic-68-20150305-22:14:46-11536
-attr c 9
+run statistic-68-20150310-14:35:48-5888
+attr c 19
 attr configname statistic
-attr datetime 20150305-22:14:46
+attr datetime 20150310-14:35:48
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/10, $c=9"
-attr iterationvars2 "$p=1/10, $c=9, $repetition=68"
-attr measurement "$p=1/10, $c=9"
+attr iterationvars "$p=1/20, $c=19"
+attr iterationvars2 "$p=1/20, $c=19, $repetition=68"
+attr measurement "$p=1/20, $c=19"
 attr network RSUExampleScenario
-attr p 1/10
-attr processid 11536
+attr p 1/20
+attr processid 5888
 attr repetition 68
 attr replication #68
 attr resultdir results
 attr runnumber 68
 attr seedset 68
 
-scalar . 	c 	9
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	13
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	78
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	9
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	6
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.0634319618061
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	5
+scalar . 	c 	19
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	8
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	74
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	18
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9.25
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	6.5526712110406
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-26570.063997666
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3321.2579997082
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	2312.9743125538
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	273.48174006929
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.185217508662
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.8131395014836

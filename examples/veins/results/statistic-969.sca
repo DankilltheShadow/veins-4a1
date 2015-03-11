@@ -1,26 +1,34 @@
 version 2
-run statistic-969-20150306-04:20:30-9288
-attr c 5
+run statistic-969-20150310-19:46:31-4620
+attr c 11
 attr configname statistic
-attr datetime 20150306-04:20:30
+attr datetime 20150310-19:46:31
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/5, $c=5"
-attr iterationvars2 "$p=1/5, $c=5, $repetition=69"
-attr measurement "$p=1/5, $c=5"
+attr iterationvars "$p=1/10, $c=11"
+attr iterationvars2 "$p=1/10, $c=11, $repetition=69"
+attr measurement "$p=1/10, $c=11"
 attr network RSUExampleScenario
-attr p 1/5
-attr processid 9288
+attr p 1/10
+attr processid 4620
 attr repetition 69
 attr replication #69
 attr resultdir results
 attr runnumber 969
 attr seedset 969
 
-scalar . 	c 	5
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	20
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	73
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	7
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	3.65
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.7109938632269
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	6
+scalar . 	c 	11
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	13
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	76
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	11
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	5.8461538461538
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.5484807983602
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-28003.479034804
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2154.113771908
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1316.1094541624
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	439.40158276174
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.800121750903
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.0658679323949

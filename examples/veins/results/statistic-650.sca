@@ -1,26 +1,34 @@
 version 2
-run statistic-650-20150306-02:09:21-11808
-attr c 9
+run statistic-650-20150310-17:54:56-6912
+attr c 25
 attr configname statistic
-attr datetime 20150306-02:09:21
+attr datetime 20150310-17:54:56
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/8, $c=9"
-attr iterationvars2 "$p=1/8, $c=9, $repetition=50"
-attr measurement "$p=1/8, $c=9"
+attr iterationvars "$p=1/20, $c=25"
+attr iterationvars2 "$p=1/20, $c=25, $repetition=50"
+attr measurement "$p=1/20, $c=25"
 attr network RSUExampleScenario
-attr p 1/8
-attr processid 11808
+attr p 1/20
+attr processid 6912
 attr repetition 50
 attr replication #50
 attr resultdir results
 attr runnumber 650
 attr seedset 650
 
-scalar . 	c 	9
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	11
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	88
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	1
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	8
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.8586407545692
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	3
+scalar . 	c 	25
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	6
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	87
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	7
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	14.5
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	4.8218253804965
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	216.36545317904
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	36.060908863173
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.3706288577003
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-31036.44515
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-5172.7408583333
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1679.89949398
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	205.93483288038
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.322472146729
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.6770666238824

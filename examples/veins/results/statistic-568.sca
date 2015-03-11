@@ -1,26 +1,34 @@
 version 2
-run statistic-568-20150306-01:35:52-5728
-attr c 8
+run statistic-568-20150310-17:26:12-7252
+attr c 24
 attr configname statistic
-attr datetime 20150306-01:35:52
+attr datetime 20150310-17:26:12
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/8, $c=8"
-attr iterationvars2 "$p=1/8, $c=8, $repetition=68"
-attr measurement "$p=1/8, $c=8"
+attr iterationvars "$p=1/20, $c=24"
+attr iterationvars2 "$p=1/20, $c=24, $repetition=68"
+attr measurement "$p=1/20, $c=24"
 attr network RSUExampleScenario
-attr p 1/8
-attr processid 5728
+attr p 1/20
+attr processid 7252
 attr repetition 68
 attr replication #68
 attr resultdir results
 attr runnumber 568
 attr seedset 568
 
-scalar . 	c 	8
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	6
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	48
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	46
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	8
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	9
+scalar . 	c 	24
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	3
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	70
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	27
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	23.333333333333
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.94280904158206
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	104.71945331936
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	34.906484439787
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	0.26094850814225
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-24325.914665987
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-8108.6382219955
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	286.03541872535
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	102.84158286216
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.28052762072
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.1819620865738

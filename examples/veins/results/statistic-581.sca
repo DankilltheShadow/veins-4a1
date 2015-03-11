@@ -1,26 +1,34 @@
 version 2
-run statistic-581-20150306-01:40:53-7624
-attr c 8
+run statistic-581-20150310-17:30:04-6656
+attr c 24
 attr configname statistic
-attr datetime 20150306-01:40:53
+attr datetime 20150310-17:30:04
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/8, $c=8"
-attr iterationvars2 "$p=1/8, $c=8, $repetition=81"
-attr measurement "$p=1/8, $c=8"
+attr iterationvars "$p=1/20, $c=24"
+attr iterationvars2 "$p=1/20, $c=24, $repetition=81"
+attr measurement "$p=1/20, $c=24"
 attr network RSUExampleScenario
-attr p 1/8
-attr processid 7624
+attr p 1/20
+attr processid 6656
 attr repetition 81
 attr replication #81
 attr resultdir results
 attr runnumber 581
 attr seedset 581
 
-scalar . 	c 	8
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	8
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	54
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	38
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	6.75
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.7139136501003
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	6
+scalar . 	c 	24
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	4
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	42
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	54
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	10.5
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	4.5
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	146.36199854003
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	36.590499635008
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.8786432088056
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-14945.34420133
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3736.3360503324
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1533.3981301958
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	137.70570717011
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.426426792526
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	0.74705554545885

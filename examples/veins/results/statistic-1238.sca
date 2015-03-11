@@ -1,26 +1,34 @@
 version 2
-run statistic-1238-20150306-06:13:44-12904
-attr c 3
+run statistic-1238-20150310-21:23:54-3120
+attr c 14
 attr configname statistic
-attr datetime 20150306-06:13:44
+attr datetime 20150310-21:23:54
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/4, $c=3"
-attr iterationvars2 "$p=1/4, $c=3, $repetition=38"
-attr measurement "$p=1/4, $c=3"
+attr iterationvars "$p=1/10, $c=14"
+attr iterationvars2 "$p=1/10, $c=14, $repetition=38"
+attr measurement "$p=1/10, $c=14"
 attr network RSUExampleScenario
-attr p 1/4
-attr processid 12904
+attr p 1/10
+attr processid 3120
 attr repetition 38
 attr replication #38
 attr resultdir results
 attr runnumber 1238
 attr seedset 1238
 
-scalar . 	c 	3
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	27
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	66
+scalar . 	c 	14
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	9
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	84
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	7
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	2.4444444444444
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.8314794192831
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	6
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9.3333333333333
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.7118429085533
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	334.60586701927
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	37.178429668808
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.8132156242812
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-30581.554720845
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3397.9505245384
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1314.6466997987
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	305.49633133979
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.944036815532
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.6080613812369

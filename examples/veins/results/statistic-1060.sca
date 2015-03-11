@@ -1,26 +1,34 @@
 version 2
-run statistic-1060-20150306-04:59:08-7276
-attr c 6
+run statistic-1060-20150310-20:19:15-5124
+attr c 12
 attr configname statistic
-attr datetime 20150306-04:59:08
+attr datetime 20150310-20:19:15
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/5, $c=6"
-attr iterationvars2 "$p=1/5, $c=6, $repetition=60"
-attr measurement "$p=1/5, $c=6"
+attr iterationvars "$p=1/10, $c=12"
+attr iterationvars2 "$p=1/10, $c=12, $repetition=60"
+attr measurement "$p=1/10, $c=12"
 attr network RSUExampleScenario
-attr p 1/5
-attr processid 7276
+attr p 1/10
+attr processid 5124
 attr repetition 60
 attr replication #60
 attr resultdir results
 attr runnumber 1060
 attr seedset 1060
 
-scalar . 	c 	6
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	24
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	76
+scalar . 	c 	12
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	15
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	85
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	0
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	3.1666666666667
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.6499158227686
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	1
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	5.6666666666667
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.913569784455
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	594.30383493087
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	39.620255662058
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2.1537260996368
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-32415.435507407
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2161.0290338271
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1086.7891556876
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	514.13324553707
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.275549702472
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.0120745685034

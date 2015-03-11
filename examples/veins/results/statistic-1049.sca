@@ -1,26 +1,34 @@
 version 2
-run statistic-1049-20150306-04:54:16-4820
-attr c 6
+run statistic-1049-20150310-20:15:31-4136
+attr c 12
 attr configname statistic
-attr datetime 20150306-04:54:16
+attr datetime 20150310-20:15:31
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/5, $c=6"
-attr iterationvars2 "$p=1/5, $c=6, $repetition=49"
-attr measurement "$p=1/5, $c=6"
+attr iterationvars "$p=1/10, $c=12"
+attr iterationvars2 "$p=1/10, $c=12, $repetition=49"
+attr measurement "$p=1/10, $c=12"
 attr network RSUExampleScenario
-attr p 1/5
-attr processid 4820
+attr p 1/10
+attr processid 4136
 attr repetition 49
 attr replication #49
 attr resultdir results
 attr runnumber 1049
 attr seedset 1049
 
-scalar . 	c 	6
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	17
+scalar . 	c 	12
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	9
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	76
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	7
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	4.4705882352941
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.6130952000944
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	7
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	15
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	8.4444444444444
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.7151674438446
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	338.48152348524
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	37.609058165026
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2.4418752871648
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-27576.451726383
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3064.0501918204
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1269.9806510499
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	306.75373405947
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.08374822883
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.6583659084724

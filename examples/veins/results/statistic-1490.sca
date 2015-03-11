@@ -1,26 +1,34 @@
 version 2
-run statistic-1490-20150306-08:00:30-11844
-attr c 5
+run statistic-1490-20150310-22:53:48-3892
+attr c 7
 attr configname statistic
-attr datetime 20150306-08:00:30
+attr datetime 20150310-22:53:48
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/4, $c=5"
-attr iterationvars2 "$p=1/4, $c=5, $repetition=90"
-attr measurement "$p=1/4, $c=5"
+attr iterationvars "$p=1/8, $c=7"
+attr iterationvars2 "$p=1/8, $c=7, $repetition=90"
+attr measurement "$p=1/8, $c=7"
 attr network RSUExampleScenario
-attr p 1/4
-attr processid 11844
+attr p 1/8
+attr processid 3892
 attr repetition 90
 attr replication #90
 attr resultdir results
 attr runnumber 1490
 attr seedset 1490
 
-scalar . 	c 	5
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	23
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	71
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	6
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	3.0869565217391
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.7423882530012
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	6
+scalar . 	c 	7
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	14
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	76
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	10
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	5.4285714285714
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.128523489393
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-27727.136510855
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-1980.5097507754
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	803.06571147584
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	477.92272618227
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.137337584448
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	3.398593680903

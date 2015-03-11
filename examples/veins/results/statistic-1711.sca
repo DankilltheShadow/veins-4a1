@@ -1,26 +1,34 @@
 version 2
-run statistic-1711-20150306-09:36:59-12588
-attr c 2
+run statistic-1711-20150311-00:15:15-4880
+attr c 10
 attr configname statistic
-attr datetime 20150306-09:36:59
+attr datetime 20150311-00:15:15
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/2, $c=2"
-attr iterationvars2 "$p=1/2, $c=2, $repetition=11"
-attr measurement "$p=1/2, $c=2"
+attr iterationvars "$p=1/8, $c=10"
+attr iterationvars2 "$p=1/8, $c=10, $repetition=11"
+attr measurement "$p=1/8, $c=10"
 attr network RSUExampleScenario
-attr p 1/2
-attr processid 12588
+attr p 1/8
+attr processid 4880
 attr repetition 11
 attr replication #11
 attr resultdir results
 attr runnumber 1711
 attr seedset 1711
 
-scalar . 	c 	2
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	51
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	44
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	5
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	0.86274509803922
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.81696731984312
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	2
+scalar . 	c 	10
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	13
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	86
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	1
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	6.6153846153846
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.6698032128851
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-31223.36835226
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2401.7975655585
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1370.4630288058
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	440.30403293229
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.869540994792
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	3.3495897680122

@@ -1,26 +1,34 @@
 version 2
-run statistic-1100-20150306-05:15:51-8524
-attr c 7
+run statistic-1100-20150310-20:32:59-6656
+attr c 13
 attr configname statistic
-attr datetime 20150306-05:15:51
+attr datetime 20150310-20:32:59
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/5, $c=7"
-attr iterationvars2 "$p=1/5, $c=7, $repetition=0"
-attr measurement "$p=1/5, $c=7"
+attr iterationvars "$p=1/10, $c=13"
+attr iterationvars2 "$p=1/10, $c=13, $repetition=0"
+attr measurement "$p=1/10, $c=13"
 attr network RSUExampleScenario
-attr p 1/5
-attr processid 8524
+attr p 1/10
+attr processid 6656
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 1100
 attr seedset 1100
 
-scalar . 	c 	7
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	17
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	79
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	4
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	4.6470588235294
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.1127394113021
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	5
+scalar . 	c 	13
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	7
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	77
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	16
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	11
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	4.1403933560541
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	258.8834059749
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	36.9833437107
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.8683695536402
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-27753.895548971
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3964.8422212816
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1490.6542870775
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	238.6818984702
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.097414067171
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.4691439851182

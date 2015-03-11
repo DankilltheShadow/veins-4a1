@@ -1,26 +1,34 @@
 version 2
-run statistic-381-20150306-00:19:41-4160
-attr c 12
+run statistic-381-20150310-16:22:26-2776
+attr c 22
 attr configname statistic
-attr datetime 20150306-00:19:41
+attr datetime 20150310-16:22:26
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/10, $c=12"
-attr iterationvars2 "$p=1/10, $c=12, $repetition=81"
-attr measurement "$p=1/10, $c=12"
+attr iterationvars "$p=1/20, $c=22"
+attr iterationvars2 "$p=1/20, $c=22, $repetition=81"
+attr measurement "$p=1/20, $c=22"
 attr network RSUExampleScenario
-attr p 1/10
-attr processid 4160
+attr p 1/20
+attr processid 2776
 attr repetition 81
 attr replication #81
 attr resultdir results
 attr runnumber 381
 attr seedset 381
 
-scalar . 	c 	12
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	16
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	84
+scalar . 	c 	22
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	11
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	89
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	0
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	5.25
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.9449334595149
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	2
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	8.0909090909091
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.2038200339466
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	410.47644012436
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	37.316040011305
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.8877226721783
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-32554.215148469
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2959.4741044062
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1110.657466171
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	373.65703183087
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.968821075534
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.7047314783122

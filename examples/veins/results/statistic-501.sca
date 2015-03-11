@@ -1,26 +1,34 @@
 version 2
-run statistic-501-20150306-01:08:29-3508
-attr c 8
+run statistic-501-20150310-17:03:09-3384
+attr c 24
 attr configname statistic
-attr datetime 20150306-01:08:29
+attr datetime 20150310-17:03:09
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/8, $c=8"
-attr iterationvars2 "$p=1/8, $c=8, $repetition=1"
-attr measurement "$p=1/8, $c=8"
+attr iterationvars "$p=1/20, $c=24"
+attr iterationvars2 "$p=1/20, $c=24, $repetition=1"
+attr measurement "$p=1/20, $c=24"
 attr network RSUExampleScenario
-attr p 1/8
-attr processid 3508
+attr p 1/20
+attr processid 3384
 attr repetition 1
 attr replication #1
 attr resultdir results
 attr runnumber 501
 attr seedset 501
 
-scalar . 	c 	8
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	14
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	76
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	10
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	5.4285714285714
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.9897697538834
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	2
+scalar . 	c 	24
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	2
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	44
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	54
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	22
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	70.763892476617
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	35.381946238308
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	0.30335531493277
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-15486.222215
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-7743.1111075002
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	641.73609840527
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	69.699917257851
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.849958628925
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.1813532927995

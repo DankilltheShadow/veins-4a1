@@ -1,26 +1,34 @@
 version 2
-run statistic-1171-20150306-05:45:09-11700
-attr c 7
+run statistic-1171-20150310-21:00:20-4716
+attr c 13
 attr configname statistic
-attr datetime 20150306-05:45:09
+attr datetime 20150310-21:00:20
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/5, $c=7"
-attr iterationvars2 "$p=1/5, $c=7, $repetition=71"
-attr measurement "$p=1/5, $c=7"
+attr iterationvars "$p=1/10, $c=13"
+attr iterationvars2 "$p=1/10, $c=13, $repetition=71"
+attr measurement "$p=1/10, $c=13"
 attr network RSUExampleScenario
-attr p 1/5
-attr processid 11700
+attr p 1/10
+attr processid 4716
 attr repetition 71
 attr replication #71
 attr resultdir results
 attr runnumber 1171
 attr seedset 1171
 
-scalar . 	c 	7
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	21
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	75
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	4
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	3.5714285714286
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.128523489393
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	1
+scalar . 	c 	13
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	12
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	88
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	0
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	7.3333333333333
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.7487370837451
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	465.32852315656
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	38.777376929713
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.7760916934922
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-33212.708179583
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2767.7256816319
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1004.286742432
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	412.33566336742
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.361305280618
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.2153471643568

@@ -1,26 +1,34 @@
 version 2
-run statistic-1159-20150306-05:40:10-7344
-attr c 7
+run statistic-1159-20150310-20:55:46-1224
+attr c 13
 attr configname statistic
-attr datetime 20150306-05:40:10
+attr datetime 20150310-20:55:46
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/5, $c=7"
-attr iterationvars2 "$p=1/5, $c=7, $repetition=59"
-attr measurement "$p=1/5, $c=7"
+attr iterationvars "$p=1/10, $c=13"
+attr iterationvars2 "$p=1/10, $c=13, $repetition=59"
+attr measurement "$p=1/10, $c=13"
 attr network RSUExampleScenario
-attr p 1/5
-attr processid 7344
+attr p 1/10
+attr processid 1224
 attr repetition 59
 attr replication #59
 attr resultdir results
 attr runnumber 1159
 attr seedset 1159
 
-scalar . 	c 	7
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	13
+scalar . 	c 	13
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	7
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	83
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	4
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	6.3846153846154
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.002954216185
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	5
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	10
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	11.857142857143
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.7261494247992
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	249.38916528516
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	35.627023612166
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.0893023785071
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-29261.412919095
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-4180.2018455851
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	573.75348409908
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	238.49686317549
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.070980453642
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.2664521352096

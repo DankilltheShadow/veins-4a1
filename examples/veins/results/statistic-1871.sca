@@ -1,26 +1,34 @@
 version 2
-run statistic-1871-20150306-10:47:02-15052
-attr c 3
+run statistic-1871-20150311-01:10:20-3904
+attr c 11
 attr configname statistic
-attr datetime 20150306-10:47:02
+attr datetime 20150311-01:10:20
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/2, $c=3"
-attr iterationvars2 "$p=1/2, $c=3, $repetition=71"
-attr measurement "$p=1/2, $c=3"
+attr iterationvars "$p=1/8, $c=11"
+attr iterationvars2 "$p=1/8, $c=11, $repetition=71"
+attr measurement "$p=1/8, $c=11"
 attr network RSUExampleScenario
-attr p 1/2
-attr processid 15052
+attr p 1/8
+attr processid 3904
 attr repetition 71
 attr replication #71
 attr resultdir results
 attr runnumber 1871
 attr seedset 1871
 
-scalar . 	c 	3
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	52
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	48
+scalar . 	c 	11
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	13
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	87
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	0
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	0.92307692307692
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.91664425290869
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	1
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	6.6923076923077
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.0980047024003
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	506.93940442291
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	38.995338801762
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2.0227194809211
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-32877.233824714
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2529.0179865164
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1122.9096320308
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	443.64931801851
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.126870616808
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.9094210364768

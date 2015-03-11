@@ -1,26 +1,34 @@
 version 2
-run statistic-1333-20150306-06:53:39-12308
-attr c 4
+run statistic-1333-20150310-21:56:51-6052
+attr c 15
 attr configname statistic
-attr datetime 20150306-06:53:39
+attr datetime 20150310-21:56:51
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/4, $c=4"
-attr iterationvars2 "$p=1/4, $c=4, $repetition=33"
-attr measurement "$p=1/4, $c=4"
+attr iterationvars "$p=1/10, $c=15"
+attr iterationvars2 "$p=1/10, $c=15, $repetition=33"
+attr measurement "$p=1/10, $c=15"
 attr network RSUExampleScenario
-attr p 1/4
-attr processid 12308
+attr p 1/10
+attr processid 6052
 attr repetition 33
 attr replication #33
 attr resultdir results
 attr runnumber 1333
 attr seedset 1333
 
-scalar . 	c 	4
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	35
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	63
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	2
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	1.8
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.2603854285779
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	3
+scalar . 	c 	15
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	16
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	84
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	0
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	5.25
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.4003676271839
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-31449.285195875
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-1965.5803247422
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1224.8039983642
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	548.63147577905
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.289467236191
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.5483622299703

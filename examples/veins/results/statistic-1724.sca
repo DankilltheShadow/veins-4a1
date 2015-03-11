@@ -1,26 +1,34 @@
 version 2
-run statistic-1724-20150306-09:42:14-15172
-attr c 2
+run statistic-1724-20150311-00:19:56-3880
+attr c 10
 attr configname statistic
-attr datetime 20150306-09:42:14
+attr datetime 20150311-00:19:56
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/2, $c=2"
-attr iterationvars2 "$p=1/2, $c=2, $repetition=24"
-attr measurement "$p=1/2, $c=2"
+attr iterationvars "$p=1/8, $c=10"
+attr iterationvars2 "$p=1/8, $c=10, $repetition=24"
+attr measurement "$p=1/8, $c=10"
 attr network RSUExampleScenario
-attr p 1/2
-attr processid 15172
+attr p 1/8
+attr processid 3880
 attr repetition 24
 attr replication #24
 attr resultdir results
 attr runnumber 1724
 attr seedset 1724
 
-scalar . 	c 	2
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	57
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	41
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	2
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	0.71929824561404
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.7434954421199
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	1
+scalar . 	c 	10
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	16
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	84
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	0
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	5.25
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.0516389039334
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-31968.299293771
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-1998.0187058607
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1146.0859865677
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	545.66076940441
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.103798087776
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.617464447701

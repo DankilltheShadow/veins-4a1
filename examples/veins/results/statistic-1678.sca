@@ -1,26 +1,34 @@
 version 2
-run statistic-1678-20150306-09:22:52-14444
-attr c 1
+run statistic-1678-20150311-00:02:45-4544
+attr c 9
 attr configname statistic
-attr datetime 20150306-09:22:52
+attr datetime 20150311-00:02:45
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/2, $c=1"
-attr iterationvars2 "$p=1/2, $c=1, $repetition=78"
-attr measurement "$p=1/2, $c=1"
+attr iterationvars "$p=1/8, $c=9"
+attr iterationvars2 "$p=1/8, $c=9, $repetition=78"
+attr measurement "$p=1/8, $c=9"
 attr network RSUExampleScenario
-attr p 1/2
-attr processid 14444
+attr p 1/8
+attr processid 4544
 attr repetition 78
 attr replication #78
 attr resultdir results
 attr runnumber 1678
 attr seedset 1678
 
-scalar . 	c 	1
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	45
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	43
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	12
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	0.95555555555556
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.20608041101102
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	15
+scalar . 	c 	9
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	7
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	63
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	30
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	258.8754199964
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	36.982202856628
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.3034558657989
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-23060.166792019
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3294.309541717
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	116.80921799726
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	238.62100765655
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.088715379507
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.6402183459491

@@ -1,26 +1,34 @@
 version 2
-run statistic-5-20150305-21:49:11-9624
-attr c 9
+run statistic-5-20150310-14:14:04-3644
+attr c 19
 attr configname statistic
-attr datetime 20150305-21:49:11
+attr datetime 20150310-14:14:04
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/10, $c=9"
-attr iterationvars2 "$p=1/10, $c=9, $repetition=5"
-attr measurement "$p=1/10, $c=9"
+attr iterationvars "$p=1/20, $c=19"
+attr iterationvars2 "$p=1/20, $c=19, $repetition=5"
+attr measurement "$p=1/20, $c=19"
 attr network RSUExampleScenario
-attr p 1/10
-attr processid 9624
+attr p 1/20
+attr processid 3644
 attr repetition 5
 attr replication #5
 attr resultdir results
 attr runnumber 5
 attr seedset 5
 
-scalar . 	c 	9
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	4
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	29
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	67
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	7.25
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.0310889132455
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	7
+scalar . 	c 	19
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	1
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	19
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	80
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	19
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	35.322281256674
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	35.322281256674
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	3.7470027081099e-016
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-6677.9890733889
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-6677.9890733889
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	2.7267077484794e-013
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	33.2443653791
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.2443653791
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.84147705365e-015

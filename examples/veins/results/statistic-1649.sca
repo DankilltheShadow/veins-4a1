@@ -1,26 +1,34 @@
 version 2
-run statistic-1649-20150306-09:09:25-4236
-attr c 1
+run statistic-1649-20150310-23:51:33-2600
+attr c 9
 attr configname statistic
-attr datetime 20150306-09:09:25
+attr datetime 20150310-23:51:33
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/2, $c=1"
-attr iterationvars2 "$p=1/2, $c=1, $repetition=49"
-attr measurement "$p=1/2, $c=1"
+attr iterationvars "$p=1/8, $c=9"
+attr iterationvars2 "$p=1/8, $c=9, $repetition=49"
+attr measurement "$p=1/8, $c=9"
 attr network RSUExampleScenario
-attr p 1/2
-attr processid 4236
+attr p 1/8
+attr processid 2600
 attr repetition 49
 attr replication #49
 attr resultdir results
 attr runnumber 1649
 attr seedset 1649
 
-scalar . 	c 	1
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	44
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	40
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	16
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	0.90909090909091
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.28747978728803
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	17
+scalar . 	c 	9
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	11
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	65
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	24
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	5.9090909090909
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.9373626220734
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-24258.695505649
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2205.335955059
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1130.9107534192
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	376.05713075874
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.187011887158
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.6859027654571

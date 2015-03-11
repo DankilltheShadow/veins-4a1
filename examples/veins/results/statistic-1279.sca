@@ -1,26 +1,34 @@
 version 2
-run statistic-1279-20150306-06:30:45-7428
-attr c 3
+run statistic-1279-20150310-21:38:59-2152
+attr c 14
 attr configname statistic
-attr datetime 20150306-06:30:45
+attr datetime 20150310-21:38:59
 attr experiment statistic
 attr inifile omnetpp.ini
-attr iterationvars "$p=1/4, $c=3"
-attr iterationvars2 "$p=1/4, $c=3, $repetition=79"
-attr measurement "$p=1/4, $c=3"
+attr iterationvars "$p=1/10, $c=14"
+attr iterationvars2 "$p=1/10, $c=14, $repetition=79"
+attr measurement "$p=1/10, $c=14"
 attr network RSUExampleScenario
-attr p 1/4
-attr processid 7428
+attr p 1/10
+attr processid 2152
 attr repetition 79
 attr replication #79
 attr resultdir results
 attr runnumber 1279
 attr seedset 1279
 
-scalar . 	c 	3
-scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	25
-scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	62
-scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	13
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	2.48
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.89977775033616
-scalar RSUExampleScenario.rsu[0].appl 	GSScycles 	10
+scalar . 	c 	14
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	11
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	83
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	6
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	7.5454545454545
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	4.6390366626084
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	nan
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-30054.571422484
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2732.2337656804
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1633.0735750138
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	370.18503350638
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.653184864216
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.6529041673178

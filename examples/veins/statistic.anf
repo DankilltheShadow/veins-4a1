@@ -35,6 +35,23 @@
         </items>
       </items>
     </datasets>
+    <datasets name="export">
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(varClusterNodes)"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="varClusterSize" valueExpr="varClusterNodes" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:Discard" filterPattern="varClusterNodes"/>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(meanClusterNodes)"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="ClusterSize" valueExpr="meanClusterNodes" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:Discard" filterPattern="meanClusterNodes"/>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(NumberofFN)"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="%FN" valueExpr="NumberofFN" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:Discard" filterPattern="NumberofFN"/>
+      </items>
+    </datasets>
   </datasets>
   <chartSheets>
     <chartSheets name="default" charts="//@datasets/@datasets.0/@items.0/@items.3 //@datasets/@datasets.0/@items.1/@items.3 //@datasets/@datasets.0/@items.2/@items.3"/>

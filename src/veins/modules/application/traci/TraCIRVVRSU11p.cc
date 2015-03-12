@@ -432,7 +432,7 @@ void TraCIRVVRSU11p::satisfy(int CH,int ON, std::map<int,int> &S, Matching &m){
             for(size_t jt = 0; jt < CHpref.size(); jt++){
                 if(CHpref[jt] == tON){
                     if(iWorst < jt){
-                        iWorst=jt;
+                        iWorst = jt;
                         worst = it;
                         break;
                     }

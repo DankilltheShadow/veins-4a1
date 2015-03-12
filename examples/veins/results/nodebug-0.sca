@@ -1,14 +1,14 @@
 version 2
-run nodebug-0-20150310-14:12:29-7948
+run nodebug-0-20150312-16:40:11-7620
 attr configname nodebug
-attr datetime 20150310-14:12:29
+attr datetime 20150312-16:40:11
 attr experiment nodebug
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network RSUExampleScenario
-attr processid 7948
+attr processid 7620
 attr repetition 0
 attr replication #0
 attr resultdir results

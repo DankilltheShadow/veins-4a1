@@ -89,6 +89,7 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
         Matching launchRVVMatching(Matching Matched);
         Matching stable(Matching m);
         void add(int a);
+        void satisfy(int CH,int ON, std::map<int,int> &S, Matching &m);
 };
 
 #endif

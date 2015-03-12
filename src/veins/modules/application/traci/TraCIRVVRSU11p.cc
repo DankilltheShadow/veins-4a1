@@ -349,7 +349,7 @@ Matching TraCIRVVRSU11p::launchRVVMatching(Matching pMatched) {
             }
         }
         if(!addB){
-
+            satisfy(BP.begin()->first,BP.begin()->second, S, tempMatch); //soddisfo sempre la prima???
         }
     }
     return tempMatch;
@@ -398,16 +398,52 @@ Matching TraCIRVVRSU11p::stable(Matching m){
                     }
                     if(insertBP){
                         BP.insert(std::pair<int, int>(CH,ON));
+                        //devo uscire appena trovo una blocking pair del CH???
                     }
                 }
                 j++;
             }
         }
-
     }
     return BP;
 }
 
 void TraCIRVVRSU11p::add(int a){
+
+}
+
+void TraCIRVVRSU11p::satisfy(int CH,int ON, std::map<int,int> &S, Matching &m){
+    S[ON]=1;
+    S[CH]=1;
+    for( Matching::iterator it = m.begin(); it != m.end(); it++ ){
+       if(it->second == ON){
+           m.erase(it);
+           break;
+       }
+    }
+    if(m.count(CH)>=CHcapacity[CH]){
+        Matching::iterator worst;
+        int iWorst=-1;
+        std::pair <Matching::iterator, Matching::iterator> ret;
+        ret = m.equal_range(CH);
+        PrefList CHpref = PrefCHLists.find(CH)->second;
+        for( Matching::iterator it = ret.first; it!=ret.second; it++ ){
+            const int tON = it->second;
+            for(size_t jt = 0; jt < CHpref.size(); jt++){
+                if(CHpref[jt] == tON){
+                    if(iWorst < jt){
+                        iWorst=jt;
+                        worst = it;
+                        break;
+                    }
+                }
+            }
+            if(iWorst==-1){
+                worst = it;
+                break;
+            }
+        }
+        m.erase(iWorst);
+    }
 
 }

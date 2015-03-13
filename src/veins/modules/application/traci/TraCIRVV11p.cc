@@ -49,7 +49,7 @@ void TraCIRVV11p::initialize(int stage) {
         double offSetHello = dblrand() * (par("helloInterval").doubleValue()/2);
         offSetHello = offSetHello + floor(offSetHello/0.050)*0.050;
 
-        scheduleAt(simTime() + offSetHello, sendHelloTimer);
+        scheduleAt(simTime() + offSetHello + 180, sendHelloTimer);
 
         //graphic indentification. FN=red ON=blue CH=green
         findHost()->getDisplayString().updateWith("r=5,red");

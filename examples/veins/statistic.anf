@@ -37,6 +37,16 @@
     </datasets>
     <datasets name="export">
       <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(expectedCHutility)"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="befPayoffs" valueExpr="expectedCHutility" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:Discard" filterPattern="expectedCHutility"/>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(sumCHutility)"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="Payoffs" valueExpr="sumCHutility" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:Discard" filterPattern="sumCHutility"/>
+      </items>
+      <items xsi:type="scave:Group">
         <items xsi:type="scave:Add" filterPattern="name(varClusterNodes)"/>
         <items xsi:type="scave:ComputeScalar" scalarName="varClusterSize" valueExpr="varClusterNodes" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
         <items xsi:type="scave:Discard" filterPattern="varClusterNodes"/>

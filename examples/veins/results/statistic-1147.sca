@@ -1,8 +1,8 @@
 version 2
-run statistic-1147-20150312-07:47:05-11396
+run statistic-1147-20150312-23:47:36-21652
 attr c 13
 attr configname statistic
-attr datetime 20150312-07:47:05
+attr datetime 20150312-23:47:36
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/10, $c=13"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/10, $c=13, $repetition=47"
 attr measurement "$p=1/10, $c=13"
 attr network RSUExampleScenario
 attr p 1/10
-attr processid 11396
+attr processid 21652
 attr repetition 47
 attr replication #47
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	13
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	9
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	72
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	19
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	8
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.7712361663283
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	349.1154277513
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	38.790603083478
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.8960620570178
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-40.658859026494
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-4.5176510029438
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1.4860823839784
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	308.45656872481
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.272952080534
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.5458716907659
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	3

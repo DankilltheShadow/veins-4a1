@@ -1,8 +1,8 @@
 version 2
-run statistic-19-20150312-00:23:10-2004
+run statistic-19-20150312-16:14:59-8340
 attr c 19
 attr configname statistic
-attr datetime 20150312-00:23:10
+attr datetime 20150312-16:14:59
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/20, $c=19"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/20, $c=19, $repetition=19"
 attr measurement "$p=1/20, $c=19"
 attr network RSUExampleScenario
 attr p 1/20
-attr processid 2004
+attr processid 8340
 attr repetition 19
 attr replication #19
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	19
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	4
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	54
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	42
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	13.5
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	7.3993242934744
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	4
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	151.53833918545
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	37.884584796363
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	3.5019723876473
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-13.221466300138
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3.3053665750345
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	3.1607077475777
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	138.31687288531
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.579218221328
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.0893265193586
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2

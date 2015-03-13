@@ -1,8 +1,8 @@
 version 2
-run statistic-1178-20150312-07:59:13-12704
+run statistic-1178-20150313-00:00:40-18084
 attr c 13
 attr configname statistic
-attr datetime 20150312-07:59:13
+attr datetime 20150313-00:00:40
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/10, $c=13"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/10, $c=13, $repetition=78"
 attr measurement "$p=1/10, $c=13"
 attr network RSUExampleScenario
 attr p 1/10
-attr processid 12704
+attr processid 18084
 attr repetition 78
 attr replication #78
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	13
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	9
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	86
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	5
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9.5555555555556
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.4993826398227
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	334.12878181746
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	37.12542020194
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	0.80909650507419
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-27.583991136644
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3.0648879040716
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	0.9909200550588
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	306.54479068081
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.060532297868
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.7051865674225
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	3

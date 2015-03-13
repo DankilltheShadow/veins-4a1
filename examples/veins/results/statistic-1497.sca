@@ -1,8 +1,8 @@
 version 2
-run statistic-1497-20150310-22:56:06-1140
+run statistic-1497-20150313-02:12:39-22632
 attr c 7
 attr configname statistic
-attr datetime 20150310-22:56:06
+attr datetime 20150313-02:12:39
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/8, $c=7"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/8, $c=7, $repetition=97"
 attr measurement "$p=1/8, $c=7"
 attr network RSUExampleScenario
 attr p 1/8
-attr processid 1140
+attr processid 22632
 attr repetition 97
 attr replication #97
 attr resultdir results
@@ -22,13 +22,13 @@ scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	7
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	49
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	44
 scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	7
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	260.58477614246
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	37.22639659178
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.7196344980995
-scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-18003.207071483
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2571.8867244976
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	120.24472719989
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	7
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2.6457513110646
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-22.857517653458
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	7
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	2.6457513110646
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	237.727258489
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.961036927
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.303360681651
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	7
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.6457513110646

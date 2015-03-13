@@ -1,8 +1,8 @@
 version 2
-run statistic-1274-20150312-08:37:54-12596
+run statistic-1274-20150313-00:39:50-17784
 attr c 14
 attr configname statistic
-attr datetime 20150312-08:37:54
+attr datetime 20150313-00:39:50
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/10, $c=14"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/10, $c=14, $repetition=74"
 attr measurement "$p=1/10, $c=14"
 attr network RSUExampleScenario
 attr p 1/10
-attr processid 12596
+attr processid 17784
 attr repetition 74
 attr replication #74
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	14
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	9
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	87
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	4
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9.6666666666667
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	4.546060565662
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	335.22228220313
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	37.246920244793
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.348854625686
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-29.234092509267
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3.2482325010296
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1.3667913319997
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	305.98818969387
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.998687743763
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.4241800366469
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	3

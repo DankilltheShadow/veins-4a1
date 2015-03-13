@@ -1,8 +1,8 @@
 version 2
-run statistic-688-20150312-04:44:30-10304
+run statistic-688-20150312-20:40:52-20108
 attr c 25
 attr configname statistic
-attr datetime 20150312-04:44:30
+attr datetime 20150312-20:40:52
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/20, $c=25"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/20, $c=25, $repetition=88"
 attr measurement "$p=1/20, $c=25"
 attr network RSUExampleScenario
 attr p 1/20
-attr processid 10304
+attr processid 20108
 attr repetition 88
 attr replication #88
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	25
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	9
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	91
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	0
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	10.111111111111
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	5.3840184175937
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	337.05618679936
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	37.450687422151
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.267941898708
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-29.879219716826
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3.3199133018696
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1.3615387507194
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	307.17696708253
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.130774120281
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.015417059118
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	3

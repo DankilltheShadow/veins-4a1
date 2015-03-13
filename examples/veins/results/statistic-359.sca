@@ -1,8 +1,8 @@
 version 2
-run statistic-359-20150312-02:35:31-2564
+run statistic-359-20150312-18:29:00-11076
 attr c 22
 attr configname statistic
-attr datetime 20150312-02:35:31
+attr datetime 20150312-18:29:00
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/20, $c=22"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/20, $c=22, $repetition=59"
 attr measurement "$p=1/20, $c=22"
 attr network RSUExampleScenario
 attr p 1/20
-attr processid 2564
+attr processid 11076
 attr repetition 59
 attr replication #59
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	22
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	4
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	83
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	13
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	20.75
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.1650635094611
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	4
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	140.41499025933
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	35.103747564832
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	0.59265988659094
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-5.1369103538614
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-1.2842275884654
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	0.47647398360549
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	135.27807990547
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.819519976367
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	0.41843163814749
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2

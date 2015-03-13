@@ -1,8 +1,8 @@
 version 2
-run statistic-988-20150312-06:43:48-10428
+run statistic-988-20150312-22:42:30-21360
 attr c 11
 attr configname statistic
-attr datetime 20150312-06:43:48
+attr datetime 20150312-22:42:30
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/10, $c=11"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/10, $c=11, $repetition=88"
 attr measurement "$p=1/10, $c=11"
 attr network RSUExampleScenario
 attr p 1/10
-attr processid 10428
+attr processid 21360
 attr repetition 88
 attr replication #88
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	11
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	9
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	86
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	5
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9.5555555555556
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.3147407395555
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	332.55460226362
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	36.950511362625
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.5512381775435
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-23.816812098636
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2.646312455404
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1.7174830879291
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	308.73779016499
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.304198907221
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.3562307462789
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	3

@@ -1,8 +1,8 @@
 version 2
-run statistic-799-20150312-05:28:48-9152
+run statistic-799-20150312-21:26:03-19808
 attr c 9
 attr configname statistic
-attr datetime 20150312-05:28:48
+attr datetime 20150312-21:26:03
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/10, $c=9"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/10, $c=9, $repetition=99"
 attr measurement "$p=1/10, $c=9"
 attr network RSUExampleScenario
 attr p 1/10
-attr processid 9152
+attr processid 19808
 attr repetition 99
 attr replication #99
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	9
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	9
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	76
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	15
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	8.4444444444444
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.95581391856029
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	335.97076942378
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	37.330085491531
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.9171511163977
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-27.56823318183
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3.0631370202033
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1.881403734898
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	308.40253624195
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.266948471327
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.0135765278189
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	3

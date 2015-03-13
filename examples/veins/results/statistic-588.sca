@@ -1,8 +1,8 @@
 version 2
-run statistic-588-20150312-04:04:53-9868
+run statistic-588-20150312-20:00:53-18112
 attr c 24
 attr configname statistic
-attr datetime 20150312-04:04:53
+attr datetime 20150312-20:00:53
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/20, $c=24"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/20, $c=24, $repetition=88"
 attr measurement "$p=1/20, $c=24"
 attr network RSUExampleScenario
 attr p 1/20
-attr processid 9868
+attr processid 18112
 attr repetition 88
 attr replication #88
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	24
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	4
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	70
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	26
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	17.5
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	6.0207972893961
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	4
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	144.51503631972
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	36.128759079931
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.5308474297836
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-6.8094218677679
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-1.702355466942
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	0.86237668385996
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	137.70561445196
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.426403612989
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.6826936336706
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2

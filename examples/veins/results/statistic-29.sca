@@ -1,8 +1,8 @@
 version 2
-run statistic-29-20150312-00:27:36-1284
+run statistic-29-20150312-16:19:03-16040
 attr c 19
 attr configname statistic
-attr datetime 20150312-00:27:36
+attr datetime 20150312-16:19:03
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/20, $c=19"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/20, $c=19, $repetition=29"
 attr measurement "$p=1/20, $c=19"
 attr network RSUExampleScenario
 attr p 1/20
-attr processid 1284
+attr processid 16040
 attr repetition 29
 attr replication #29
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	19
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	4
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	40
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	56
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	10
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	5.1961524227066
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	4
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	146.54339646608
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	36.635849116521
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.8859879513373
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-10.547947246016
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2.6369868115041
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1.9962482551206
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	135.99544922007
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.998862305017
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	0.37424051780782
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2

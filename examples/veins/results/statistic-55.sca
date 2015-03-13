@@ -1,8 +1,8 @@
 version 2
-run statistic-55-20150312-00:37:16-6880
+run statistic-55-20150312-16:29:10-17056
 attr c 19
 attr configname statistic
-attr datetime 20150312-00:37:16
+attr datetime 20150312-16:29:10
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/20, $c=19"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/20, $c=19, $repetition=55"
 attr measurement "$p=1/20, $c=19"
 attr network RSUExampleScenario
 attr p 1/20
-attr processid 6880
+attr processid 17056
 attr repetition 55
 attr replication #55
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	19
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	9
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	91
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	0
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	10.111111111111
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	4.817662975262
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	335.66343559586
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	37.295937288428
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2.3488348065326
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-28.246388801384
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3.1384876445982
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	2.1806162607389
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	307.41704679447
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.15744964383
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.9139431595102
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	3

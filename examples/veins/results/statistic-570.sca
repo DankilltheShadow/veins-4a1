@@ -1,8 +1,8 @@
 version 2
-run statistic-570-20150312-03:58:05-9684
+run statistic-570-20150312-19:53:47-17532
 attr c 24
 attr configname statistic
-attr datetime 20150312-03:58:05
+attr datetime 20150312-19:53:47
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/20, $c=24"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/20, $c=24, $repetition=70"
 attr measurement "$p=1/20, $c=24"
 attr network RSUExampleScenario
 attr p 1/20
-attr processid 9684
+attr processid 17532
 attr repetition 70
 attr replication #70
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	24
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	1
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	24
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	75
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	24
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	1
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	35.342738185244
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	35.342738185244
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.422473250301e-015
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	1
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-1.4659742126328
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-1.4659742126328
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	9.7144514654701e-017
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	1
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	33.876763972611
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.876763972611
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.0755285551056e-015
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	1
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1

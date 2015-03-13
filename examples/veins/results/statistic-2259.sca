@@ -1,8 +1,8 @@
 version 2
-run statistic-2259-20150311-09:10:51-7120
+run statistic-2259-20150313-07:37:30-4312
 attr c 5
 attr configname statistic
-attr datetime 20150311-09:10:51
+attr datetime 20150313-07:37:30
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/5, $c=5"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/5, $c=5, $repetition=59"
 attr measurement "$p=1/5, $c=5"
 attr network RSUExampleScenario
 attr p 1/5
-attr processid 7120
+attr processid 4312
 attr repetition 59
 attr replication #59
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	5
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	17
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	72
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	11
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	4.2352941176471
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	1.1646464631308
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	17
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	4.1231056256177
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	671.19980988398
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	39.482341757881
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.2954498212786
-scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-27745.253893068
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-1632.0737584158
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	450.00723717641
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	17
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	4.1231056256177
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-89.935360775092
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	17
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	4.1231056256177
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	581.26444910889
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.19202641817
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.5658964422439
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	17
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	4.1231056256177

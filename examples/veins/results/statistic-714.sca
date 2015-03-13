@@ -1,8 +1,8 @@
 version 2
-run statistic-714-20150312-04:54:50-10896
+run statistic-714-20150312-20:51:28-20116
 attr c 9
 attr configname statistic
-attr datetime 20150312-04:54:50
+attr datetime 20150312-20:51:28
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/10, $c=9"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/10, $c=9, $repetition=14"
 attr measurement "$p=1/10, $c=9"
 attr network RSUExampleScenario
 attr p 1/10
-attr processid 10896
+attr processid 20116
 attr repetition 14
 attr replication #14
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	9
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	8
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	69
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	23
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	8.625
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.69597054535375
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	8
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.8284271247462
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	296.46635550061
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	37.058294437576
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.7936483713482
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	8
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2.8284271247462
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-26.80017656042
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-3.3500220700525
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1.2156398468563
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	8
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	2.8284271247462
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	269.66617894019
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.708272367524
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	1.8923589003724
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	8
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.8284271247462

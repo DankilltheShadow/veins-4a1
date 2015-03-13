@@ -1,8 +1,8 @@
 version 2
-run statistic-572-20150312-03:58:37-9508
+run statistic-572-20150312-19:54:05-20240
 attr c 24
 attr configname statistic
-attr datetime 20150312-03:58:37
+attr datetime 20150312-19:54:05
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/20, $c=24"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/20, $c=24, $repetition=72"
 attr measurement "$p=1/20, $c=24"
 attr network RSUExampleScenario
 attr p 1/20
-attr processid 9508
+attr processid 20240
 attr repetition 72
 attr replication #72
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	24
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	4
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	74
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	22
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	18.5
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3.7749172176354
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	4
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	139.89756787462
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	34.974391968656
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.1352690378685
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-3.5846346431825
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-0.89615866079561
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	0.82702473694053
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	136.31293323144
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.07823330786
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	0.74480073664351
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2

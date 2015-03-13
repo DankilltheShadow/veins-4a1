@@ -1,8 +1,8 @@
 version 2
-run statistic-846-20150312-05:47:18-10060
+run statistic-846-20150312-21:44:47-20600
 attr c 10
 attr configname statistic
-attr datetime 20150312-05:47:18
+attr datetime 20150312-21:44:47
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/10, $c=10"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/10, $c=10, $repetition=46"
 attr measurement "$p=1/10, $c=10"
 attr network RSUExampleScenario
 attr p 1/10
-attr processid 10060
+attr processid 20600
 attr repetition 46
 attr replication #46
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	10
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	16
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	76
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	8
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	4.75
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2.8831406486677
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	16
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	4
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	632.28290870154
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	39.517681793847
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.8802034448374
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	16
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	4
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-83.031079112758
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-5.1894424445474
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1.8353125914568
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	16
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	4
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	549.25182958879
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.328239349299
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.3045869119817
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	16
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	4

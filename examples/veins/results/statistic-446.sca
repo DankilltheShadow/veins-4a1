@@ -1,8 +1,8 @@
 version 2
-run statistic-446-20150312-03:09:18-9004
+run statistic-446-20150312-19:04:08-18972
 attr c 23
 attr configname statistic
-attr datetime 20150312-03:09:18
+attr datetime 20150312-19:04:08
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/20, $c=23"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/20, $c=23, $repetition=46"
 attr measurement "$p=1/20, $c=23"
 attr network RSUExampleScenario
 attr p 1/20
-attr processid 9004
+attr processid 18972
 attr repetition 46
 attr replication #46
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	23
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	9
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	89
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	2
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9.8888888888889
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	4.3319085976929
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	9
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	325.64629040222
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	36.182921155802
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.7234184965607
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-21.068456856
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-2.3409396506667
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1.6330077233737
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	3
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	304.57783354622
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	33.841981505136
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2.0799920536007
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	9
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	3

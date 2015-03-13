@@ -1,8 +1,8 @@
 version 2
-run statistic-58-20150312-00:39:01-2568
+run statistic-58-20150312-16:29:59-14268
 attr c 19
 attr configname statistic
-attr datetime 20150312-00:39:01
+attr datetime 20150312-16:29:59
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/20, $c=19"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/20, $c=19, $repetition=58"
 attr measurement "$p=1/20, $c=19"
 attr network RSUExampleScenario
 attr p 1/20
-attr processid 2568
+attr processid 14268
 attr repetition 58
 attr replication #58
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	19
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	4
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	74
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	22
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	18.5
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	0.86602540378444
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	4
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	140.03144389578
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	35.007860973945
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	0.37618263008969
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-3.8667500726941
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-0.96668751817352
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	0.24460449118116
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	136.16469382308
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.041173455771
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	0.35909268584206
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2

@@ -1,8 +1,8 @@
 version 2
-run statistic-514-20150312-03:36:42-8544
+run statistic-514-20150312-19:31:07-19732
 attr c 24
 attr configname statistic
-attr datetime 20150312-03:36:42
+attr datetime 20150312-19:31:07
 attr experiment statistic
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/20, $c=24"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/20, $c=24, $repetition=14"
 attr measurement "$p=1/20, $c=24"
 attr network RSUExampleScenario
 attr p 1/20
-attr processid 8544
+attr processid 19732
 attr repetition 14
 attr replication #14
 attr resultdir results
@@ -21,14 +21,14 @@ scalar . 	c 	24
 scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	4
 scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	67
 scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	29
-scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	16.75
-scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	6.2199276523124
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	4
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	142.52840057936
-scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	35.632100144841
-scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	1.3419889253003
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	-5.896962611731
-scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	-1.4742406529327
-scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	1.6412991204992
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	2
 scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	136.63143796763
-scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.157859491908
-scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	0.92752783360877
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	4
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	2

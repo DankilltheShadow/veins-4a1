@@ -1,8 +1,8 @@
 version 2
-run statistic7-327-20150314-09:06:29-4616
+run statistic7-327-20150315-21:59:57-4976
 attr c 4
 attr configname statistic7
-attr datetime 20150314-09:06:29
+attr datetime 20150315-21:59:57
 attr experiment statistic7
 attr inifile omnetpp.ini
 attr iterationvars "$p=1/2, $c=4"
@@ -10,7 +10,7 @@ attr iterationvars2 "$p=1/2, $c=4, $repetition=27"
 attr measurement "$p=1/2, $c=4"
 attr network RSUExampleScenario
 attr p 1/2
-attr processid 4616
+attr processid 4976
 attr repetition 27
 attr replication #27
 attr resultdir results

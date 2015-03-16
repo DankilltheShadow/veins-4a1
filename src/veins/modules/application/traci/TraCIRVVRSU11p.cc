@@ -332,7 +332,7 @@ void TraCIRVVRSU11p::orgStatistic() {
 
 Matching TraCIRVVRSU11p::launchRVVMatching(Matching pMatched) {
     Matching tempMatch = pMatched;
-    Matching BP = stable(tempMatch);
+    Matching BP = stable(tempMatch, PrefCHLists, PrefONLists);
     std::map<int,int> S;
     while (BP.size() > 0){
         bool addB = false;
@@ -351,11 +351,12 @@ Matching TraCIRVVRSU11p::launchRVVMatching(Matching pMatched) {
         if(!addB){
             satisfy(BP.begin()->first,BP.begin()->second, S, tempMatch); //soddisfo sempre la prima???
         }
+        BP = stable(tempMatch, PrefCHLists, PrefONLists);
     }
     return tempMatch;
 }
 
-Matching TraCIRVVRSU11p::stable(Matching m){
+Matching TraCIRVVRSU11p::stable(Matching m,PrefMap PrefCHLists,PrefMap PrefONLists){
     Matching BP;
     for(auto const& p : PrefCHLists){
         const int CH = p.first;
@@ -399,6 +400,7 @@ Matching TraCIRVVRSU11p::stable(Matching m){
                     if(insertBP){
                         BP.insert(std::pair<int, int>(CH,ON));
                         //devo uscire appena trovo una blocking pair del CH???
+                        break;
                     }
                 }
                 j++;
@@ -417,7 +419,7 @@ void TraCIRVVRSU11p::add(int a, std::string state, std::map<int,int> &S, Matchin
             }
         }
         S[a]=1;
-        while(blockingAgent(a)){
+        while(blockingAgent(a, S, m)){
             int worstON;
             int bestCH;
             const PrefList ONpref = PrefONLists[a];
@@ -484,7 +486,7 @@ void TraCIRVVRSU11p::add(int a, std::string state, std::map<int,int> &S, Matchin
             m.erase(worst);
         }
         S[a]=1;
-        while(blockingAgent(a)){
+        while(blockingAgent(a, S, m)){
             int wCH;
             int bestON;
             const PrefList CHpref = PrefCHLists[a];
@@ -545,6 +547,35 @@ void TraCIRVVRSU11p::satisfy(int CH,int ON, std::map<int,int> &S, Matching &m){
     m.insert(std::pair<int,int>(CH, ON));
 }
 
-bool TraCIRVVRSU11p::blockingAgent(int bA){
+bool TraCIRVVRSU11p::blockingAgent(int bA, std::map<int,int> S, Matching m){
+    std::vector<Matching::iterator> dCanc;
+    for( Matching::iterator it = m.begin(); it!=m.end(); it++){
+        if(S.find(it->first)!=S.end() || S.find(it->second)!=S.end()){
+            dCanc.push_back(it);
+        }
+    }
+    for(size_t i=0; i<dCanc.size(); i++){
+        m.erase(dCanc[i]);
+    }
+    PrefMap tPrefCHLists=PrefCHLists;
+    PrefMap tPrefONLists=PrefONLists;
+    for( Matching::iterator it = S.begin(); it!=S.end(); it++){
+        PrefMap::iterator canc=tPrefCHLists.find(it->first);
+        if(canc!=tPrefCHLists.end()){
+            tPrefCHLists.erase(canc);
+        }
+        canc=tPrefONLists.find(it->first);
+        if(canc!=tPrefONLists.end()){
+            tPrefONLists.erase(canc);
+        }
+    }
+    Matching BP = stable(m, tPrefCHLists, tPrefONLists);
+    if (BP.size() > 0){
+        for(Matching::iterator it = BP.begin(); it!=BP.end(); it++){
+            if(it->first==bA || it->second==bA ){
+                return true;
+            }
+        }
+    }
     return false;
 }

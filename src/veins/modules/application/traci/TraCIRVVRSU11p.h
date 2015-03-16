@@ -87,10 +87,10 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
         double calcUtility(double sqrD);
         void orgStatistic();
         Matching launchRVVMatching(Matching Matched);
-        Matching stable(Matching m);
+        Matching stable(Matching m,PrefMap PrefCHLists,PrefMap PrefONLists);
         void add(int a, std::string state, std::map<int,int> &S, Matching &m, Matching &BPlist);
         void satisfy(int CH,int ON, std::map<int,int> &S, Matching &m);
-        bool blockingAgent(int bA);
+        bool blockingAgent(int bA, std::map<int,int> S, Matching m);
 };
 
 #endif

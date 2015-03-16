@@ -88,8 +88,9 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
         void orgStatistic();
         Matching launchRVVMatching(Matching Matched);
         Matching stable(Matching m);
-        void add(int a);
+        void add(int a, std::string state, std::map<int,int> &S, Matching &m, Matching &BPlist);
         void satisfy(int CH,int ON, std::map<int,int> &S, Matching &m);
+        bool blockingAgent(int bA);
 };
 
 #endif

@@ -338,12 +338,12 @@ Matching TraCIRVVRSU11p::launchRVVMatching(Matching pMatched) {
         bool addB = false;
         for( Matching::iterator it = BP.begin(); it != BP.end(); it++ ){
             if(S.find(it->first)!= S.end() && S.find(it->second)== S.end()){
-                add(it->first);
+                add(it->first,"CH", S, tempMatch, BP);
                 addB = true;
                 break;
             }
             if(S.find(it->second)!= S.end() && S.find(it->first)== S.end()){
-                add(it->second);
+                add(it->second,"ON", S, tempMatch, BP);
                 addB = true;
                 break;
             }
@@ -408,7 +408,103 @@ Matching TraCIRVVRSU11p::stable(Matching m){
     return BP;
 }
 
-void TraCIRVVRSU11p::add(int a){
+void TraCIRVVRSU11p::add(int a, std::string state, std::map<int,int> &S, Matching &m, Matching &BPlist){
+    if(state=="ON"){
+        for( Matching::iterator it = m.begin(); it != m.end(); it++ ){
+            if(it->second == a){
+                m.erase(it);
+                break;
+            }
+        }
+        S[a]=1;
+        while(blockingAgent(a)){
+            int worstON;
+            int bestCH;
+            const PrefList ONpref = PrefONLists[a];
+            for(size_t it=0; it<ONpref.size(); it++){
+                if(S.find(ONpref[it])==S.end()){
+                    bestCH=ONpref[it];
+                    break;
+                }
+            }
+            if(m.count(bestCH)>=CHcapacity[bestCH]){
+                Matching::iterator worst;
+                int iWorst=-1;
+                std::pair <Matching::iterator, Matching::iterator> ret;
+                ret = m.equal_range(bestCH);
+                PrefList CHpref = PrefCHLists.find(bestCH)->second;
+                for( Matching::iterator it = ret.first; it!=ret.second; it++ ){
+                    const int tON = it->second;
+                    for(size_t jt = 0; jt < CHpref.size(); jt++){
+                        if(CHpref[jt] == tON){
+                            if(iWorst < jt){
+                                iWorst = jt;
+                                worst = it;
+                                break;
+                            }
+                        }
+                    }
+                    if(iWorst==-1){
+                        worst = it;
+                        iWorst = CHpref.size();
+                        break;
+                    }
+                }
+                worstON = worst->second;
+                m.erase(worst);
+            }
+            m.insert(std::pair<int,int>(bestCH, a));
+            a = worstON;
+        }
+
+    }else if(state=="CH"){
+        if(m.count(a)>=CHcapacity[a]){
+            Matching::iterator worst;
+            int iWorst=-1;
+            std::pair <Matching::iterator, Matching::iterator> ret;
+            ret = m.equal_range(a);
+            PrefList CHpref = PrefCHLists.find(a)->second;
+            for( Matching::iterator it = ret.first; it!=ret.second; it++ ){
+                const int tON = it->second;
+                for(size_t jt = 0; jt < CHpref.size(); jt++){
+                    if(CHpref[jt] == tON){
+                        if(iWorst < jt){
+                            iWorst = jt;
+                            worst = it;
+                            break;
+                        }
+                    }
+                }
+                if(iWorst==-1){
+                    worst = it;
+                    iWorst = CHpref.size();
+                    break;
+                }
+            }
+            m.erase(worst);
+        }
+        S[a]=1;
+        while(blockingAgent(a)){
+            int wCH;
+            int bestON;
+            const PrefList CHpref = PrefCHLists[a];
+            for(size_t it=0; it<CHpref.size(); it++){
+                if(S.find(CHpref[it])==S.end()){
+                    bestON=CHpref[it];
+                    break;
+                }
+            }
+            for( Matching::iterator it = m.begin(); it != m.end(); it++ ){
+                if(it->second == bestON){
+                    wCH=it->first;
+                    m.erase(it);
+                    break;
+                }
+            }
+            m.insert(std::pair<int,int>(a, bestON));
+            a = wCH;
+        }
+    }
 
 }
 
@@ -440,10 +536,15 @@ void TraCIRVVRSU11p::satisfy(int CH,int ON, std::map<int,int> &S, Matching &m){
             }
             if(iWorst==-1){
                 worst = it;
+                iWorst = CHpref.size();
                 break;
             }
         }
-        m.erase(iWorst);
+        m.erase(worst);
     }
+    m.insert(std::pair<int,int>(CH, ON));
+}
 
+bool TraCIRVVRSU11p::blockingAgent(int bA){
+    return false;
 }

@@ -37,6 +37,9 @@
     </datasets>
     <datasets name="export">
       <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(meanCHutility)"/>
+      </items>
+      <items xsi:type="scave:Group">
         <items xsi:type="scave:Add" filterPattern="name(expectedCHutility)"/>
         <items xsi:type="scave:ComputeScalar" scalarName="befPayoffs" valueExpr="expectedCHutility" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
         <items xsi:type="scave:Discard" filterPattern="expectedCHutility"/>

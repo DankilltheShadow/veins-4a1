@@ -245,7 +245,7 @@ void TraCIRVVRSU11p::orgStatistic() {
 
     statistics.numON = Matched.size();
     statistics.numFN -= Matched.size();
-    statistics.meanCluster = statistics.numON / (statistics.numCH!=0) ? statistics.numCH : 1;
+    statistics.meanCluster = (statistics.numCH!=0) ? statistics.numON /statistics.numCH : statistics.numON;
 
     double var = 0;
     for(auto const& p : PrefCHLists){
@@ -267,19 +267,21 @@ void TraCIRVVRSU11p::orgStatistic() {
             const int ON = preflistCH[itpCH];
             PrefMap::iterator it;
             it = PrefCHLists.find(ON);
-            if(it==PrefCHLists.end()){
+            if(it==PrefCHLists.end())/* && CHcapacity[CH]<countON)*/{
                 double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
                 sumexpU += calcUtility(sqrDistance);
                 countON++;
             }
         }
-        statistics.CHutility += (numONCluster!= 0) ? sumU/(10*numONCluster) : 0;
-        statistics.expCHutility += (countON!= 0) ? sumexpU/(10*countON) : 0;
-        statistics.diffCHutility += ((countON!= 0) ? sumexpU/(10*countON) : 0)-((numONCluster!= 0) ? sumU/(10*numONCluster) : 0);
+        double oneCHutility = (numONCluster!= 0) ? sumU/(10*numONCluster) : 0;
+        statistics.CHutility += oneCHutility;
+        double oneexpCHutility = (countON!= 0) ? sumexpU/(10*countON) : 0;
+        statistics.expCHutility += oneexpCHutility;
+        statistics.diffCHutility += oneexpCHutility-oneCHutility;
     }
-    statistics.meanCHutility = statistics.CHutility/(statistics.numCH!=0) ? statistics.numCH : 1;
-    statistics.meanexpCHutility = statistics.expCHutility/(statistics.numCH!=0) ? statistics.numCH : 1;
-    statistics.meandiffCHutility = statistics.diffCHutility/(statistics.numCH!=0) ? statistics.numCH : 1;
+    statistics.meanCHutility = (statistics.numCH!=0) ? statistics.CHutility/statistics.numCH : statistics.CHutility;
+    statistics.meanexpCHutility = (statistics.numCH!=0) ? statistics.expCHutility/statistics.numCH : statistics.expCHutility;
+    statistics.meandiffCHutility = (statistics.numCH!=0) ? statistics.diffCHutility/statistics.numCH : statistics.diffCHutility;
 
     /////////////////////////////////////////////////
     for(auto const& p : PrefCHLists){
@@ -306,14 +308,16 @@ void TraCIRVVRSU11p::orgStatistic() {
                 countON++;
             }
         }
-        statistics.sigmaCHutility += (((numONCluster!= 0) ? sumU/(10*numONCluster) : 0)-statistics.meanCHutility)*(((numONCluster!= 0) ? sumU/(10*numONCluster) : 0)-statistics.meanCHutility);
-        statistics.sigmaexpCHutility += (((countON!= 0) ? sumexpU/(10*countON) : 0)-statistics.meanexpCHutility)*(((countON!= 0) ? sumexpU/(10*countON) : 0)-statistics.meanexpCHutility);
-        statistics.sigmadiffCHutility += ((((countON!= 0) ? sumexpU/(10*countON) : 0)-((numONCluster!= 0) ? sumU/(10*numONCluster) : 0))-statistics.meandiffCHutility)*((((countON!= 0) ? sumexpU/(10*countON) : 0)-((numONCluster!= 0) ? sumU/(10*numONCluster) : 0))-statistics.meandiffCHutility);
+        double val = (numONCluster!= 0) ? sumU/(10*numONCluster) : 0;
+        statistics.sigmaCHutility += (val - statistics.meanCHutility)*(val - statistics.meanCHutility);
+        double valE = (countON!= 0) ? sumexpU/(10*countON) : 0;
+        statistics.sigmaexpCHutility += (valE - statistics.meanexpCHutility)*(valE -statistics.meanexpCHutility);
+        statistics.sigmadiffCHutility += ((valE-val)-statistics.meandiffCHutility)*((valE-val)-statistics.meandiffCHutility);
     }
-    statistics.sigmaCHutility = sqrt(statistics.sigmaCHutility/(statistics.numCH!=0) ? statistics.numCH : 1);
-    statistics.sigmaexpCHutility = sqrt(statistics.sigmaexpCHutility/(statistics.numCH!=0) ? statistics.numCH : 1);
-    statistics.sigmadiffCHutility = sqrt(statistics.sigmadiffCHutility/(statistics.numCH!=0) ? statistics.numCH : 1);
-    statistics.sigmaCluster = sqrt(var / (statistics.numCH!=0) ? statistics.numCH : 1);
+    statistics.sigmaCHutility = (statistics.numCH!=0) ? sqrt(statistics.sigmaCHutility/statistics.numCH) : sqrt(statistics.sigmaCHutility);
+    statistics.sigmaexpCHutility = (statistics.numCH!=0) ? sqrt(statistics.sigmaexpCHutility/statistics.numCH) : sqrt(statistics.sigmaexpCHutility/1);
+    statistics.sigmadiffCHutility = (statistics.numCH!=0) ? sqrt(statistics.sigmadiffCHutility/statistics.numCH) : sqrt(statistics.sigmadiffCHutility/1);
+    statistics.sigmaCluster =  (statistics.numCH!=0) ? sqrt(var / statistics.numCH) : sqrt(var / 1);
     //
 
     ////////////////////////////////////////////////////////////////

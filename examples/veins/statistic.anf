@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scave:Analysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:scave="http://www.omnetpp.org/omnetpp/scave">
   <inputs>
-    <inputs name="/veins/examples/veins/results/statistic-*.vec"/>
+    <inputs name="/veins/examples/veins/results/statistic*.vec"/>
     <inputs name="/veins/examples/veins/results/statistic*.sca"/>
   </inputs>
   <datasets>
@@ -37,7 +37,14 @@
     </datasets>
     <datasets name="export">
       <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(meanExpectedCHutility)"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="befMeanPayoff" valueExpr="meanExpectedCHutility" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:Discard" filterPattern="meanExpectedCHutility"/>
+      </items>
+      <items xsi:type="scave:Group">
         <items xsi:type="scave:Add" filterPattern="name(meanCHutility)"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="meanPayoff" valueExpr="meanCHutility" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:Discard" filterPattern="meanCHutility"/>
       </items>
       <items xsi:type="scave:Group">
         <items xsi:type="scave:Add" filterPattern="name(expectedCHutility)"/>

@@ -1,0 +1,34 @@
+version 2
+run statistic3-72-20150318-14:08:01-8452
+attr c 16
+attr configname statistic3
+attr datetime 20150318-14:08:01
+attr experiment statistic3
+attr inifile omnetpp.ini
+attr iterationvars "$p=1/10, $c=16"
+attr iterationvars2 "$p=1/10, $c=16, $repetition=2"
+attr measurement "$p=1/10, $c=16"
+attr network RSUExampleScenario
+attr p 1/10
+attr processid 8452
+attr repetition 2
+attr replication #2
+attr resultdir results
+attr runnumber 72
+attr seedset 72
+
+scalar . 	c 	16
+scalar RSUExampleScenario.rsu[0].appl 	NumberofCH 	17
+scalar RSUExampleScenario.rsu[0].appl 	NumberofON 	83
+scalar RSUExampleScenario.rsu[0].appl 	NumberofFN 	0
+scalar RSUExampleScenario.rsu[0].appl 	meanClusterNodes 	4.8823529411765
+scalar RSUExampleScenario.rsu[0].appl 	varClusterNodes 	4.7388550732054
+scalar RSUExampleScenario.rsu[0].appl 	sumCHutility 	547.61059998119
+scalar RSUExampleScenario.rsu[0].appl 	meanCHutility 	32.212388234188
+scalar RSUExampleScenario.rsu[0].appl 	varCHutility 	14.998257524414
+scalar RSUExampleScenario.rsu[0].appl 	sumDiffCHutility 	31.676589524844
+scalar RSUExampleScenario.rsu[0].appl 	meanDiffCHutility 	1.863328795579
+scalar RSUExampleScenario.rsu[0].appl 	varDiffCHutility 	14.687321895616
+scalar RSUExampleScenario.rsu[0].appl 	expectedCHutility 	579.28718950604
+scalar RSUExampleScenario.rsu[0].appl 	meanExpectedCHutility 	34.075717029767
+scalar RSUExampleScenario.rsu[0].appl 	varExpectedCHutility 	0.79019345511295

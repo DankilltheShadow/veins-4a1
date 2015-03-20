@@ -18,7 +18,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 
-#include "veins/modules/application/traci/TraCIRVV11p.h"
+#include "veins/modules/application/traci/TraCILeach11p.h"
 
 using Veins::TraCIMobilityAccess;
 using Veins::AnnotationManagerAccess;
@@ -29,17 +29,31 @@ Define_Module(TraCILeach11p);
 
 void TraCILeach11p::Statistics::initialize()
 {
-    numAssVector.setName("ON Associati");
-    numCH.setName("CH state");
-    numON.setName("ON state");
-    numFN.setName("FN state");
-    xCoord.setName("Posizione x");
-    yCoord.setName("Posizione y");
+    numCH = 0;
+    numON = 0;
+    numFN = 0;
+    meanCluster=0;
+}
+
+void TraCILeach11p::Statistics::recordScalars(cSimpleModule& module, double div)
+{
+    module.recordScalar("NumberofCH", numCH/div);
+    module.recordScalar("NumberofON", numON/div);
+    module.recordScalar("NumberofFN", numFN/div);
+    module.recordScalar("meanClusterNodes", meanCluster/div);
 }
 
 void TraCILeach11p::collectStatistics(){
     if(fmod(simTime().dbl(),(timeHello/2))==0){
         numCollStats++;
+        if(std::string(par("Car_State").stringValue())=="CH"){
+            statistics.numCH++;
+            statistics.meanCluster += ownON.size();
+        }else if(std::string(par("Car_State").stringValue())=="ON"){
+            statistics.numON++;
+        }else if(std::string(par("Car_State").stringValue())=="FN"){
+            statistics.numFN++;
+        }
     }
 }
 
@@ -70,11 +84,13 @@ void TraCILeach11p::initialize(int stage) {
         //choose random role
         probCH = par("Prob_CH").doubleValue();
         numCollStats = 0;
-
+        statistics.initialize();
+        nextCHturn = false;
+        double time;
         if(simTime().dbl() < 180){
-            double time=180;
+            time=180;
         }else{
-            double time=simTime().dbl();
+            time=simTime().dbl();
         }
 
         scheduleAt(offSetHello + time, sendHelloTimer);
@@ -82,16 +98,6 @@ void TraCILeach11p::initialize(int stage) {
 }
 
 void TraCILeach11p::onBeacon(WaveShortMessage* wsm) {
-}
-
-void TraCILeach11p::onHello(WaveShortMessage* wsm) {
-    if( std::string(par("Car_State").stringValue())=="FN"){
-        //divento suo ON e lo informo
-        par("Car_State").setStringValue("ON");
-        //aggiungo il mittente al mio CH
-        related.push_back(wsm->getSenderAddress());
-        sendRVVMessage("AssReq");
-    }
 }
 
 void TraCILeach11p::onData(WaveShortMessage* wsm) {
@@ -166,33 +172,43 @@ void TraCILeach11p::handleLowerMsg(cMessage* msg) {
     WaveShortMessage* wsm = dynamic_cast<WaveShortMessage*>(msg);
     ASSERT(wsm);
 
-    switch (std::string(wsm->getName())) {
-        case "Hello": {
-            onHello(wsm);
-            break;
-        }
-        case "AssReq": {
-            onReq(wsm);
-            break;
-        }
-        case "AssRes": {
-            onRes(wsm);
-            break;
-        }
-        case "beacon": {
-            onBeacon(wsm);
-            break;
-        }
-        case "data": {
-            onData(wsm);
-            break;
-        }
-        default: {
-            DBG << "unknown message (" << wsm->getName() << ")  received\n";
-            break;
-        }
+    if(std::string(wsm->getName())=="Hello" && wsm->getRecipientAddress()==myId) {
+        onHello(wsm);
+    } else if(std::string(wsm->getName())=="AssReq" && wsm->getRecipientAddress()==myId) {
+        onReq(wsm);
+    } else if(std::string(wsm->getName())=="AssRef" && wsm->getRecipientAddress()==myId) {
+        onRef(wsm);
+    } else if(std::string(wsm->getName())=="beacon" && wsm->getRecipientAddress()==myId) {
+        onBeacon(wsm);
+    } else if(std::string(wsm->getName())=="data" && wsm->getRecipientAddress()==myId) {
+        onData(wsm);
     }
     delete(msg);
+}
+
+void TraCILeach11p::onRef(WaveShortMessage* wsm) {
+    if(std::string(par("Car_State").stringValue())=="ON" && ownCH==wsm->getSenderAddress()){
+        ownCH=-1;
+    }
+}
+
+void TraCILeach11p::onReq(WaveShortMessage* wsm) {
+    if(std::string(par("Car_State").stringValue())!="CH" || ownON.size()==capacity){
+        //rifiuto
+        sendRVVMessage("AssRef",wsm->getSenderAddress());
+    }else{
+        ownON.push_back(wsm->getSenderAddress());
+    }
+}
+
+void TraCILeach11p::onHello(WaveShortMessage* wsm) {
+    if(std::string(par("Car_State").stringValue())=="FN"){
+        //divento suo ON e lo informo
+        par("Car_State").setStringValue("ON");
+        ownCH = wsm->getSenderAddress();
+        //aggiungo il mittente al mio CH
+        sendRVVMessage("AssReq",ownCH);
+    }
 }
 
 void TraCILeach11p::handleSelfMsg(cMessage* msg) {
@@ -212,15 +228,20 @@ void TraCILeach11p::handleSelfMsg(cMessage* msg) {
 
 void TraCILeach11p::newTurn(){
     ownON.clear();
-    if(nTurn%(1/probCH)==0){
-        nextCHTurn = false;
+    ownCH=-1;
+    if(fmod(nTurn,(1/probCH))==0){
+        nextCHturn = false;
     }
-    if((!nextCHTurn) && (uniform(0,1) <= probCH/(1-probCH*(nTurn%(1/probCH))))){
+    if((!nextCHturn) && (uniform(0,1) <= probCH/(1-probCH*(fmod(nTurn,(1/probCH)))))){
         par("Car_State").setStringValue("CH");
-        nextCHTurn = true;
+        nextCHturn = true;
         sendRVVMessage("Hello"); //send broadcast hello MSG.
     }else{
         par("Car_State").setStringValue("FN");
     }
     nTurn++;
+}
+
+void TraCILeach11p::finish() {
+    statistics.recordScalars(*this, numCollStats);
 }

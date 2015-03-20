@@ -1,0 +1,20 @@
+version 2
+run statisticLeach-0-20150320-14:05:55-6884
+attr c 24
+attr configname statisticLeach
+attr datetime 20150320-14:05:55
+attr experiment statisticLeach
+attr inifile omnetpp.ini
+attr iterationvars "$p=1/25, $c=24"
+attr iterationvars2 "$p=1/25, $c=24, $repetition=0"
+attr measurement "$p=1/25, $c=24"
+attr network RSUExampleScenario
+attr p 1/25
+attr processid 6884
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+scalar . 	c 	24

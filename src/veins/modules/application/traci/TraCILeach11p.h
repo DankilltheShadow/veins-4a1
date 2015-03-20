@@ -45,18 +45,17 @@ class TraCILeach11p : public BaseWaveApplLayer {
 
         class Statistics {
            public:
-               cOutVector numAssVector;
-               cOutVector numCH;
-               cOutVector numON;
-               cOutVector numFN;
-               cOutVector xCoord;
-               cOutVector yCoord;
+               double numCH;
+               double numON;
+               double numFN;
+               double meanCluster;
 
                void initialize();
-               void recordScalars(cSimpleModule& module);
+               void recordScalars(cSimpleModule& module, double div);
         };
 
 	protected:
+        Statistics statistics;
 		TraCIMobility* mobility;
 		TraCICommandInterface* traci;
 		TraCICommandInterface::Vehicle* traciVehicle;
@@ -69,15 +68,19 @@ class TraCILeach11p : public BaseWaveApplLayer {
 		static const simsignalwrap_t neighbors;
 		cMessage* sendHelloTimer;
 		int capacity;
-		int nTurn;
+		double nTurn;
 		double probCH;
 		double timeHello;
+		bool nextCHturn;
 		int numCollStats;
 		int ownCH;
 		std::list<int> ownON;
 	protected:
 		virtual void onBeacon(WaveShortMessage* wsm);
 		virtual void onData(WaveShortMessage* wsm);
+		virtual void onHello(WaveShortMessage* wsm);
+		virtual void onReq(WaveShortMessage* wsm);
+		virtual void onRef(WaveShortMessage* wsm);
 		void sendMessage(std::string blockedRoadId);
 		void sendRVVMessage(std::string type, int toNode);
 		virtual void handlePositionUpdate(cObject* obj);
@@ -86,6 +89,7 @@ class TraCILeach11p : public BaseWaveApplLayer {
 		virtual void handleSelfMsg(cMessage* msg);
 		virtual void handleLowerMsg(cMessage* msg);
 		void newTurn();
+		void finish();
 		void collectStatistics();
 };
 

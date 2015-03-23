@@ -134,9 +134,11 @@ void TraCIRVV11p::handleParkingUpdate(cObject* obj) {
 void TraCIRVV11p::handlePositionUpdate(cObject* obj) {
 	BaseWaveApplLayer::handlePositionUpdate(obj);
 
-	for (auto it = neighborsdDistCalc.begin(); it != neighborsdDistCalc.end(); it++){
+	for (auto it = neighborsdDistCalc.begin(); it != neighborsdDistCalc.end(); ){
         if (simTime() - neighborsdTime[it->first] > 2*par("helloInterval").doubleValue()){
             it = neighborsdDistCalc.erase(it);
+        }else{
+            it++;
         }
     }
 }

@@ -28,38 +28,34 @@ Define_Module(TraCIRVVRSU11p);
 
 void TraCIRVVRSU11p::Statistics::initialize()
 {
-    numCH=0;
-    numON=0;
-    numFN=0;
-    meanCluster=0;
-    sigmaCluster=0;
-    CHutility=0;
-    meanCHutility=0;
-    sigmaCHutility=0;
-    expCHutility=0;
-    meanexpCHutility=0;
-    sigmaexpCHutility=0;
-    diffCHutility=0;
-    meandiffCHutility=0;
-    sigmadiffCHutility=0;
-}
-
-void TraCIRVVRSU11p::Statistics::recordScalars(cSimpleModule& module)
-{
-    module.recordScalar("NumberofCH", numCH);
-    module.recordScalar("NumberofON", numON);
-    module.recordScalar("NumberofFN", numFN);
-    module.recordScalar("meanClusterNodes", meanCluster);
-    module.recordScalar("varClusterNodes", sigmaCluster);
-    module.recordScalar("sumCHutility", CHutility);
-    module.recordScalar("meanCHutility", meanCHutility);
-    module.recordScalar("varCHutility", sigmaCHutility);
-    module.recordScalar("sumDiffCHutility", diffCHutility);
-    module.recordScalar("meanDiffCHutility", meandiffCHutility);
-    module.recordScalar("varDiffCHutility", sigmadiffCHutility);
-    module.recordScalar("expectedCHutility", expCHutility);
-    module.recordScalar("meanExpectedCHutility", meanexpCHutility);
-    module.recordScalar("varExpectedCHutility", sigmaexpCHutility);
+    numCH.setName("Number_CH");
+    numON.setName("Number_ON");
+    numFN.setName("Number_FN");
+    numCHLost.setName("Number_CH_Losts");
+    meanClusterSize.setName("Mean_Cluster_Size");
+    stddevCluster.setName("StdDev_Cluster_Size");
+    varianceCluster.setName("Variance_Cluster_Size");
+    meanNeighbors.setName("Mean_Neighbors");
+    stddevNeighbors.setName("StdDev_Neighbors");
+    varianceNeighbors.setName("Variance_Neighbors");
+    // CH
+    totalCHUtility.setName("Total_CH_Utility");
+    meanCHUtility.setName("Mean_CH_Utility");
+    stddevCHUtility.setName("StdDev_CH_Utility");
+    varianceCHUtility.setName("Variance_CH_Utility");
+    totalExpCHUtility.setName("Total_exp_CH_Utility");
+    meanExpCHUtility.setName("Mean_exp_CH_Utility");
+    stddevExpCHUtility.setName("StdDev_exp_CH_Utility");
+    varianceExpCHUtility.setName("Variance_exp_CH_Utility");
+    // ON
+    totalONUtility.setName("Total_ON_Utility");
+    meanONUtility.setName("Mean_ON_Utility");
+    stddevONUtility.setName("StdDev_ON_Utility");
+    varianceONUtility.setName("Variance_ON_Utility");
+    totalExpONUtility.setName("Total_exp_ON_Utility");
+    meanExpONUtility.setName("Mean_exp_ON_Utility");
+    stddevExpONUtility.setName("StdDev_exp_ON_Utility");
+    varianceExpONUtility.setName("Variance_exp_ON_Utility");
 }
 
 void TraCIRVVRSU11p::initialize(int stage) {
@@ -148,6 +144,9 @@ void TraCIRVVRSU11p::handleSelfMsg(cMessage* msg) {
     switch (msg->getKind()) {
         case SEND_MATCH: {
             Matched = RVV(Matched);
+            if(simTime()>=simulation.getWarmupPeriod()){
+                orgStatistic();
+            }
             scheduleAt(simTime() + par("startMatching").doubleValue(), startMatching);
             break;
         }
@@ -168,126 +167,212 @@ double TraCIRVVRSU11p::calcUtility(double sqrD){
     return(w*log(1+(pDivSigma*g)));
 }
 
+void TraCIRVVRSU11p::adjustPrefList() {
+    for(auto p = PrefCHLists.begin(); p != PrefCHLists.end(); ++p){
+        PrefList list = p->second;
+        PrefList goodList;
+        for(size_t jt=0;jt<list.size();jt++){
+            const int ON = list[jt];
+            if (PrefONLists.find(ON) != PrefONLists.end()) {
+               goodList.push_back(ON);
+            }
+        }
+        p->second = goodList;
+    }
+    for(auto p = PrefONLists.begin(); p != PrefONLists.end(); ++p){
+        PrefList list = p->second;
+        PrefList goodList;
+        for(size_t jt=0;jt<list.size();jt++){
+            const int CH = list[jt];
+            if (PrefCHLists.find(CH) != PrefCHLists.end()) {
+                goodList.push_back(CH);
+            }
+        }
+        p->second = goodList;
+    }
+}
+
 void TraCIRVVRSU11p::orgStatistic() {
+    cStdDev statsBasic;
+    cStdDev statsNeighbors;
+    cStdDev statsCHutility;
+    cStdDev statsONutility;
+    cStdDev statsExpCHutility;
+    cStdDev statsExpONutility;
 
-    statistics.numON = Matched.size();
-    statistics.numFN -= Matched.size();
-    statistics.meanCluster = (statistics.numCH!=0) ? statistics.numON /statistics.numCH : statistics.numON;
-
-    double var = 0;
-    for(auto const& p : PrefCHLists){
+    for(auto const& p :PrefCHLists){
         const int CH = p.first;
-        double numONCluster = Matched.count(CH);
-        var += (numONCluster-statistics.meanCluster)*(numONCluster-statistics.meanCluster);
-        std::pair <Matching::iterator, Matching::iterator> ret;
-        ret = Matched.equal_range(CH);
-        double sumU = 0;
-        for( Matching::iterator it = ret.first; it != ret.second; it++ ){
-            const int ON = it->second;
-            double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
-            sumU += calcUtility(sqrDistance);
+        const PrefList prefCH = p.second;
+        auto ret = Matched.equal_range(CH);
+        double numerator = 0;
+        double denominator = 0;
+        for(auto p = ret.first; p!=ret.second; ++p){
+            const int ON = p->second;
+            numerator += calcUtility(nodesCoord[CH].distance(nodesCoord[ON]));
+            denominator += 10;
         }
-        double sumexpU = 0;
-        PrefList preflistCH = p.second;
-        int countON = 0;
-        for( size_t itpCH = 0; itpCH < preflistCH.size(); itpCH++ ){
-            const int ON = preflistCH[itpCH];
-            PrefMap::iterator it;
-            it = PrefCHLists.find(ON);
-            if(it==PrefCHLists.end())/* && CHcapacity[CH]<countON)*/{
-                double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
-                sumexpU += calcUtility(sqrDistance);
-                countON++;
+        if(denominator!=0){
+            double UCH;
+            UCH = numerator/denominator;
+            statsCHutility.collect(UCH);
+            statsBasic.collect(denominator/10);
+        }
+        numerator=0;
+        denominator=0;
+        for(auto const& it : prefCH){
+            const int ON = it;
+            numerator += calcUtility(nodesCoord[CH].distance(nodesCoord[ON]));
+            denominator += 10;
+        }
+        if(denominator!=0){
+            double UCH;
+            UCH = numerator/denominator;
+            statsExpCHutility.collect(UCH);
+            statsNeighbors.collect(denominator/10);
+        }
+    }
+    for(auto const& p :PrefONLists){
+        const int ON = p.first;
+        const PrefList prefON = p.second;
+        double value = 0;
+        double N = 0;
+        for(auto const& it : prefON){
+            const int CH = it;
+            value += calcUtility(nodesCoord[CH].distance(nodesCoord[ON]))/10;
+            N++;
+        }
+        if(N!=0){
+            double UON;
+            UON = value/N;
+            statsExpONutility.collect(UON);
+            statsNeighbors.collect(N);
+        }
+        value = 0;
+        N = 0;
+        for(auto const& it : Matched){
+            const int CH = it.first;
+            if(it.second == ON){
+                value = calcUtility(nodesCoord[CH].distance(nodesCoord[ON]))/10;
+                N = 1;
+                break;
             }
         }
-        double oneCHutility = (numONCluster!= 0) ? sumU/(10*numONCluster) : 0;
-        statistics.CHutility += oneCHutility;
-        double oneexpCHutility = (countON!= 0) ? sumexpU/(10*countON) : 0;
-        statistics.expCHutility += oneexpCHutility;
-        statistics.diffCHutility += oneexpCHutility-oneCHutility;
-    }
-    statistics.meanCHutility = (statistics.numCH!=0) ? statistics.CHutility/statistics.numCH : statistics.CHutility;
-    statistics.meanexpCHutility = (statistics.numCH!=0) ? statistics.expCHutility/statistics.numCH : statistics.expCHutility;
-    statistics.meandiffCHutility = (statistics.numCH!=0) ? statistics.diffCHutility/statistics.numCH : statistics.diffCHutility;
-
-    /////////////////////////////////////////////////
-    for(auto const& p : PrefCHLists){
-        const int CH = p.first;
-        double numONCluster = Matched.count(CH);
-        std::pair <Matching::iterator, Matching::iterator> ret;
-        ret = Matched.equal_range(CH);
-        double sumU = 0;
-        for( Matching::iterator it = ret.first; it != ret.second; it++ ){
-            const int ON = it->second;
-            double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
-            sumU += calcUtility(sqrDistance);
+        if(N!=0){
+            double UON;
+            UON = value/N;
+            statsONutility.collect(UON);
         }
-        double sumexpU = 0;
-        PrefList preflistCH = p.second;
-        int countON = 0;
-        for( size_t itpCH = 0; itpCH < preflistCH.size(); itpCH++ ){
-            const int ON = preflistCH[itpCH];
-            PrefMap::iterator it;
-            it = PrefCHLists.find(ON);
-            if(it==PrefCHLists.end()){
-                double sqrDistance = nodesCoord[CH].sqrdist(nodesCoord[ON]);
-                sumexpU += calcUtility(sqrDistance);
-                countON++;
-            }
-        }
-        double val = (numONCluster!= 0) ? sumU/(10*numONCluster) : 0;
-        statistics.sigmaCHutility += (val - statistics.meanCHutility)*(val - statistics.meanCHutility);
-        double valE = (countON!= 0) ? sumexpU/(10*countON) : 0;
-        statistics.sigmaexpCHutility += (valE - statistics.meanexpCHutility)*(valE -statistics.meanexpCHutility);
-        statistics.sigmadiffCHutility += ((valE-val)-statistics.meandiffCHutility)*((valE-val)-statistics.meandiffCHutility);
     }
-    statistics.sigmaCHutility = (statistics.numCH!=0) ? sqrt(statistics.sigmaCHutility/statistics.numCH) : sqrt(statistics.sigmaCHutility);
-    statistics.sigmaexpCHutility = (statistics.numCH!=0) ? sqrt(statistics.sigmaexpCHutility/statistics.numCH) : sqrt(statistics.sigmaexpCHutility/1);
-    statistics.sigmadiffCHutility = (statistics.numCH!=0) ? sqrt(statistics.sigmadiffCHutility/statistics.numCH) : sqrt(statistics.sigmadiffCHutility/1);
-    statistics.sigmaCluster =  (statistics.numCH!=0) ? sqrt(var / statistics.numCH) : sqrt(var / 1);
-    //
-
-    ////////////////////////////////////////////////////////////////
-    //Scrive file di matching
-    /*
-    std::ofstream myfile;
-    myfile.open ("matching.txt");
-    Matching::iterator iter;
-    for (iter=Matched.begin(); iter!=Matched.end(); ++iter)
-    {
-        myfile<<(*iter).first<<"->"<<(*iter).second<<"\n";
-    }
-    myfile.close();*/
-    statistics.recordScalars(*this);
+    //cStdDev statsBasic;
+    //cStdDev statsNeighbors;
+    //cStdDev statsCHutility;
+    //cStdDev statsONutility;
+    //cStdDev statsExpCHutility;
+    //cStdDev statsExpONutility;
+    //Basic stats
+    statistics.numCH.record(statsBasic.getCount());
+    statistics.numON.record(statsBasic.getSum());
+    statistics.numFN.record((PrefCHLists.size()+PrefONLists.size())-(statsBasic.getSum()+statsBasic.getCount()));
+    statistics.numCHLost.record(PrefCHLists.size()-statsBasic.getCount());
+    statistics.meanClusterSize.record(statsBasic.getMean());
+    statistics.stddevCluster.record(statsBasic.getStddev());
+    statistics.varianceCluster.record(statsBasic.getVariance());
+    //Neighbors stats
+    statistics.meanNeighbors.record(statsNeighbors.getMean());
+    statistics.stddevNeighbors.record(statsNeighbors.getStddev());
+    statistics.varianceNeighbors.record(statsNeighbors.getVariance());
+    //CH stats
+    statistics.totalCHUtility.record(statsCHutility.getSum());
+    statistics.meanCHUtility.record(statsCHutility.getMean());
+    statistics.stddevCHUtility.record(statsCHutility.getStddev());
+    statistics.varianceCHUtility.record(statsCHutility.getVariance());
+    statistics.totalExpCHUtility.record(statsExpCHutility.getSum());
+    statistics.meanExpCHUtility.record(statsExpCHutility.getMean());
+    statistics.stddevExpCHUtility.record(statsExpCHutility.getStddev());
+    statistics.varianceExpCHUtility.record(statsExpCHutility.getVariance());
+    //ON stats
+    statistics.totalONUtility.record(statsONutility.getSum());
+    statistics.meanONUtility.record(statsONutility.getMean());
+    statistics.stddevONUtility.record(statsONutility.getStddev());
+    statistics.varianceONUtility.record(statsONutility.getVariance());
+    statistics.totalExpONUtility.record(statsExpONutility.getSum());
+    statistics.meanExpONUtility.record(statsExpONutility.getMean());
+    statistics.stddevExpONUtility.record(statsExpONutility.getStddev());
+    statistics.varianceExpONUtility.record(statsExpONutility.getVariance());
 }
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////RVV Algorithm/////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 Matching TraCIRVVRSU11p::RVV(Matching Mz){
+    adjustPrefList();
     Matching tempM = Mz;
     std::map<int, int> S;
-    Matching bp = foundBP(tempM, PrefCHLists, PrefONLists);
-    int t=0;
-    while (!bp.empty()) {
-        t++;
-        bool found = false;
-        for(auto const& p : bp){
-            const int CH = p.first;
-            const int ON = p.second;
-            if(S.find(CH)!=S.end() && S.find(ON)==S.end()){
-                found = add(ON, 0, S, tempM); //1=CH,0=ON
-            }else if(S.find(ON)!=S.end() && S.find(CH)==S.end()){
-                found = add(CH, 1, S, tempM); //1=CH,0=ON
+    ////////////////////////////////////////////////////////////////
+    //Scrive file di matching
+    std::ofstream myfile;
+    myfile.open ("matching.txt");
+    myfile<<simTime().dbl()<<"\n";
+    myfile<<"{";
+    for(auto iter=tempM.begin(); iter!=tempM.end(); ++iter){
+        myfile<<"{"<<(*iter).first<<","<<(*iter).second<<"},";
+    }
+    myfile<<"}\n";
+    myfile<<"CHs\n";
+    myfile<<"{";
+    for(auto& p : PrefCHLists){
+        myfile<<"{"<<p.first<<",{";
+        const PrefList list = p.second;
+        for(size_t jt=0;jt<list.size();jt++){
+            if(jt==list.size()-1)
+                myfile<<list[jt];
+            else
+                myfile<<list[jt]<<",";
+        }
+        myfile<<"}},";
+    }
+    myfile<<"}\n";
+    myfile<<"ONs\n";
+    myfile<<"{";
+    for(auto& p : PrefONLists){
+        myfile<<"{"<<p.first<<",{";
+        const PrefList list = p.second;
+        for(size_t jt=0;jt<list.size();jt++){
+            if(jt==list.size()-1)
+                myfile<<list[jt];
+            else
+                myfile<<list[jt]<<",";
+        }
+        myfile<<"}},";
+    }
+    myfile<<"}\n";
+    myfile.close();
+    if(PrefCHLists.size()!=0 && PrefONLists.size()!=0){
+        Matching bp = foundBP(tempM, PrefCHLists, PrefONLists);
+        int t=0;
+        while (!bp.empty()) {
+            t++;
+            bool found = false;
+            for(auto const& p : bp){
+                const int CH = p.first;
+                const int ON = p.second;
+                if(S.find(CH)!=S.end() && S.find(ON)==S.end()){
+                    found = add(ON, 0, S, tempM); //1=CH,0=ON
+                }else if(S.find(ON)!=S.end() && S.find(CH)==S.end()){
+                    found = add(CH, 1, S, tempM); //1=CH,0=ON
+                }
             }
+            if(!found){
+                satisfy(bp.begin()->first,bp.begin()->second, S, tempM);
+            }
+            bp.clear();
+            bp = foundBP(tempM, PrefCHLists, PrefONLists);
         }
-        if(!found){
-            satisfy(bp.begin()->first,bp.begin()->second, S, tempM);
-        }
-        bp.clear();
-        bp = foundBP(tempM, PrefCHLists, PrefONLists);
+    }else{
+        tempM.clear();
     }
 
     return tempM;
+
 }
 
 Matching TraCIRVVRSU11p::foundBP(Matching m, PrefMap fPrefCHLists, PrefMap fPrefONLists){
@@ -317,7 +402,11 @@ Matching TraCIRVVRSU11p::foundBP(Matching m, PrefMap fPrefCHLists, PrefMap fPref
                     for( Matching::iterator it = m.begin(); it != m.end(); it++ ){
                         if(it->second == ON){
                             const int onCH = it->first;
-                            PrefList ONpref = fPrefONLists.find(ON)->second;
+                            PrefList ONpref;
+                            if(fPrefONLists.find(ON)!=fPrefONLists.end())
+                                ONpref = fPrefONLists.find(ON)->second;
+                            else
+                                ONpref.clear();
                             for(size_t iter = 0; iter < ONpref.size(); iter++){
                                 if(ONpref[iter]==CH){
                                     break;
@@ -362,7 +451,11 @@ bool TraCIRVVRSU11p::add(int a, int role, std::map<int, int> &S, Matching &m){
                 int iWorst=-1;
                 std::pair <Matching::iterator, Matching::iterator> ret;
                 ret = m.equal_range(inCH);
-                PrefList CHpref = PrefCHLists.find(inCH)->second;
+                PrefList CHpref;
+                if(PrefCHLists.find(inCH)!=PrefCHLists.end())
+                    CHpref = PrefCHLists.find(inCH)->second;
+                else
+                    CHpref.clear();
                 for( Matching::iterator it = ret.first; it!=ret.second; it++ ){
                     const int tON = it->second;
                     for(size_t jt = 0; jt < CHpref.size(); jt++){
@@ -394,7 +487,11 @@ bool TraCIRVVRSU11p::add(int a, int role, std::map<int, int> &S, Matching &m){
             int iWorst=-1;
             std::pair <Matching::iterator, Matching::iterator> ret;
             ret = m.equal_range(CH);
-            PrefList CHpref = PrefCHLists.find(CH)->second;
+            PrefList CHpref;
+            if(PrefCHLists.find(CH)!=PrefCHLists.end())
+                CHpref = PrefCHLists.find(CH)->second;
+            else
+                CHpref.clear();
             for( Matching::iterator it = ret.first; it!=ret.second; it++ ){
                 const int tON = it->second;
                 for(size_t jt = 0; jt < CHpref.size(); jt++){
@@ -449,13 +546,15 @@ Matching TraCIRVVRSU11p::blockingAgent(int agent, std::map<int, int> S, Matching
         if (S.find(tempListit->first) == S.end()){
             tempListit = tempPrefCHLists.erase(tempListit);
         }else{
-            PrefList &list = tempListit->second;
-            PrefList::iterator jt = list.begin();
+            PrefList list = tempListit->second;
+            PrefList goodList;
             for(size_t jt=0;jt<list.size();jt++){
-                if (S.find(list[jt]) == S.end()) {
-                    list.erase(list.begin()+jt);
+                const int ON = list[jt];
+                if (S.find(ON) == S.end()) {
+                   goodList.push_back(ON);
                 }
             }
+            tempListit->second = goodList;
             ++tempListit;
         }
     }
@@ -464,12 +563,15 @@ Matching TraCIRVVRSU11p::blockingAgent(int agent, std::map<int, int> S, Matching
         if (S.find(tempListit->first) == S.end()){
             tempListit = tempPrefONLists.erase(tempListit);
         }else{
-            PrefList &list = tempListit->second;
+            PrefList list = tempListit->second;
+            PrefList goodList;
             for(size_t jt=0;jt<list.size();jt++){
-                if (S.find(list[jt]) == S.end()) {
-                    list.erase(list.begin()+jt);
+                const int CH = list[jt];
+                if (S.find(CH) == S.end()) {
+                   goodList.push_back(CH);
                 }
             }
+            tempListit->second = goodList;
             ++tempListit;
         }
     }
@@ -504,7 +606,11 @@ void TraCIRVVRSU11p::satisfy(int CH, int ON, std::map<int, int> &S, Matching &m 
         int iWorst=-1;
         std::pair <Matching::iterator, Matching::iterator> ret;
         ret = m.equal_range(CH);
-        PrefList CHpref = PrefCHLists.find(CH)->second;
+        PrefList CHpref;
+        if(PrefCHLists.find(CH)!=PrefCHLists.end())
+            CHpref = PrefCHLists.find(CH)->second;
+        else
+            CHpref.clear();
         for( Matching::iterator it = ret.first; it!=ret.second; it++ ){
             const int tON = it->second;
             for(size_t jt = 0; jt < CHpref.size(); jt++){

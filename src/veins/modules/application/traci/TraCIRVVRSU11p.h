@@ -37,23 +37,38 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
 	public:
         class Statistics {
             public:
-                double numCH;
-                double numON;
-                double numFN;
-                double meanCluster;
-                double sigmaCluster;
-                double CHutility;
-                double meanCHutility;
-                double sigmaCHutility;
-                double diffCHutility;
-                double meandiffCHutility;
-                double sigmadiffCHutility;
-                double expCHutility;
-                double meanexpCHutility;
-                double sigmaexpCHutility;
+                //Basic stats
+                cOutVector numCH;
+                cOutVector numON;
+                cOutVector numFN;
+                cOutVector numCHLost;
+                cOutVector meanClusterSize;
+                cOutVector stddevCluster;
+                cOutVector varianceCluster;
+                //Neighbors stats
+                cOutVector meanNeighbors;
+                cOutVector stddevNeighbors;
+                cOutVector varianceNeighbors;
+                //CH stats
+                cOutVector totalCHUtility;
+                cOutVector meanCHUtility;
+                cOutVector stddevCHUtility;
+                cOutVector varianceCHUtility;
+                cOutVector totalExpCHUtility;
+                cOutVector meanExpCHUtility;
+                cOutVector stddevExpCHUtility;
+                cOutVector varianceExpCHUtility;
+                //ON stats
+                cOutVector totalONUtility;
+                cOutVector meanONUtility;
+                cOutVector stddevONUtility;
+                cOutVector varianceONUtility;
+                cOutVector totalExpONUtility;
+                cOutVector meanExpONUtility;
+                cOutVector stddevExpONUtility;
+                cOutVector varianceExpONUtility;
 
                 void initialize();
-                void recordScalars(cSimpleModule& module);
         };
 
 		virtual void initialize(int stage);
@@ -85,6 +100,7 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
         void updatePreferenceList(WaveShortMessage* data);
         double calcUtility(double sqrD);
         void orgStatistic();
+        void adjustPrefList();
         Matching RVV(Matching Mz);
         Matching foundBP(Matching m, PrefMap fPrefCHLists, PrefMap fPrefONLists);
         bool add(int a, int r, std::map<int, int> &S, Matching &m);

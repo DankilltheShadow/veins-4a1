@@ -56,8 +56,8 @@ class TraCIRVV11p : public BaseWaveApplLayer {
 		static const simsignalwrap_t neighbors;
 		cMessage* sendHelloTimer;
 		int capacity;
+		double probCH;
 		//create the maps of neighbors
-		std::map<int, Coord> neighborsdCoord;
 		std::map<int, double> neighborsdDistCalc;
 		std::map<int, simtime_t> neighborsdTime;
 	protected:
@@ -71,6 +71,7 @@ class TraCIRVV11p : public BaseWaveApplLayer {
 		virtual void handleSelfMsg(cMessage* msg);
 		virtual void handleLowerMsg(cMessage* msg);
 		void updateInfo(WaveShortMessage* data);
+		void changeNodeState();
 };
 
 #endif

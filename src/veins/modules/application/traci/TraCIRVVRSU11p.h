@@ -82,8 +82,7 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
 		virtual void sendWSM(WaveShortMessage* wsm);
 		virtual void handleLowerMsg(cMessage* msg);
 		virtual void handleSelfMsg(cMessage* msg);
-        void onPreferenceList(WaveShortMessage* data);
-        void launchMatching();
+        void updatePreferenceList(WaveShortMessage* data);
         double calcUtility(double sqrD);
         void orgStatistic();
         Matching RVV(Matching Mz);

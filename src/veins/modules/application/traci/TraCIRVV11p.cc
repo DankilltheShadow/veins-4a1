@@ -49,14 +49,7 @@ void TraCIRVV11p::initialize(int stage) {
         double offSetHello = dblrand() * (par("helloInterval").doubleValue()/2);
         offSetHello = offSetHello + floor(offSetHello/0.050)*0.050;
 
-        double time;
-        if(simTime().dbl() < 180){
-            time=180;
-        }else{
-            time=simTime().dbl();
-        }
-
-        scheduleAt(offSetHello + time, sendHelloTimer);
+        scheduleAt(offSetHello + simTime(), sendHelloTimer);
 
         //graphic indentification. FN=red ON=blue CH=green
         findHost()->getDisplayString().updateWith("r=5,red");
@@ -64,12 +57,16 @@ void TraCIRVV11p::initialize(int stage) {
         capacity = par("capacityCluster");
 
         //choose random role
-        double probCH = par("Prob_CH").doubleValue();
-        if(uniform(0,1)<=probCH){
-            par("Car_State").setStringValue("CH");
-            findHost()->getDisplayString().updateWith("r=6,green");
-        }
+        probCH = par("Prob_CH").doubleValue();
 	}
+}
+
+void TraCIRVV11p::changeNodeState(){
+    if(uniform(0,1)<=probCH){
+        par("Car_State").setStringValue("CH");
+    } else {
+        par("Car_State").setStringValue("ON");
+    }
 }
 
 void TraCIRVV11p::onBeacon(WaveShortMessage* wsm) {
@@ -96,14 +93,25 @@ void TraCIRVV11p::sendRVVMessage(std::string type, int toNode=-1) {
     t_channel channel = dataOnSch ? type_SCH : type_CCH;
     WaveShortMessage* wsm = prepareWSM(type, dataLengthBits, channel, dataPriority, toNode,2);
     wsm->setSenderState(par("Car_State").stringValue());
+
+    std::multimap<double, int> PrList;
+    for (auto const& p : neighborsdDistCalc)
+    {
+        PrList.insert(std::pair<double,int>(p.second, p.first));
+    }
+    wsm->setPrefListArraySize(PrList.size());
+    int i = 0;
+    for (std::multimap<double,int>::iterator it=PrList.begin(); it!=PrList.end(); ++it)
+    {
+        wsm->setPrefList(i,(*it).second);
+        i++;
+    }
+    wsm->setCapacity(capacity);
     sendWSM(wsm);
 }
 
 void TraCIRVV11p::receiveSignal(cComponent* source, simsignal_t signalID, cObject* obj) {
 	Enter_Method_Silent();
-	if(simTime() == simulation.getWarmupPeriod()){
-	    traciVehicle->setSpeed(0.0);
-	}
 	if (signalID == mobilityStateChangedSignal) {
 		handlePositionUpdate(obj);
 	}
@@ -126,39 +134,11 @@ void TraCIRVV11p::handleParkingUpdate(cObject* obj) {
 void TraCIRVV11p::handlePositionUpdate(cObject* obj) {
 	BaseWaveApplLayer::handlePositionUpdate(obj);
 
-	// stopped for for at least 10s?
-	if (mobility->getSpeed() < 1) {
-	    double appTime= 2.5 * par("helloInterval").doubleValue();
-		if (simTime() - lastDroveAt == appTime) {
-		    std::multimap<double, int> PrList;
-		    for (auto const& p : neighborsdTime)
-            {
-                if(lastDroveAt-p.second >= appTime){
-                    neighborsdCoord.erase(p.first);
-                }else{
-                    double dDistance = this->curPosition.distance(neighborsdCoord[p.first]);
-                    PrList.insert(std::pair<double,int>(dDistance, p.first));
-                }
-            }
-
-		    t_channel channel = dataOnSch ? type_SCH : type_CCH;
-            WaveShortMessage* wsm = prepareWSM("Plist", dataLengthBits, channel, dataPriority, -9,2);
-            wsm->setPrefListArraySize(PrList.size());
-            int i = 0;
-            std::multimap<double,int>::iterator it;
-            for (it=PrList.begin(); it!=PrList.end(); ++it)
-            {
-                wsm->setPrefList(i,(*it).second);
-                i++;
-            }
-            wsm->setSenderState(par("Car_State").stringValue());
-            wsm->setCapacity(capacity);
-            sendWSM(wsm);
-		}
-	}
-	else {
-		lastDroveAt = simTime();
-	}
+	for (auto it = neighborsdDistCalc.begin(); it != neighborsdDistCalc.end(); it++){
+        if (simTime() - neighborsdTime[it->first] > 2*par("helloInterval").doubleValue()){
+            it = neighborsdDistCalc.erase(it);
+        }
+    }
 }
 void TraCIRVV11p::sendWSM(WaveShortMessage* wsm) {
 	if (isParking && !sendWhileParking) return;
@@ -168,10 +148,9 @@ void TraCIRVV11p::sendWSM(WaveShortMessage* wsm) {
 void TraCIRVV11p::handleSelfMsg(cMessage* msg) {
     switch (msg->getKind()) {
         case SEND_HELLO: {
+            changeNodeState();
             sendRVVMessage("Hello"); //send broadcast hello MSG.
-            if(simTime() - lastDroveAt <= par("helloInterval").doubleValue()){
-                scheduleAt(simTime() + par("helloInterval").doubleValue(), sendHelloTimer);
-            }
+            scheduleAt(simTime() + par("helloInterval").doubleValue(), sendHelloTimer);
             break;
         }
         default: {
@@ -202,10 +181,7 @@ void TraCIRVV11p::handleLowerMsg(cMessage* msg) {
 }
 
 void TraCIRVV11p::updateInfo(WaveShortMessage* wsm) {
-    if(std::string(par("Car_State").stringValue()) != wsm->getSenderState()){
-        int id = wsm->getSenderAddress();
-        neighborsdCoord[id]=wsm->getSenderPos();
-        neighborsdTime[id]=wsm->getTimestamp();
-    }
-
+    int id = wsm->getSenderAddress();
+    neighborsdDistCalc[id]=this->curPosition.distance(wsm->getSenderPos());
+    neighborsdTime[id]=wsm->getTimestamp();
 }

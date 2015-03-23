@@ -49,6 +49,7 @@ class TraCILeach11p : public BaseWaveApplLayer {
                double numON;
                double numFN;
                double meanCluster;
+               double meanCHutility;
 
                void initialize();
                void recordScalars(cSimpleModule& module, double div);
@@ -75,12 +76,14 @@ class TraCILeach11p : public BaseWaveApplLayer {
 		int numCollStats;
 		int ownCH;
 		std::list<int> ownON;
+		std::map<int, double> nodesUtility;
 	protected:
 		virtual void onBeacon(WaveShortMessage* wsm);
 		virtual void onData(WaveShortMessage* wsm);
 		virtual void onHello(WaveShortMessage* wsm);
 		virtual void onReq(WaveShortMessage* wsm);
 		virtual void onRef(WaveShortMessage* wsm);
+		virtual void onDeA(WaveShortMessage* wsm);
 		void sendMessage(std::string blockedRoadId);
 		void sendRVVMessage(std::string type, int toNode);
 		virtual void handlePositionUpdate(cObject* obj);
@@ -91,6 +94,7 @@ class TraCILeach11p : public BaseWaveApplLayer {
 		void newTurn();
 		void finish();
 		void collectStatistics();
+		double calcUtility(double sqrD);
 };
 
 #endif

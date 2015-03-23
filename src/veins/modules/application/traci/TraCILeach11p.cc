@@ -33,14 +33,21 @@ void TraCILeach11p::Statistics::initialize()
     numON = 0;
     numFN = 0;
     meanCluster=0;
+    meanCHutility=0;
 }
 
 void TraCILeach11p::Statistics::recordScalars(cSimpleModule& module, double div)
 {
+    if(numCH!=0){
+        module.recordScalar("meanClusterNodes", meanCluster/numCH);
+        module.recordScalar("meanClusterHeadUtility", meanCHutility/numCH);
+    }else{
+        module.recordScalar("meanClusterNodes", 0);
+        module.recordScalar("meanClusterHeadUtility", 0);
+    }
     module.recordScalar("NumberofCH", numCH/div);
     module.recordScalar("NumberofON", numON/div);
     module.recordScalar("NumberofFN", numFN/div);
-    module.recordScalar("meanClusterNodes", meanCluster/div);
 }
 
 void TraCILeach11p::collectStatistics(){
@@ -49,12 +56,28 @@ void TraCILeach11p::collectStatistics(){
         if(std::string(par("Car_State").stringValue())=="CH"){
             statistics.numCH++;
             statistics.meanCluster += ownON.size();
+            double utility=0;
+            for(auto it = ownON.begin();it != ownON.end(); it++){
+                const int ON = *it;
+                utility += nodesUtility[ON];
+            }
+            if(ownON.size()!=0)
+                statistics.meanCHutility = utility/(10*ownON.size());
         }else if(std::string(par("Car_State").stringValue())=="ON"){
             statistics.numON++;
         }else if(std::string(par("Car_State").stringValue())=="FN"){
             statistics.numFN++;
         }
     }
+}
+
+double TraCILeach11p::calcUtility(double sqrD){
+    double sigmaQ=FWMath::dBm2mW(-110); //converto i dBm in mW per sigma quadro
+    double pDivSigma = 10/sigmaQ; // 10 mW
+    double w = 20; //MHZ
+    double g = 1/sqrD;
+
+    return(w*log(1+(pDivSigma*g)));
 }
 
 void TraCILeach11p::initialize(int stage) {
@@ -172,12 +195,14 @@ void TraCILeach11p::handleLowerMsg(cMessage* msg) {
     WaveShortMessage* wsm = dynamic_cast<WaveShortMessage*>(msg);
     ASSERT(wsm);
 
-    if(std::string(wsm->getName())=="Hello" && wsm->getRecipientAddress()==myId) {
+    if(std::string(wsm->getName())=="Hello") {
         onHello(wsm);
     } else if(std::string(wsm->getName())=="AssReq" && wsm->getRecipientAddress()==myId) {
         onReq(wsm);
     } else if(std::string(wsm->getName())=="AssRef" && wsm->getRecipientAddress()==myId) {
         onRef(wsm);
+    } else if(std::string(wsm->getName())=="deAss" && wsm->getRecipientAddress()==myId) {
+        onDeA(wsm);
     } else if(std::string(wsm->getName())=="beacon" && wsm->getRecipientAddress()==myId) {
         onBeacon(wsm);
     } else if(std::string(wsm->getName())=="data" && wsm->getRecipientAddress()==myId) {
@@ -186,9 +211,16 @@ void TraCILeach11p::handleLowerMsg(cMessage* msg) {
     delete(msg);
 }
 
+void TraCILeach11p::onDeA(WaveShortMessage* wsm) {
+    if(std::string(par("Car_State").stringValue())=="CH"){
+        ownON.remove(wsm->getSenderAddress());
+    }
+}
+
 void TraCILeach11p::onRef(WaveShortMessage* wsm) {
     if(std::string(par("Car_State").stringValue())=="ON" && ownCH==wsm->getSenderAddress()){
         ownCH=-1;
+        par("Car_State").setStringValue("FN");
     }
 }
 
@@ -198,6 +230,8 @@ void TraCILeach11p::onReq(WaveShortMessage* wsm) {
         sendRVVMessage("AssRef",wsm->getSenderAddress());
     }else{
         ownON.push_back(wsm->getSenderAddress());
+        const double sqrDistance = this->curPosition.sqrdist(wsm->getSenderPos());
+        nodesUtility[wsm->getSenderAddress()] = calcUtility(sqrDistance);
     }
 }
 
@@ -227,7 +261,12 @@ void TraCILeach11p::handleSelfMsg(cMessage* msg) {
 }
 
 void TraCILeach11p::newTurn(){
+    for(auto it = ownON.begin();it != ownON.end(); it++){
+        const int ON = *it;
+        sendRVVMessage("AssRef",ON);
+    }
     ownON.clear();
+    sendRVVMessage("deAss",ownCH);
     ownCH=-1;
     if(fmod(nTurn,(1/probCH))==0){
         nextCHturn = false;

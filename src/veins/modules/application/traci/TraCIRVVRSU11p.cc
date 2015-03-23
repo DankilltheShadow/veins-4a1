@@ -73,7 +73,6 @@ void TraCIRVVRSU11p::initialize(int stage) {
 		startMatching = new cMessage("Start!", SEND_MATCH);
 		statistics.initialize();
 		scheduleAt(simTime() + par("startMatching").doubleValue(), startMatching);
-
 	}
 }
 
@@ -106,8 +105,8 @@ void TraCIRVVRSU11p::handleLowerMsg(cMessage* msg) {
     WaveShortMessage* wsm = dynamic_cast<WaveShortMessage*>(msg);
     ASSERT(wsm);
 
-    if (std::string(wsm->getName()) == "Plist") {
-        onPreferenceList(wsm);
+    if (std::string(wsm->getName()) == "Hello") {
+        updatePreferenceList(wsm);
     } else if (std::string(wsm->getName()) == "beacon") {
         onBeacon(wsm);
     }
@@ -120,30 +119,36 @@ void TraCIRVVRSU11p::handleLowerMsg(cMessage* msg) {
     delete(msg);
 }
 
-void TraCIRVVRSU11p::onPreferenceList(WaveShortMessage* wsm) {
+void TraCIRVVRSU11p::updatePreferenceList(WaveShortMessage* wsm) {
     int id = wsm->getSenderAddress();
-    PrefList list;
 
+    PrefMap::iterator it = PrefCHLists.find(id);
+    if(it != PrefCHLists.end()){
+        PrefCHLists.erase(it);
+    }
+    it = PrefONLists.find(id);
+    if(it != PrefONLists.end()){
+        PrefONLists.erase(it);
+    }
+
+    PrefList list;
     for (size_t i=0; i<wsm->getPrefListArraySize(); ++i){
         list.push_back(wsm->getPrefList(i));
     }
     if(std::string(wsm->getSenderState())=="CH"){
         PrefCHLists.insert(std::pair<int, std::vector<int>> (id, list));
         CHcapacity.insert(std::pair<int, int> (id, wsm->getCapacity()));
-        statistics.numCH++;
     }else{
         PrefONLists.insert(std::pair<int, std::vector<int>> (id, list));
-        statistics.numFN++;
     }
-    nodesCoord.insert(std::pair<int, Coord> (id, wsm->getSenderPos()));
+    nodesCoord[id] = wsm->getSenderPos();
 }
 
-/*
- Si fermano i veicoli a circa 243. ultimo Hello a circa 263. A 265 circa il primo Plist. <<<280 fine Plist. 82 Nodi.*/
 void TraCIRVVRSU11p::handleSelfMsg(cMessage* msg) {
     switch (msg->getKind()) {
         case SEND_MATCH: {
-            launchMatching();
+            Matched = RVV(Matched);
+            scheduleAt(simTime() + par("startMatching").doubleValue(), startMatching);
             break;
         }
         default: {
@@ -152,84 +157,6 @@ void TraCIRVVRSU11p::handleSelfMsg(cMessage* msg) {
             break;
         }
     }
-}
-
-void TraCIRVVRSU11p::launchMatching() {
-
-    PrefList ONunmatched;
-    PrefMap PrefONListsTEMP = PrefONLists;
-    for(auto const& iter : PrefONLists){
-        ONunmatched.push_back(iter.first);
-    }
-    while(!ONunmatched.empty()){
-        for(size_t it = 0; it<ONunmatched.size(); it++){
-            int ON = ONunmatched[it];
-            const PrefList &preflist = PrefONListsTEMP[ON];
-            if(!preflist.empty()){
-                const int &pCH = *preflist.begin();
-                if(PrefCHLists.find(pCH)!=PrefCHLists.end()){
-                    Matched.insert(std::pair<int,int>(pCH, ON));
-                }else{
-                    it--;
-                }
-                PrefONListsTEMP[ON].erase(PrefONListsTEMP[ON].begin());
-            }else{
-                ONunmatched.erase(ONunmatched.begin()+it);
-            }
-        }
-        for(auto const& p : PrefCHLists){
-            const int CH = p.first;
-            std::pair <Matching::iterator, Matching::iterator> ret;
-            ret = Matched.equal_range(CH);
-            int CountON = Matched.count(CH);
-            if( CountON > CHcapacity[CH] ){
-                PrefList preflistCH = p.second;
-                std::map<int, Matching::iterator> Order;
-                int size = preflistCH.size();
-                for( Matching::iterator it = ret.first; it != ret.second; it++ ){
-                    bool found=false;
-                    for( size_t itpCH = 0; itpCH < preflistCH.size(); itpCH++ ){
-                        if( it->second == preflistCH[itpCH] ){
-                            Order[itpCH] = it;
-                            found = true;
-                            break;
-                        }
-                    }
-                    if(!found){
-                        Order[size] = it;
-                        size++;
-                    }
-                }
-                for(int itC=0; itC < CountON-CHcapacity[CH]; itC++){
-                    std::map<int, Matching::iterator>::reverse_iterator last= Order.rbegin();
-                    Matched.erase(last->second);
-                    bool found=false;
-                    for(size_t itpB=0; itpB<ONunmatched.size(); itpB++){
-                        if(ONunmatched[itpB]==last->second->second){
-                            found=true;
-                            break;
-                        }
-                    }
-                    if(!found){
-                        ONunmatched.push_back(last->second->second);
-                    }
-                    Order.erase(last->first);
-                }
-            }
-            for(Matching::iterator it=ret.first; it!=ret.second; ++it){
-                for(size_t itUn = 0; itUn<ONunmatched.size(); itUn++){
-                    if(ONunmatched[itUn]==it->second){
-                        ONunmatched.erase(ONunmatched.begin()+itUn);
-                    }
-                }
-            }
-        }
-
-    }
-
-    //raccoglie statistiche
-    orgStatistic();
-
 }
 
 double TraCIRVVRSU11p::calcUtility(double sqrD){

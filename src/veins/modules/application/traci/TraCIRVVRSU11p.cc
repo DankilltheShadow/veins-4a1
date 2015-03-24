@@ -167,7 +167,7 @@ double TraCIRVVRSU11p::calcUtility(double sqrD){
     return(w*log(1+(pDivSigma*g)));
 }
 
-void TraCIRVVRSU11p::adjustPrefList() {
+/*void TraCIRVVRSU11p::adjustPrefList() {
     for(auto p = PrefCHLists.begin(); p != PrefCHLists.end(); ++p){
         PrefList list = p->second;
         PrefList goodList;
@@ -190,7 +190,7 @@ void TraCIRVVRSU11p::adjustPrefList() {
         }
         p->second = goodList;
     }
-}
+}*/
 
 void TraCIRVVRSU11p::orgStatistic() {
     cStdDev statsBasic;
@@ -304,7 +304,7 @@ void TraCIRVVRSU11p::orgStatistic() {
 ///////////////////RVV Algorithm/////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 Matching TraCIRVVRSU11p::RVV(Matching Mz){
-    adjustPrefList();
+    //adjustPrefList();
     Matching tempM = Mz;
     std::map<int, int> S;
     ////////////////////////////////////////////////////////////////

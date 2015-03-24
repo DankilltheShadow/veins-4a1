@@ -20,3 +20,6 @@ tests/**/err.tmp
 
 examples/**/.tkenvrc
 examples/**/valgrind.out
+*.vci
+*.vec
+*.sca

@@ -100,7 +100,7 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
         void updatePreferenceList(WaveShortMessage* data);
         double calcUtility(double sqrD);
         void orgStatistic();
-        void adjustPrefList();
+        //void adjustPrefList();
         Matching RVV(Matching Mz);
         Matching foundBP(Matching m, PrefMap fPrefCHLists, PrefMap fPrefONLists);
         bool add(int a, int r, std::map<int, int> &S, Matching &m);

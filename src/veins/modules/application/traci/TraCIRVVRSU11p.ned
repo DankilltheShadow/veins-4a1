@@ -26,4 +26,5 @@ simple TraCIRVVRSU11p extends BaseWaveApplLayer
     @class(TraCIRVVRSU11p);
     @display("i=block/app2");
     volatile double startMatching = default(20s) @unit(s); //time when start matching algorithm
+    volatile double intervalDeletion = default(25s) @unit(s); //time when start matching algorithm
 }

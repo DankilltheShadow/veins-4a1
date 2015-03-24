@@ -90,6 +90,8 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
 		Matching Matched;
 		std::map<int, Coord> nodesCoord;
 		std::map<int, int> CHcapacity;
+		std::map<int, simtime_t> nodesTime;
+		double intervalDeletion;
 	protected:
 		virtual void onBeacon(WaveShortMessage* wsm);
 		virtual void onData(WaveShortMessage* wsm);
@@ -101,6 +103,7 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
         double calcUtility(double sqrD);
         void orgStatistic();
         //void adjustPrefList();
+        void deleteOldNodes();
         Matching RVV(Matching Mz);
         Matching foundBP(Matching m, PrefMap fPrefCHLists, PrefMap fPrefONLists);
         bool add(int a, int r, std::map<int, int> &S, Matching &m);

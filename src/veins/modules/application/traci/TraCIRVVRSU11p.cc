@@ -68,6 +68,7 @@ void TraCIRVVRSU11p::initialize(int stage) {
 		sentMessage = false;
 		startMatching = new cMessage("Start!", SEND_MATCH);
 		statistics.initialize();
+		intervalDeletion = par("intervalDeletion").doubleValue();
 		scheduleAt(simTime() + par("startMatching").doubleValue(), startMatching);
 	}
 }
@@ -138,14 +139,47 @@ void TraCIRVVRSU11p::updatePreferenceList(WaveShortMessage* wsm) {
         PrefONLists.insert(std::pair<int, std::vector<int>> (id, list));
     }
     nodesCoord[id] = wsm->getSenderPos();
+    nodesTime[id] = simTime();
+}
+
+void TraCIRVVRSU11p::deleteOldNodes(){
+    std::list<int> listID;
+    for(auto const& p : nodesTime){
+        const int id = p.first;
+        simtime_t lastTime = p.second;
+        if(simTime()-lastTime >= intervalDeletion){
+            listID.push_back(id);
+        }
+    }
+    for(auto const& p: listID){
+        int id = p;
+        auto pos = PrefCHLists.find(id);
+        if(pos!=PrefCHLists.end())
+            PrefCHLists.erase(pos);
+        auto pos2 = CHcapacity.find(id);
+        if(pos2!=CHcapacity.end())
+            CHcapacity.erase(pos2);
+        auto pos3 = PrefONLists.find(id);
+        if(pos3!=PrefONLists.end())
+            PrefONLists.erase(pos3);
+        auto pos4 = nodesCoord.find(id);
+        if(pos4!=nodesCoord.end())
+            nodesCoord.erase(pos4);
+        auto pos5 = nodesTime.find(id);
+        if(pos5!=nodesTime.end())
+            nodesTime.erase(pos5);
+    }
 }
 
 void TraCIRVVRSU11p::handleSelfMsg(cMessage* msg) {
     switch (msg->getKind()) {
         case SEND_MATCH: {
-            Matched = RVV(Matched);
-            if(simTime()>=simulation.getWarmupPeriod()){
-                orgStatistic();
+            deleteOldNodes();
+            if(!PrefCHLists.empty() || !PrefONLists.empty()){
+                Matched = RVV(Matched);
+                if(simTime()>=simulation.getWarmupPeriod()){
+                    orgStatistic();
+                }
             }
             scheduleAt(simTime() + par("startMatching").doubleValue(), startMatching);
             break;

@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scave:Analysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:scave="http://www.omnetpp.org/omnetpp/scave">
+<scave:Analysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:scave="http://www.omnetpp.org/omnetpp/scave">
   <inputs>
     <inputs name="/veins/examples/veins/results/statisticLeach-*.vec"/>
     <inputs name="/veins/examples/veins/results/statisticLeach-*.sca"/>
   </inputs>
-  <datasets/>
+  <datasets>
+    <datasets name="Leach">
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(meanClusterHeadUtility)"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="meanfileCHut" valueExpr="mean(meanClusterHeadUtility)" moduleExpr="RSUExampleScenario.node[0].appl" groupByExpr="run"/>
+        <items xsi:type="scave:Discard" filterPattern="meanClusterHeadUtility"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="MeanCH_U" valueExpr="meanfileCHut" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:Discard" filterPattern="meanfileCHut"/>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(meanClusterNodes)"/>
+		<items xsi:type="scave:ComputeScalar" scalarName="meanfileCLNodes" valueExpr="mean(meanClusterNodes)" moduleExpr="RSUExampleScenario.node[0].appl" groupByExpr="run"/>
+        <items xsi:type="scave:Discard" filterPattern="meanClusterNodes"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="MeanClusterSize" valueExpr="meanfileCLNodes" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:Discard" filterPattern="meanfileCLNodes"/>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(NumberofCH)"/>
+		<items xsi:type="scave:ComputeScalar" scalarName="fileCH" valueExpr="sum(NumberofCH)" moduleExpr="RSUExampleScenario.node[0].appl" groupByExpr="run"/>
+        <items xsi:type="scave:Discard" filterPattern="NumberofCH"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="CHpercent" valueExpr="fileCH" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:Discard" filterPattern="fileCH"/>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(NumberofFN)"/>
+		<items xsi:type="scave:ComputeScalar" scalarName="fileFN" valueExpr="sum(NumberofFN)" moduleExpr="RSUExampleScenario.node[0].appl" groupByExpr="run"/>
+        <items xsi:type="scave:Discard" filterPattern="NumberofFN"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="FNpercent" valueExpr="fileFN" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:Discard" filterPattern="fileFN"/>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(NumberofON)"/>
+		<items xsi:type="scave:ComputeScalar" scalarName="fileON" valueExpr="sum(NumberofON)" moduleExpr="RSUExampleScenario.node[0].appl" groupByExpr="run"/>
+        <items xsi:type="scave:Discard" filterPattern="NumberofON"/>
+        <items xsi:type="scave:ComputeScalar" scalarName="ONpercent" valueExpr="fileON" moduleExpr="" groupByExpr="measurement" averageReplications="true"/>
+        <items xsi:type="scave:Discard" filterPattern="fileON"/>
+      </items>
+    </datasets>
+  </datasets>
   <chartSheets/>
 </scave:Analysis>

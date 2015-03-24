@@ -313,6 +313,12 @@ Matching TraCIRVVRSU11p::RVV(Matching Mz){
     myfile.open ("matching.txt");
     myfile<<simTime().dbl()<<"\n";
     myfile<<"{";
+    for(auto iter=CHcapacity.begin(); iter!=CHcapacity.end(); ++iter){
+        myfile<<"{"<<(*iter).first<<","<<(*iter).second<<"},";
+    }
+    myfile<<"}\n";
+    myfile<<"Match\n";
+    myfile<<"{";
     for(auto iter=tempM.begin(); iter!=tempM.end(); ++iter){
         myfile<<"{"<<(*iter).first<<","<<(*iter).second<<"},";
     }
@@ -346,30 +352,32 @@ Matching TraCIRVVRSU11p::RVV(Matching Mz){
     }
     myfile<<"}\n";
     myfile.close();
-    if(PrefCHLists.size()!=0 && PrefONLists.size()!=0){
-        Matching bp = foundBP(tempM, PrefCHLists, PrefONLists);
-        int t=0;
-        while (!bp.empty()) {
-            t++;
-            bool found = false;
-            for(auto const& p : bp){
-                const int CH = p.first;
-                const int ON = p.second;
-                if(S.find(CH)!=S.end() && S.find(ON)==S.end()){
-                    found = add(ON, 0, S, tempM); //1=CH,0=ON
-                }else if(S.find(ON)!=S.end() && S.find(CH)==S.end()){
-                    found = add(CH, 1, S, tempM); //1=CH,0=ON
-                }
+ //   if(PrefCHLists.size()!=0 && PrefONLists.size()!=0){
+    Matching bp = foundBP(tempM, PrefCHLists, PrefONLists);
+    int t=0;
+    while (!bp.empty()) {
+        t++;
+        bool found = false;
+        for(auto const& p : bp){
+            const int CH = p.first;
+            const int ON = p.second;
+            if(S.find(CH)!=S.end() && S.find(ON)==S.end()){
+                found = add(ON, 0, S, tempM); //1=CH,0=ON
+                break;
+            }else if(S.find(ON)!=S.end() && S.find(CH)==S.end()){
+                found = add(CH, 1, S, tempM); //1=CH,0=ON
+                break;
             }
-            if(!found){
-                satisfy(bp.begin()->first,bp.begin()->second, S, tempM);
-            }
-            bp.clear();
-            bp = foundBP(tempM, PrefCHLists, PrefONLists);
         }
-    }else{
-        tempM.clear();
+        if(!found){
+            satisfy(bp.begin()->first,bp.begin()->second, S, tempM);
+        }
+        bp.clear();
+        bp = foundBP(tempM, PrefCHLists, PrefONLists);
     }
+/*    }else{
+        tempM.clear();
+    }*/
 
     return tempM;
 
@@ -390,23 +398,29 @@ Matching TraCIRVVRSU11p::foundBP(Matching m, PrefMap fPrefCHLists, PrefMap fPref
         for( int i = 0; i < CHcapacity[CH]; i++ ){
             if(j < CHpref.size()){
                 const int ON = CHpref[j];
+                PrefList ONpref;
                 bool found = false;
+                bool foundCH = false;
+                if(fPrefONLists.find(ON)!=fPrefONLists.end())
+                    ONpref = fPrefONLists.find(ON)->second;
+                else
+                    ONpref.clear();
+                for(size_t iter = 0; iter < ONpref.size(); iter++){
+                    if(ONpref[iter]==CH)
+                        foundCH=true;
+                    break;
+                }
                 for( size_t k = 0; k < ONmatched.size(); k++ ){
                     if( ON == ONmatched[k] ){
                         found=true;
                         break;
                     }
                 }
-                if(!found){
+                if(!found && foundCH){
                     bool insertBP = true;
                     for( Matching::iterator it = m.begin(); it != m.end(); it++ ){
                         if(it->second == ON){
                             const int onCH = it->first;
-                            PrefList ONpref;
-                            if(fPrefONLists.find(ON)!=fPrefONLists.end())
-                                ONpref = fPrefONLists.find(ON)->second;
-                            else
-                                ONpref.clear();
                             for(size_t iter = 0; iter < ONpref.size(); iter++){
                                 if(ONpref[iter]==CH){
                                     break;
@@ -458,14 +472,16 @@ bool TraCIRVVRSU11p::add(int a, int role, std::map<int, int> &S, Matching &m){
                     CHpref.clear();
                 for( Matching::iterator it = ret.first; it!=ret.second; it++ ){
                     const int tON = it->second;
-                    for(size_t jt = 0; jt < CHpref.size(); jt++){
+                    for(int jt = 0; jt < CHpref.size(); jt++){
                         if(CHpref[jt] == tON){
                             if(iWorst < jt){
                                 iWorst = jt;
                                 worst = it;
                                 break;
+                            }else {
+                                break;
                             }
-                        }else if(jt==CHpref.size()-1){
+                        }else if(jt == CHpref.size()-1){
                             iWorst = -1;
                         }
                     }
@@ -494,11 +510,13 @@ bool TraCIRVVRSU11p::add(int a, int role, std::map<int, int> &S, Matching &m){
                 CHpref.clear();
             for( Matching::iterator it = ret.first; it!=ret.second; it++ ){
                 const int tON = it->second;
-                for(size_t jt = 0; jt < CHpref.size(); jt++){
+                for(int jt = 0; jt < CHpref.size(); jt++){
                     if(CHpref[jt] == tON){
                         if(iWorst < jt){
                             iWorst = jt;
                             worst = it;
+                            break;
+                        }else {
                             break;
                         }
                     }else if(jt==CHpref.size()-1){
@@ -546,15 +564,16 @@ Matching TraCIRVVRSU11p::blockingAgent(int agent, std::map<int, int> S, Matching
         if (S.find(tempListit->first) == S.end()){
             tempListit = tempPrefCHLists.erase(tempListit);
         }else{
+            const int CH = tempListit->first;
             PrefList list = tempListit->second;
             PrefList goodList;
             for(size_t jt=0;jt<list.size();jt++){
                 const int ON = list[jt];
-                if (S.find(ON) == S.end()) {
-                   goodList.push_back(ON);
+                if (S.find(ON) != S.end()) {
+                    goodList.push_back(ON);
                 }
             }
-            tempListit->second = goodList;
+            tempPrefCHLists[CH] = goodList;
             ++tempListit;
         }
     }
@@ -563,23 +582,31 @@ Matching TraCIRVVRSU11p::blockingAgent(int agent, std::map<int, int> S, Matching
         if (S.find(tempListit->first) == S.end()){
             tempListit = tempPrefONLists.erase(tempListit);
         }else{
+            const int ON = tempListit->first;
             PrefList list = tempListit->second;
             PrefList goodList;
             for(size_t jt=0;jt<list.size();jt++){
                 const int CH = list[jt];
-                if (S.find(CH) == S.end()) {
-                   goodList.push_back(CH);
+                if (S.find(CH) != S.end()) {
+                    goodList.push_back(CH);
                 }
             }
-            tempListit->second = goodList;
+            tempPrefONLists[ON] = goodList;
             ++tempListit;
         }
     }
     Matching bpM = foundBP(m, tempPrefCHLists, tempPrefONLists);
     if(!bpM.empty()){
-        PrefMap::iterator iter = (PrefCHLists.find(agent)!=PrefCHLists.end())?PrefCHLists.find(agent):PrefONLists.find(agent);
-        PrefList list = iter->second;
+        PrefList list;
+        if(PrefCHLists.find(agent)!=PrefCHLists.end()){
+            list = PrefCHLists.find(agent)->second;
+        }else if(PrefONLists.find(agent)!=PrefONLists.end()){
+            list = PrefONLists.find(agent)->second;
+        }
         for(size_t i=0; i<list.size();i++){
+            if(bestbps.size()>0){
+                break;
+            }
             const int best = list[i];
             for (auto it = bpM.begin(); it != bpM.end(); it++){
                 if((it->first==best && it->second==agent) || (it->second==best && it->first==agent)){
@@ -613,11 +640,13 @@ void TraCIRVVRSU11p::satisfy(int CH, int ON, std::map<int, int> &S, Matching &m 
             CHpref.clear();
         for( Matching::iterator it = ret.first; it!=ret.second; it++ ){
             const int tON = it->second;
-            for(size_t jt = 0; jt < CHpref.size(); jt++){
+            for(int jt = 0; jt < CHpref.size(); jt++){
                 if(CHpref[jt] == tON){
                     if(iWorst < jt){
                         iWorst = jt;
                         worst = it;
+                        break;
+                    }else {
                         break;
                     }
                 }else if(jt==CHpref.size()-1){

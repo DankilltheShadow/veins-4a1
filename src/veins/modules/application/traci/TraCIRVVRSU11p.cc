@@ -248,8 +248,8 @@ void TraCIRVVRSU11p::orgStatistic() {
         if(denominator!=0){
             double UCH;
             UCH = numerator/denominator;
-            statsCHutility.collect(UCH);
-            statsBasic.collect(denominator/10);
+            statsCHutility.collect(UCH);         //colleziono per ogni CH la sua Utility Function dopo il matching
+            statsBasic.collect(denominator/10);  //colleziono il numero di ON associati al cluster (ClusterSize)
         }
         numerator=0;
         denominator=0;
@@ -261,8 +261,8 @@ void TraCIRVVRSU11p::orgStatistic() {
         if(denominator!=0){
             double UCH;
             UCH = numerator/denominator;
-            statsExpCHutility.collect(UCH);
-            statsNeighbors.collect(denominator/10);
+            statsExpCHutility.collect(UCH);             //colleziono per ogni CH la sua Utility Function prima del matching
+            statsNeighbors.collect(denominator/10);     //colleziono il numero di vicini. (#nodi nella lista di preferenza)
         }
     }
     for(auto const& p :PrefONLists){
@@ -278,31 +278,25 @@ void TraCIRVVRSU11p::orgStatistic() {
         if(N!=0){
             double UON;
             UON = value/N;
-            statsExpONutility.collect(UON);
-            statsNeighbors.collect(N);
+            statsExpONutility.collect(UON);     //Colleziono per ogni ON la sua Utility Function prima del matching
+            statsNeighbors.collect(N);          //Colleziono per ogni ON il numero dei vicini.
         }
         value = 0;
-        N = 0;
+        bool found = false;
         for(auto const& it : Matched){
             const int CH = it.first;
             if(it.second == ON){
                 value = calcUtility(nodesCoord[CH].distance(nodesCoord[ON]))/10;
-                N = 1;
+                found = true;
                 break;
             }
         }
-        if(N!=0){
+        if(found){
             double UON;
-            UON = value/N;
-            statsONutility.collect(UON);
+            UON = value;
+            statsONutility.collect(UON);        //Colleziono per ogni ON la sua Utility Function dopo il matching
         }
     }
-    //cStdDev statsBasic;
-    //cStdDev statsNeighbors;
-    //cStdDev statsCHutility;
-    //cStdDev statsONutility;
-    //cStdDev statsExpCHutility;
-    //cStdDev statsExpONutility;
     //Basic stats
     statistics.numCH.record(statsBasic.getCount());
     statistics.numON.record(statsBasic.getSum());

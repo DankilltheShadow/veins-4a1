@@ -335,7 +335,7 @@ Matching TraCIRVVRSU11p::RVV(Matching Mz){
     //adjustPrefList();
     Matching tempM = Mz;
     std::map<int, int> S;
-    ////////////////////////////////////////////////////////////////
+    /*////////////////////////////////////////////////////////////////
     //Scrive file di matching
     std::ofstream myfile;
     myfile.open ("matching.txt");
@@ -379,8 +379,7 @@ Matching TraCIRVVRSU11p::RVV(Matching Mz){
         myfile<<"}},";
     }
     myfile<<"}\n";
-    myfile.close();
- //   if(PrefCHLists.size()!=0 && PrefONLists.size()!=0){
+    myfile.close();*/
     Matching bp = foundBP(tempM, PrefCHLists, PrefONLists);
     int t=0;
     while (!bp.empty()) {

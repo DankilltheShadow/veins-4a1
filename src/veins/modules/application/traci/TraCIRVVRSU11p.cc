@@ -32,6 +32,7 @@ void TraCIRVVRSU11p::Statistics::initialize()
     numON.setName("Number_ON");
     numFN.setName("Number_FN");
     numCHLost.setName("Number_CH_Losts");
+    numONLost.setName("Number_CH_Losts");
     meanClusterSize.setName("Mean_Cluster_Size");
     stddevCluster.setName("StdDev_Cluster_Size");
     varianceCluster.setName("Variance_Cluster_Size");
@@ -265,6 +266,7 @@ void TraCIRVVRSU11p::orgStatistic() {
             statsNeighbors.collect(denominator/10);     //colleziono il numero di vicini. (#nodi nella lista di preferenza)
         }
     }
+    int noNeigh = 0;
     for(auto const& p :PrefONLists){
         const int ON = p.first;
         const PrefList prefON = p.second;
@@ -280,6 +282,8 @@ void TraCIRVVRSU11p::orgStatistic() {
             UON = value/N;
             statsExpONutility.collect(UON);     //Colleziono per ogni ON la sua Utility Function prima del matching
             statsNeighbors.collect(N);          //Colleziono per ogni ON il numero dei vicini.
+        }else{
+            noNeigh++;
         }
         value = 0;
         bool found = false;
@@ -302,6 +306,7 @@ void TraCIRVVRSU11p::orgStatistic() {
     statistics.numON.record(statsBasic.getSum());
     statistics.numFN.record((PrefCHLists.size()+PrefONLists.size())-(statsBasic.getSum()+statsBasic.getCount()));
     statistics.numCHLost.record(PrefCHLists.size()-statsBasic.getCount());
+    statistics.numONLost.record(PrefONLists.size()-statsBasic.getSum()-noNeigh);
     statistics.meanClusterSize.record(statsBasic.getMean());
     statistics.stddevCluster.record(statsBasic.getStddev());
     statistics.varianceCluster.record(statsBasic.getVariance());

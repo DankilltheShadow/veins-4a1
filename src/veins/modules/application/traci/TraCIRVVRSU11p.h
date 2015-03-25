@@ -42,6 +42,7 @@ class TraCIRVVRSU11p : public BaseWaveApplLayer {
                 cOutVector numON;
                 cOutVector numFN;
                 cOutVector numCHLost;
+                cOutVector numONLost;
                 cOutVector meanClusterSize;
                 cOutVector stddevCluster;
                 cOutVector varianceCluster;

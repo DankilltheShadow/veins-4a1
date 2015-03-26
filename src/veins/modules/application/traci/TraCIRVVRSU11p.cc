@@ -340,51 +340,53 @@ Matching TraCIRVVRSU11p::RVV(Matching Mz){
     //adjustPrefList();
     Matching tempM = Mz;
     std::map<int, int> S;
-    /*////////////////////////////////////////////////////////////////
-    //Scrive file di matching
-    std::ofstream myfile;
-    myfile.open ("matching.txt");
-    myfile<<simTime().dbl()<<"\n";
-    myfile<<"{";
-    for(auto iter=CHcapacity.begin(); iter!=CHcapacity.end(); ++iter){
-        myfile<<"{"<<(*iter).first<<","<<(*iter).second<<"},";
-    }
-    myfile<<"}\n";
-    myfile<<"Match\n";
-    myfile<<"{";
-    for(auto iter=tempM.begin(); iter!=tempM.end(); ++iter){
-        myfile<<"{"<<(*iter).first<<","<<(*iter).second<<"},";
-    }
-    myfile<<"}\n";
-    myfile<<"CHs\n";
-    myfile<<"{";
-    for(auto& p : PrefCHLists){
-        myfile<<"{"<<p.first<<",{";
-        const PrefList list = p.second;
-        for(size_t jt=0;jt<list.size();jt++){
-            if(jt==list.size()-1)
-                myfile<<list[jt];
-            else
-                myfile<<list[jt]<<",";
+    if(simTime().dbl()==280){
+        ////////////////////////////////////////////////////////////////
+        //Scrive file di matching
+        std::ofstream myfile;
+        myfile.open ("matching.txt");
+        myfile<<simTime().dbl()<<"\n";
+        myfile<<"{";
+        for(auto iter=CHcapacity.begin(); iter!=CHcapacity.end(); ++iter){
+            myfile<<"{"<<(*iter).first<<","<<(*iter).second<<"},";
         }
-        myfile<<"}},";
-    }
-    myfile<<"}\n";
-    myfile<<"ONs\n";
-    myfile<<"{";
-    for(auto& p : PrefONLists){
-        myfile<<"{"<<p.first<<",{";
-        const PrefList list = p.second;
-        for(size_t jt=0;jt<list.size();jt++){
-            if(jt==list.size()-1)
-                myfile<<list[jt];
-            else
-                myfile<<list[jt]<<",";
+        myfile<<"}\n";
+        myfile<<"Match\n";
+        myfile<<"{";
+        for(auto iter=tempM.begin(); iter!=tempM.end(); ++iter){
+            myfile<<"{"<<(*iter).first<<","<<(*iter).second<<"},";
         }
-        myfile<<"}},";
+        myfile<<"}\n";
+        myfile<<"CHs\n";
+        myfile<<"{";
+        for(auto& p : PrefCHLists){
+            myfile<<"{"<<p.first<<",{";
+            const PrefList list = p.second;
+            for(size_t jt=0;jt<list.size();jt++){
+                if(jt==list.size()-1)
+                    myfile<<list[jt];
+                else
+                    myfile<<list[jt]<<",";
+            }
+            myfile<<"}},";
+        }
+        myfile<<"}\n";
+        myfile<<"ONs\n";
+        myfile<<"{";
+        for(auto& p : PrefONLists){
+            myfile<<"{"<<p.first<<",{";
+            const PrefList list = p.second;
+            for(size_t jt=0;jt<list.size();jt++){
+                if(jt==list.size()-1)
+                    myfile<<list[jt];
+                else
+                    myfile<<list[jt]<<",";
+            }
+            myfile<<"}},";
+        }
+        myfile<<"}\n";
+        myfile.close();
     }
-    myfile<<"}\n";
-    myfile.close();*/
     Matching bp = foundBP(tempM, PrefCHLists, PrefONLists);
     int t=0;
     while (!bp.empty()) {

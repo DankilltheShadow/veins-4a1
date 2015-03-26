@@ -42,7 +42,6 @@
         <items xsi:type="scave:Apply" operation="timetoserial"/>
         <items xsi:type="scave:Apply" operation="aggregator">
           <params name="function" value="average"/>
-          <groupBy>name</groupBy>
           <groupBy>measurement</groupBy>
         </items>
       </items>

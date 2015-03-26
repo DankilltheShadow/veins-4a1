@@ -1,4 +1,4 @@
-file 64190 1427237616                                           
+file 64190 1427396030                                           
 version 2
 run statisticRVV-9-20150324-23:47:46-5724
 attr c 14
@@ -18,56 +18,55 @@ attr resultdir results
 attr runnumber 9
 attr sc "\"erlangen-low.launchd.xml\""
 attr seedset 9
-
 vector 0  RSUExampleScenario.rsu[0].appl  Number_CH  ETV
-vector 1  RSUExampleScenario.rsu[0].appl  Number_ON  ETV
-vector 2  RSUExampleScenario.rsu[0].appl  Number_FN  ETV
-vector 3  RSUExampleScenario.rsu[0].appl  Number_CH_Losts  ETV
-vector 4  RSUExampleScenario.rsu[0].appl  Mean_Cluster_Size  ETV
-vector 5  RSUExampleScenario.rsu[0].appl  StdDev_Cluster_Size  ETV
-vector 6  RSUExampleScenario.rsu[0].appl  Variance_Cluster_Size  ETV
-vector 7  RSUExampleScenario.rsu[0].appl  Mean_Neighbors  ETV
-vector 8  RSUExampleScenario.rsu[0].appl  StdDev_Neighbors  ETV
-vector 9  RSUExampleScenario.rsu[0].appl  Variance_Neighbors  ETV
-vector 10  RSUExampleScenario.rsu[0].appl  Total_CH_Utility  ETV
-vector 11  RSUExampleScenario.rsu[0].appl  Mean_CH_Utility  ETV
-vector 12  RSUExampleScenario.rsu[0].appl  StdDev_CH_Utility  ETV
-vector 13  RSUExampleScenario.rsu[0].appl  Variance_CH_Utility  ETV
-vector 14  RSUExampleScenario.rsu[0].appl  Total_exp_CH_Utility  ETV
-vector 15  RSUExampleScenario.rsu[0].appl  Mean_exp_CH_Utility  ETV
-vector 16  RSUExampleScenario.rsu[0].appl  StdDev_exp_CH_Utility  ETV
-vector 17  RSUExampleScenario.rsu[0].appl  Variance_exp_CH_Utility  ETV
-vector 18  RSUExampleScenario.rsu[0].appl  Total_ON_Utility  ETV
-vector 19  RSUExampleScenario.rsu[0].appl  Mean_ON_Utility  ETV
-vector 20  RSUExampleScenario.rsu[0].appl  StdDev_ON_Utility  ETV
-vector 21  RSUExampleScenario.rsu[0].appl  Variance_ON_Utility  ETV
-vector 22  RSUExampleScenario.rsu[0].appl  Total_exp_ON_Utility  ETV
-vector 23  RSUExampleScenario.rsu[0].appl  Mean_exp_ON_Utility  ETV
-vector 24  RSUExampleScenario.rsu[0].appl  StdDev_exp_ON_Utility  ETV
-vector 25  RSUExampleScenario.rsu[0].appl  Variance_exp_ON_Utility  ETV
 0	2355 1462 34608 475366 240 2000 89 0 6 167 475
+vector 1  RSUExampleScenario.rsu[0].appl  Number_ON  ETV
 1	3817 1462 34608 475366 240 2000 89 0 9 236 986
+vector 2  RSUExampleScenario.rsu[0].appl  Number_FN  ETV
 2	5279 1550 34608 475366 240 2000 89 8 42 2990 104316
+vector 3  RSUExampleScenario.rsu[0].appl  Number_CH_Losts  ETV
 3	6829 1462 34608 475366 240 2000 89 0 4 74 142
-4	8291 1696 34608 475366 240 2000 89 1 2 nan nan
-5	9987 1955 34608 475366 240 2000 89 0 0.70710678118655 nan nan
-6	11942 1777 34608 475366 240 2000 89 0 0.5 nan nan
+vector 4  RSUExampleScenario.rsu[0].appl  Mean_Cluster_Size  ETV
+4	8291 1696 34608 475366 240 2000 89 -1.#IND -1.#IND -1.#IND -1.#IND
+vector 5  RSUExampleScenario.rsu[0].appl  StdDev_Cluster_Size  ETV
+5	9987 1955 34608 475366 240 2000 89 -1.#IND -1.#IND -1.#IND -1.#IND
+vector 6  RSUExampleScenario.rsu[0].appl  Variance_Cluster_Size  ETV
+6	11942 1777 34608 475366 240 2000 89 -1.#IND -1.#IND -1.#IND -1.#IND
+vector 7  RSUExampleScenario.rsu[0].appl  Mean_Neighbors  ETV
 7	13719 2194 34608 475366 240 2000 89 5.125 9.3684210526316 786.02462146361 6969.3039329695
+vector 8  RSUExampleScenario.rsu[0].appl  StdDev_Neighbors  ETV
 8	15913 2703 34608 475366 240 2000 89 0.99103120896511 2.0925692709791 148.80646726649 253.54003429247
+vector 9  RSUExampleScenario.rsu[0].appl  Variance_Neighbors  ETV
 9	18616 2700 34608 475366 240 2000 89 0.98214285714286 4.3788461538462 253.54003429247 773.07351062609
-10	21316 2625 34608 475366 240 2000 89 0 278.69863188136 7877.4419685454 1057360.4958298
-11	23941 2646 34608 475366 240 2000 89 44.440793133193 55.326328363824 nan nan
-12	26587 2328 34608 475366 240 2000 89 0.082724897855492 8.3792851591375 nan nan
-13	28915 2336 34608 475366 240 2000 89 0.0068434087252016 70.212419778141 nan nan
+vector 10  RSUExampleScenario.rsu[0].appl  Total_CH_Utility  ETV
+10	21316 2625 34608 475366 240 2000 89 0 278.69863188136 7877.4419685455 1057360.4958298
+vector 11  RSUExampleScenario.rsu[0].appl  Mean_CH_Utility  ETV
+11	23941 2646 34608 475366 240 2000 89 -1.#IND -1.#IND -1.#IND -1.#IND
+vector 12  RSUExampleScenario.rsu[0].appl  StdDev_CH_Utility  ETV
+12	26587 2328 34608 475366 240 2000 89 -1.#IND -1.#IND -1.#IND -1.#IND
+vector 13  RSUExampleScenario.rsu[0].appl  Variance_CH_Utility  ETV
+13	28915 2336 34608 475366 240 2000 89 -1.#IND -1.#IND -1.#IND -1.#IND
+vector 14  RSUExampleScenario.rsu[0].appl  Total_exp_CH_Utility  ETV
 14	31251 2697 34608 475366 240 2000 89 0 311.81247269402 10829.257288048 1886194.6668745
-15	33948 2704 34608 475366 240 2000 89 43.957006638399 47.284271580997 nan nan
-16	36652 2534 34608 475366 240 2000 89 0.069745970950952 2.4657916841809 nan nan
-17	39186 2547 34608 475366 240 2000 89 0.004864500463891 6.0801286297756 nan nan
+vector 15  RSUExampleScenario.rsu[0].appl  Mean_exp_CH_Utility  ETV
+15	33948 2704 34608 475366 240 2000 89 -1.#IND -1.#IND -1.#IND -1.#IND
+vector 16  RSUExampleScenario.rsu[0].appl  StdDev_exp_CH_Utility  ETV
+16	36652 2534 34608 475366 240 2000 89 -1.#IND -1.#IND -1.#IND -1.#IND
+vector 17  RSUExampleScenario.rsu[0].appl  Variance_exp_CH_Utility  ETV
+17	39186 2547 34608 475366 240 2000 89 -1.#IND -1.#IND -1.#IND -1.#IND
+vector 18  RSUExampleScenario.rsu[0].appl  Total_ON_Utility  ETV
 18	41733 2784 34608 475366 240 2000 89 95.102986773574 885.62051416905 49803.44884084 30168274.006365
+vector 19  RSUExampleScenario.rsu[0].appl  Mean_ON_Utility  ETV
 19	44517 2791 34608 475366 240 2000 89 45.409122504407 49.988219229461 4184.846738989 196831.07361623
+vector 20  RSUExampleScenario.rsu[0].appl  StdDev_ON_Utility  ETV
 20	47308 2789 34608 475366 240 2000 89 0.43884111635734 6.0084777071607 188.06298500491 473.50244490585
-21	50097 2790 34608 475366 240 2000 89 0.19258152540575 36.101804357448 473.50244490585 5262.9935137683
-22	52887 2788 34608 475366 240 2000 89 369.6178319786 1801.1626126601 140746.79395289 229069683.30476
+vector 21  RSUExampleScenario.rsu[0].appl  Variance_ON_Utility  ETV
+21	50097 2790 34608 475366 240 2000 89 0.19258152540575 36.101804357448 473.50244490586 5262.9935137684
+vector 22  RSUExampleScenario.rsu[0].appl  Total_exp_ON_Utility  ETV
+22	52887 2788 34608 475366 240 2000 89 369.6178319786 1801.1626126601 140746.79395289 229069683.30477
+vector 23  RSUExampleScenario.rsu[0].appl  Mean_exp_ON_Utility  ETV
 23	55675 2791 34608 475366 240 2000 89 44.614812478705 46.202228997325 3994.3790327949 179274.19146764
+vector 24  RSUExampleScenario.rsu[0].appl  StdDev_exp_ON_Utility  ETV
 24	58466 2862 34608 475366 240 2000 89 0.48205486519425 1.2702842128657 73.213079992245 62.723396877017
+vector 25  RSUExampleScenario.rsu[0].appl  Variance_exp_ON_Utility  ETV
 25	61328 2862 34608 475366 240 2000 89 0.23237689305745 1.6136219814558 62.723396877017 51.803656112432

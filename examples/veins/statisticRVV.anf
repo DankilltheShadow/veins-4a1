@@ -1,8 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scave:Analysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:scave="http://www.omnetpp.org/omnetpp/scave">
+<scave:Analysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:scave="http://www.omnetpp.org/omnetpp/scave">
   <inputs>
     <inputs name="/veins/examples/veins/results/statisticRVV-*.vec"/>
   </inputs>
-  <datasets/>
+  <datasets>
+    <datasets name="export">
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(Total_CH_Utility)" type="VECTOR"/>
+        <items xsi:type="scave:Add" filterPattern="name(Total_ON_Utility)" type="VECTOR"/>
+        <items xsi:type="scave:Apply" operation="timetoserial"/>
+        <items xsi:type="scave:Apply" operation="aggregator">
+          <params name="function" value="sum"/>
+          <groupBy>measurement</groupBy>
+          <groupBy>replication</groupBy>
+        </items>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(Number_FN)" type="VECTOR"/>
+        <items xsi:type="scave:Add" filterPattern="name(Number_ON)" type="VECTOR"/>
+        <items xsi:type="scave:Add" filterPattern="name(Number_CH)" type="VECTOR"/>
+        <items xsi:type="scave:Apply" operation="timetoserial"/>
+        <items xsi:type="scave:Apply" operation="aggregator">
+          <params name="function" value="sum"/>
+          <groupBy>measurement</groupBy>
+          <groupBy>repetition</groupBy>
+        </items>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(Number_FN)" type="VECTOR"/>
+        <items xsi:type="scave:Add" filterPattern="name(Number_ON)" type="VECTOR"/>
+        <items xsi:type="scave:Add" filterPattern="name(Number_CH)" type="VECTOR"/>
+        <items xsi:type="scave:Apply" operation="timetoserial"/>
+        <items xsi:type="scave:Apply" operation="aggregator">
+          <params name="function" value="average"/>
+          <groupBy>name</groupBy>
+          <groupBy>measurement</groupBy>
+        </items>
+      </items>
+      <items xsi:type="scave:Group">
+        <items xsi:type="scave:Add" filterPattern="name(Mean_Cluster_Size)" type="VECTOR"/>
+        <items xsi:type="scave:Apply" operation="timetoserial"/>
+        <items xsi:type="scave:Apply" operation="aggregator">
+          <params name="function" value="average"/>
+          <groupBy>name</groupBy>
+          <groupBy>measurement</groupBy>
+        </items>
+      </items>
+    </datasets>
+  </datasets>
   <chartSheets/>
 </scave:Analysis>

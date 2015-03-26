@@ -1,0 +1,73 @@
+file 70857 1427313686                                           
+version 2
+run statisticRVV-171-20150325-20:15:12-24560
+attr c 11
+attr configname statisticRVV
+attr datetime 20150325-20:15:12
+attr experiment statisticRVV
+attr inifile omnetpp.ini
+attr iterationvars "$sc=\"erlangen-medium.launchd.xml\", $p=1/10, $c=11"
+attr iterationvars2 "$sc=\"erlangen-medium.launchd.xml\", $p=1/10, $c=11, $repetition=1"
+attr measurement "$sc=\"erlangen-medium.launchd.xml\", $p=1/10, $c=11"
+attr network RSUExampleScenario
+attr p 1/10
+attr processid 24560
+attr repetition 1
+attr replication #1
+attr resultdir results
+attr runnumber 171
+attr sc "\"erlangen-medium.launchd.xml\""
+attr seedset 171
+
+vector 0  RSUExampleScenario.rsu[0].appl  Number_CH  ETV
+vector 1  RSUExampleScenario.rsu[0].appl  Number_ON  ETV
+vector 2  RSUExampleScenario.rsu[0].appl  Number_FN  ETV
+vector 3  RSUExampleScenario.rsu[0].appl  Number_CH_Losts  ETV
+vector 4  RSUExampleScenario.rsu[0].appl  Mean_Cluster_Size  ETV
+vector 5  RSUExampleScenario.rsu[0].appl  StdDev_Cluster_Size  ETV
+vector 6  RSUExampleScenario.rsu[0].appl  Variance_Cluster_Size  ETV
+vector 7  RSUExampleScenario.rsu[0].appl  Mean_Neighbors  ETV
+vector 8  RSUExampleScenario.rsu[0].appl  StdDev_Neighbors  ETV
+vector 9  RSUExampleScenario.rsu[0].appl  Variance_Neighbors  ETV
+vector 10  RSUExampleScenario.rsu[0].appl  Total_CH_Utility  ETV
+vector 11  RSUExampleScenario.rsu[0].appl  Mean_CH_Utility  ETV
+vector 12  RSUExampleScenario.rsu[0].appl  StdDev_CH_Utility  ETV
+vector 13  RSUExampleScenario.rsu[0].appl  Variance_CH_Utility  ETV
+vector 14  RSUExampleScenario.rsu[0].appl  Total_exp_CH_Utility  ETV
+vector 15  RSUExampleScenario.rsu[0].appl  Mean_exp_CH_Utility  ETV
+vector 16  RSUExampleScenario.rsu[0].appl  StdDev_exp_CH_Utility  ETV
+vector 17  RSUExampleScenario.rsu[0].appl  Variance_exp_CH_Utility  ETV
+vector 18  RSUExampleScenario.rsu[0].appl  Total_ON_Utility  ETV
+vector 19  RSUExampleScenario.rsu[0].appl  Mean_ON_Utility  ETV
+vector 20  RSUExampleScenario.rsu[0].appl  StdDev_ON_Utility  ETV
+vector 21  RSUExampleScenario.rsu[0].appl  Variance_ON_Utility  ETV
+vector 22  RSUExampleScenario.rsu[0].appl  Total_exp_ON_Utility  ETV
+vector 23  RSUExampleScenario.rsu[0].appl  Mean_exp_ON_Utility  ETV
+vector 24  RSUExampleScenario.rsu[0].appl  StdDev_exp_ON_Utility  ETV
+vector 25  RSUExampleScenario.rsu[0].appl  Variance_exp_ON_Utility  ETV
+0	2375 1594 145735 7137410 240 2000 89 1 24 973 12259
+1	3969 1610 145735 7137410 240 2000 89 2 34 1366 24198
+2	5579 1690 145735 7137410 240 2000 89 68 165 10241 1236593
+3	7269 1537 145735 7137410 240 2000 89 0 8 261 1037
+4	8806 2362 145735 7137410 240 2000 89 1.0769230769231 2 125.87064635141 180.12043298237
+5	11168 2825 145735 7137410 240 2000 89 0.27735009811261 0.89442719099992 nan nan
+6	13993 2700 145735 7137410 240 2000 89 0.076923076923077 0.8 nan nan
+7	16693 2718 145735 7137410 240 2000 89 21.908163265306 62.59585492228 3397.0930749296 144784.24260559
+8	19411 2769 145735 7137410 240 2000 89 3.2143223441136 31.470675676332 1397.4507384687 30466.958336618
+9	22180 2774 145735 7137410 240 2000 89 10.331868131868 990.40342752486 30466.958336618 20121443.444957
+10	24954 2852 145735 7137410 240 2000 89 46.845513317174 1203.48579747 48511.88890322 30633399.53026
+11	27806 2854 145735 7137410 240 2000 89 46.845513317174 51.626142837279 4419.2773671997 219535.44691629
+12	30660 2853 145735 7137410 240 2000 89 0.87796689861345 6.0360756514256 nan nan
+13	33513 2851 145735 7137410 240 2000 89 0.77082587506091 36.434209269733 nan nan
+14	36364 2867 145735 7137410 240 2000 89 44.679822813091 1278.3557494863 56164.822233365 39726070.382138
+15	39231 2868 145735 7137410 240 2000 89 44.679822813091 46.958268141524 4057.9464864183 185034.89463397
+16	42099 2888 145735 7137410 240 2000 89 0.29209458590501 1.9993339510545 nan nan
+17	44987 2895 145735 7137410 240 2000 89 0.085319247115018 3.9973362478392 nan nan
+18	47882 2868 145735 7137410 240 2000 89 1606.5700071239 6191.9573711416 326173.76597366 1344980769.0376
+19	50750 2857 145735 7137410 240 2000 89 48.20697734781 51.272376845098 4456.8502615285 223245.61602659
+20	53607 2869 145735 7137410 240 2000 89 2.3292143497086 4.0677044662955 256.43827891345 751.59430815634
+21	56476 2863 145735 7137410 240 2000 89 5.4252394868887 16.54621962512 751.59430815634 6813.0834038845
+22	59339 2852 145735 7137410 240 2000 89 3231.9723396709 8101.8973623725 516070.45916207 3146368098.182
+23	62191 2859 145735 7137410 240 2000 89 44.830050881295 45.739254969069 4052.9286935146 184567.97219181
+24	65050 2904 145735 7137410 240 2000 89 0.44373872413154 1.4677257747472 91.886001819161 98.809507629413
+25	67954 2903 145735 7137410 240 2000 89 0.19690405529389 2.1542189498572 98.809507629413 125.76694076014

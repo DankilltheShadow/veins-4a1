@@ -177,6 +177,7 @@ void TraCIRVVRSU11p::handleSelfMsg(cMessage* msg) {
         case SEND_MATCH: {
             deleteOldNodes();
             if(!PrefCHLists.empty() || !PrefONLists.empty()){
+                Matched.clear();
                 Matched = RVV(Matched);
                 if(simTime()>=simulation.getWarmupPeriod()){
                     orgStatistic();

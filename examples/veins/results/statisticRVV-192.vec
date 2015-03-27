@@ -1,0 +1,128 @@
+version 2
+run statisticRVV-192-20150327-00:59:55-7116
+attr c 8
+attr configname statisticRVV
+attr datetime 20150327-00:59:55
+attr experiment statisticRVV
+attr inifile omnetpp.ini
+attr iterationvars "$sc=\"erlangen-medium.launchd.xml\", $p=1/8, $c=8"
+attr iterationvars2 "$sc=\"erlangen-medium.launchd.xml\", $p=1/8, $c=8, $repetition=2"
+attr measurement "$sc=\"erlangen-medium.launchd.xml\", $p=1/8, $c=8"
+attr network RSUExampleScenario
+attr p 1/8
+attr processid 7116
+attr repetition 2
+attr replication #2
+attr resultdir results
+attr runnumber 192
+attr sc "\"erlangen-medium.launchd.xml\""
+attr seedset 192
+
+vector 0  RSUExampleScenario.rsu[0].appl  Number_CH  ETV
+vector 1  RSUExampleScenario.rsu[0].appl  Number_ON  ETV
+vector 2  RSUExampleScenario.rsu[0].appl  Number_FN  ETV
+vector 3  RSUExampleScenario.rsu[0].appl  Number_CH_Losts  ETV
+vector 4  RSUExampleScenario.rsu[0].appl  Number_CH_Losts  ETV
+vector 5  RSUExampleScenario.rsu[0].appl  Mean_Cluster_Size  ETV
+vector 6  RSUExampleScenario.rsu[0].appl  StdDev_Cluster_Size  ETV
+vector 7  RSUExampleScenario.rsu[0].appl  Variance_Cluster_Size  ETV
+vector 8  RSUExampleScenario.rsu[0].appl  Mean_Neighbors  ETV
+vector 9  RSUExampleScenario.rsu[0].appl  StdDev_Neighbors  ETV
+vector 10  RSUExampleScenario.rsu[0].appl  Variance_Neighbors  ETV
+vector 11  RSUExampleScenario.rsu[0].appl  Total_CH_Utility  ETV
+vector 12  RSUExampleScenario.rsu[0].appl  Mean_CH_Utility  ETV
+vector 13  RSUExampleScenario.rsu[0].appl  StdDev_CH_Utility  ETV
+vector 14  RSUExampleScenario.rsu[0].appl  Variance_CH_Utility  ETV
+vector 15  RSUExampleScenario.rsu[0].appl  Total_exp_CH_Utility  ETV
+vector 16  RSUExampleScenario.rsu[0].appl  Mean_exp_CH_Utility  ETV
+vector 17  RSUExampleScenario.rsu[0].appl  StdDev_exp_CH_Utility  ETV
+vector 18  RSUExampleScenario.rsu[0].appl  Variance_exp_CH_Utility  ETV
+vector 19  RSUExampleScenario.rsu[0].appl  Total_ON_Utility  ETV
+vector 20  RSUExampleScenario.rsu[0].appl  Mean_ON_Utility  ETV
+vector 21  RSUExampleScenario.rsu[0].appl  StdDev_ON_Utility  ETV
+vector 22  RSUExampleScenario.rsu[0].appl  Variance_ON_Utility  ETV
+vector 23  RSUExampleScenario.rsu[0].appl  Total_exp_ON_Utility  ETV
+vector 24  RSUExampleScenario.rsu[0].appl  Mean_exp_ON_Utility  ETV
+vector 25  RSUExampleScenario.rsu[0].appl  StdDev_exp_ON_Utility  ETV
+vector 26  RSUExampleScenario.rsu[0].appl  Variance_exp_ON_Utility  ETV
+0	145499	240	6
+0	171314	260	11
+0	198378	280	6
+1	145499	240	11
+1	171314	260	15
+1	198378	280	9
+2	145499	240	62
+2	171314	260	59
+2	198378	280	77
+3	145499	240	3
+3	171314	260	3
+3	198378	280	8
+4	145499	240	59
+4	171314	260	55
+4	198378	280	69
+5	145499	240	1.8333333333333
+5	171314	260	1.3636363636364
+5	198378	280	1.5
+6	145499	240	0.40824829046386
+6	171314	260	0.50452497910951
+6	198378	280	0.54772255750517
+7	145499	240	0.16666666666667
+7	171314	260	0.25454545454545
+7	198378	280	0.3
+8	145499	240	22.658227848101
+8	171314	260	22.833333333333
+8	198378	280	22.304347826087
+9	145499	240	4.8619033836063
+9	171314	260	3.8521886544819
+9	198378	280	4.1077229071693
+10	145499	240	23.638104511522
+10	171314	260	14.839357429719
+10	198378	280	16.873387482083
+11	145499	240	297.60231340727
+11	171314	260	529.87692364337
+11	198378	280	292.85325449921
+12	145499	240	49.600385567878
+12	171314	260	48.170629422125
+12	198378	280	48.808875749869
+13	145499	240	2.0994835662636
+13	171314	260	1.8466092726507
+13	198378	280	1.8872582509586
+14	145499	240	4.4078312450109
+14	171314	260	3.4099658058396
+14	198378	280	3.5617437058111
+15	145499	240	405.24916841039
+15	171314	260	628.98398203688
+15	198378	280	633.80189085377
+16	145499	240	45.027685378932
+16	171314	260	44.927427288349
+16	198378	280	45.271563632412
+17	145499	240	0.92956899555077
+17	171314	260	0.33003194025191
+17	198378	280	0.66551630041628
+18	145499	240	0.86409851748926
+18	171314	260	0.10892108158644
+18	198378	280	0.44291194611978
+19	145499	240	1641.9941970751
+19	171314	260	1789.9878141937
+19	198378	280	1853.7967488643
+20	145499	240	48.293946972798
+20	171314	260	48.378049032262
+20	198378	280	48.784124970114
+21	145499	240	2.1582052129026
+21	171314	260	2.5447640287982
+21	198378	280	2.6322753303194
+22	145499	240	4.6578497409998
+22	171314	260	6.4758239622654
+22	198378	280	6.9288734146083
+23	145499	240	3140.3194107009
+23	171314	260	3141.2856596422
+23	198378	280	3513.2277743202
+24	145499	240	44.861705867155
+24	171314	260	44.87550942346
+24	198378	280	45.041381722054
+25	145499	240	0.45296140416468
+25	171314	260	0.49687081785094
+25	198378	280	0.77779076309549
+26	145499	240	0.20517403366284
+26	171314	260	0.24688060963186
+26	198378	280	0.60495847115666

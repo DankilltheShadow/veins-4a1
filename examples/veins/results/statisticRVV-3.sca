@@ -1,8 +1,8 @@
 version 2
-run statisticRVV-3-20150324-23:29:01-6900
+run statisticRVV-3-20150327-01:27:32-12228
 attr c 14
 attr configname statisticRVV
-attr datetime 20150324-23:29:01
+attr datetime 20150327-01:27:32
 attr experiment statisticRVV
 attr inifile omnetpp.ini
 attr iterationvars "$sc=\"erlangen-low.launchd.xml\", $p=1/15, $c=14"
@@ -10,7 +10,7 @@ attr iterationvars2 "$sc=\"erlangen-low.launchd.xml\", $p=1/15, $c=14, $repetiti
 attr measurement "$sc=\"erlangen-low.launchd.xml\", $p=1/15, $c=14"
 attr network RSUExampleScenario
 attr p 1/15
-attr processid 6900
+attr processid 12228
 attr repetition 3
 attr replication #3
 attr resultdir results

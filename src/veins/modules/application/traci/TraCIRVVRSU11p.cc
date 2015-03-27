@@ -32,7 +32,7 @@ void TraCIRVVRSU11p::Statistics::initialize()
     numON.setName("Number_ON");
     numFN.setName("Number_FN");
     numCHLost.setName("Number_CH_Losts");
-    numONLost.setName("Number_CH_Losts");
+    numONLost.setName("Number_ON_Losts");
     meanClusterSize.setName("Mean_Cluster_Size");
     stddevCluster.setName("StdDev_Cluster_Size");
     varianceCluster.setName("Variance_Cluster_Size");
